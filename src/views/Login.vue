@@ -19,7 +19,7 @@
 
       <!-- Constrasena -->
       <label for="emailInstitute" class="form-label">Password</label>
-      <input type="password" placeholder="Ingresa Contrasena" class="form-control" v-model.lazy="$v.password.$model" :class="{'is-invalid': $v.password.$error, 'is-valid': $v.password.required}">
+      <input type="password" placeholder="Ingresa Contrasena" class="form-control mb-3" v-model.lazy="$v.password.$model" :class="{'is-invalid': $v.password.$error, 'is-valid': $v.password.required}">
       <p class="text-danger" v-if="!$v.password.minLength">Minimo 6 caracteres</p>
       <p class="text-danger" v-if="!$v.password.required">Campo requerido</p>
       <!-- <p>{{$v.password}}</p> -->

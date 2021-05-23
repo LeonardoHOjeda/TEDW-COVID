@@ -1,8 +1,7 @@
 <template>
-  <div id="app">
+  <div>
     <b-navbar toggleable="md" type="dark" variant="info">
-      <NavbarIndex :name="$route.name"/>
-      <!-- <b-container>
+      <b-container>
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
           <b-navbar-brand :to="{name: 'Home'}">COVID-19 APP</b-navbar-brand>
           <b-collapse is-nav id="nav_collapse">
@@ -12,22 +11,17 @@
               <b-nav-item :to="{name: 'Login'}" active-class="active">Login</b-nav-item>
             </b-navbar-nav>
           </b-collapse>
-      </b-container> -->
+      </b-container>
     </b-navbar>
-    <b-container>
-      <router-view/>
-    </b-container>
-    <Footer />
   </div>
 </template>
 
 <script>
-import NavbarIndex from './components/NavbarIndex'
-import Footer from './components/Footer'
 export default {
-  components: {
-    NavbarIndex,
-    Footer
-  }
+  name: 'Home'
 }
 </script>
+
+<style>
+
+</style>
