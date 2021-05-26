@@ -37,6 +37,12 @@ const routes = [{
         component: () =>
             import ('../views/students/Form.vue')
     },
+    {
+        path: '/students/Appointment',
+        name: 'Appointment',
+        component: () =>
+            import ('../views/students/Appointment.vue')
+    },
 ]
 
 const router = new VueRouter({
