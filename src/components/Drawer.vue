@@ -15,34 +15,35 @@
       </template>
       <hr />
       <div class="px-2 py-2">
-        <router-link exact :to="{name: 'Home'}" class="nav-menu" active-class="active">
-          <i class="fas fa-home"></i>
-          Home
-        </router-link>
-        <router-link exact :to="{name: 'About'}" class="nav-menu" active-class="active">
-          <i class="far fa-question-circle"></i>
-          About
-        </router-link>
-        <div class="tree-menu">
-          <a v-b-toggle.collapse-1 class="nav-menu" active-class="active">
-            <i class="fas fa-list"></i>
-            Tree Menu
-          </a>
-          <b-collapse id="collapse-1" class="tree-menu-collapse">
-            <router-link exact to="/pagina1" class="nav-menu" active-class="active">
-              <i class="far fa-question-circle"></i>
-              Pagina 1
-            </router-link>
-            <router-link exact to="/pagina2" class="nav-menu" active-class="active">
-              <i class="fas fa-sign-in-alt"></i>
-              Pagina 2
-            </router-link>
-          </b-collapse>
-          <router-link exact to="/login" class="nav-menu" active-class="active">
-            <i class="fas fa-sign-out-alt"></i>
-            Salir
+        <div v-for="(menu, i) in menus" :key="i">
+          <router-link v-if="menu.to" exact :to="menu.to" class="nav-menu" active-class="active">
+            <i :class="menu.icon"></i>
+            {{menu.label}}
           </router-link>
+          <div v-else class="tree-menu">
+            <a v-b-toggle="`collapse-${i}`" class="nav-menu" active-class="active">
+              <i class="fas fa-list"></i>
+              {{menu.label}}
+            </a>
+            <b-collapse :id="`collapse-${i}`" class="tree-menu-collapse">
+              <router-link
+                v-for="(submenu, j) in menu.submenus"
+                :key="j"
+                exact
+                :to="submenu.to"
+                class="nav-menu"
+                active-class="active"
+              >
+                <i :class="submenu.icon"></i>
+                {{submenu.label}}
+              </router-link>
+            </b-collapse>
+          </div>
         </div>
+        <router-link exact to="/login" class="nav-menu" active-class="active">
+          <i class="fas fa-sign-out-alt"></i>
+          Salir
+        </router-link>
       </div>
     </b-sidebar>
   </div>
@@ -51,6 +52,42 @@
 <script>
   export default {
     name: 'Drawer',
+    data: () => ({
+      user: { rol: 'admin' },
+      student_menu: [
+        { icon: 'fas fa-home', to: '/', label: 'Home' },
+        { icon: 'far fa-question-circle', to: '/about', label: 'About' },
+        {
+          icon: 'fas fa-list',
+          label: 'Tree Menu',
+          submenus: [
+            { icon: 'far fa-question-circle', to: '/pagina1', label: 'Pagina 1' },
+            { icon: 'far fa-question-circle', to: '/pagina2', label: 'Pagina 2' },
+          ],
+        },
+        {
+          icon: 'fas fa-list',
+          label: 'Otro Tree Menu',
+          submenus: [
+            { icon: 'far fa-question-circle', to: '/pagina1', label: 'Pagina 1' },
+            { icon: 'far fa-question-circle', to: '/pagina2', label: 'Pagina 2' },
+          ],
+        },
+      ],
+      admin_menu: [
+        { icon: 'fas fa-home', to: '/', label: 'Home' },
+        { icon: 'far fa-question-circle', to: '/about', label: 'About' },
+      ],
+    }),
+    computed: {
+      menus() {
+        const items = {
+          student: this.student_menu,
+          admin: this.admin_menu,
+        };
+        return items[this.user.rol];
+      },
+    },
   };
 </script>
 
@@ -66,6 +103,9 @@
   }
   .header .subtitle {
     color: rgba(241, 241, 241, 0.6);
+  }
+  #sidebar hr {
+    background-color: grey;
   }
   .nav-menu {
     margin-bottom: 0.2rem;

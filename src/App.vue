@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar :name="$route.name" :isLoggedIn="false" />
+    <Navbar :name="$route.name" :isLoggedIn="true" />
     <b-container>
       <router-view />
     </b-container>
