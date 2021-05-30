@@ -24,6 +24,7 @@
             <a v-b-toggle="`collapse-${i}`" class="nav-menu" active-class="active">
               <i class="fas fa-list"></i>
               {{menu.label}}
+              <i class="fas fa-chevron-left float-right"></i>
             </a>
             <b-collapse :id="`collapse-${i}`" class="tree-menu-collapse">
               <router-link
@@ -53,7 +54,7 @@
   export default {
     name: 'Drawer',
     data: () => ({
-      user: { rol: 'admin' },
+      user: { rol: 'student' },
       student_menu: [
         { icon: 'fas fa-home', to: '/', label: 'Home' },
         { icon: 'far fa-question-circle', to: '/about', label: 'About' },
@@ -120,6 +121,13 @@
   }
   .nav-menu:hover {
     background-color: rgba(173, 173, 173, 0.2);
+  }
+  .nav-menu .fa-chevron-left{
+    font-size: 13px;
+    margin-top: 5px;
+  }
+  .nav-menu.not-collapsed .fa-chevron-left{
+    transform: rotate(-90deg);
   }
   .subtitle {
     font-size: 0.9rem;
