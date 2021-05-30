@@ -1,32 +1,34 @@
 <template>
-  <div class="mt-5">
-    <h1>Login</h1>
-    <form @submit.prevent="submit">
-      <!-- Correo electronico -->
-      <div class="mb-3">
-        <label for="emailInstitute" class="form-label">Correo institucional</label>
-        <input 
-          type="email" 
-          placeholder="Ingresa tu correo institucional" 
-          class="form-control" v-model.lazy="$v.email.$model" 
-          :class="{'is-invalid': $v.email.$error, 'is-valid': $v.email.required}"
-          id="emailInstitute"
-          />
-        <p class="text-danger" v-if="!$v.email.email">Este email es incorrecto</p>
-        <p class="text-danger" v-if="!$v.email.required">Campo requerido</p>
-        <!-- <p>{{$v.email}}</p> -->
-      </div>
-
-      <!-- Constrasena -->
-      <label for="emailInstitute" class="form-label">Password</label>
-      <input type="password" placeholder="Ingresa Contrasena" class="form-control mb-3" v-model.lazy="$v.password.$model" :class="{'is-invalid': $v.password.$error, 'is-valid': $v.password.required}">
-      <p class="text-danger" v-if="!$v.password.minLength">Minimo 6 caracteres</p>
-      <p class="text-danger" v-if="!$v.password.required">Campo requerido</p>
-      <!-- <p>{{$v.password}}</p> -->
-
-      <b-button block variant="primary" type="submit" :disabled="$v.$invalid">Login</b-button>
-      <!-- <p>{{$v.$invalid}}</p> -->
-    </form>
+  <div>
+   <b-container class="mt-5">
+      <h1>Login</h1>
+      <form @submit.prevent="submit">
+        <!-- Correo electronico -->
+        <div class="mb-3">
+          <label for="emailInstitute" class="form-label">Correo institucional</label>
+          <input 
+            type="email" 
+            placeholder="Ingresa tu correo institucional" 
+            class="form-control" v-model.lazy="$v.email.$model" 
+            :class="{'is-invalid': $v.email.$error, 'is-valid': $v.email.required}"
+            id="emailInstitute"
+            />
+          <p class="text-danger" v-if="!$v.email.email">Este email es incorrecto</p>
+          <p class="text-danger" v-if="!$v.email.required">Campo requerido</p>
+          <!-- <p>{{$v.email}}</p> -->
+        </div>
+  
+        <!-- Constrasena -->
+        <label for="emailInstitute" class="form-label">Password</label>
+        <input type="password" placeholder="Ingresa Contrasena" class="form-control mb-3" v-model.lazy="$v.password.$model" :class="{'is-invalid': $v.password.$error, 'is-valid': $v.password.required}">
+        <p class="text-danger" v-if="!$v.password.minLength">Minimo 6 caracteres</p>
+        <p class="text-danger" v-if="!$v.password.required">Campo requerido</p>
+        <!-- <p>{{$v.password}}</p> -->
+  
+        <b-button block variant="primary" type="submit" :disabled="$v.$invalid">Login</b-button>
+        <!-- <p>{{$v.$invalid}}</p> -->
+      </form>
+   </b-container>
   </div>
 </template>
 
