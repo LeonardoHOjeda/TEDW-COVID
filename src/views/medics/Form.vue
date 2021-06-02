@@ -6,7 +6,8 @@
     </div>
     <b-table :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center">
       <template #cell(acciones)>
-          <button class="btn btn-warning btn-sm">Ver respuestas <i class="far fa-eye"></i></button>
+        <b-button variant="outline-info" size="sm" :to="`./Form/${items[2].id}`">Ver respuestas <i class="far fa-eye"></i></b-button>
+          <!-- <button class="btn btn-warning btn-sm">Ver respuestas <i class="far fa-eye"></i></button> -->
       </template>
     </b-table>
   </div>

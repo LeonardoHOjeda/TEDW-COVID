@@ -51,6 +51,18 @@ const routes = [{
         component: () =>
             import ('../views/medics/Form.vue')
     },
+    {
+        path: '/medics/Form/:id',
+        name: 'RespuestasForm',
+        component: () =>
+            import ('../views/medics/RespuestasForm.vue')
+    },
+    {
+        path: '/medics/Consultas',
+        name: 'Consultas',
+        component: () =>
+            import ('../views/medics/Consultas.vue')
+    },
 ]
 
 const router = new VueRouter({
