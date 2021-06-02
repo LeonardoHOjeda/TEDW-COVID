@@ -34,8 +34,11 @@ export default {
 
 <style>
   footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  position: relative;
+  /* negative value of footer height */
+  bottom: 0;
+  height: 180px;
+  clear: both;
+  background-color: red;
   }
 </style>

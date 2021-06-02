@@ -43,6 +43,12 @@ const routes = [{
         component: () =>
             import ('../views/students/Appointment.vue')
     },
+    {
+        path: '/students/PrintRecipe',
+        name: 'PrintRecipe',
+        component: () =>
+            import ('../views/students/PrintRecipe.vue')
+    },
 ]
 
 const router = new VueRouter({

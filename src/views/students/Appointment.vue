@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h1 class="text-center">Crear Cita</h1>
-    <h3 class="font-weight-light">En esta seccion podras solicitar una consulta con un medico, a continuacion deberas de llenar el siguiente formulario</h3>
+    <Titulos 
+      titulo="Crear Cita"
+      subtitulo="En esta seccion podras solicitar una consulta con un medico, a continuacion deberas de llenar el siguiente formulario"
+    />
     <div>
       <form @submit.prevent="procesarFormulario" action="" class="">
         <!-- Sintomas -->
@@ -44,6 +46,7 @@
 <script>
 // import Pregunta from '../../components/Pregunta'
 // import Boton from '../../components/Boton'
+import Titulos from '../../components/Titulos'
 export default {
   data() {
     return {
@@ -57,6 +60,7 @@ export default {
   components: {
     // Pregunta,
     // Boton
+    Titulos
   },
   methods: {
     procesarFormulario(){

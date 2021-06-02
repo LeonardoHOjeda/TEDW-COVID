@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h1 class="text-center">Encuesta COVID-19</h1>
-    <h3 class="font-weight-light text-center">Contesta la siguiente encuesta, evita mentir, esto es para protegernos a <span class="font-weight-bold text-danger">TODOS</span></h3>
+    <Titulos 
+      titulo="Encuesta COVID-19"
+      subtitulo="Contesta la siguiente encuesta, evita mentir, esto es para protegernos a TODOS"
+    />
     <!-- Seccion del formulario -->
     <form @submit.prevent="submit" action="" class="mt-5">
       <div class="container">
@@ -70,11 +72,13 @@
 <script>
 import Boton from '../../components/Boton'
 import Pregunta from '../../components/Pregunta'
+import Titulos from '../../components/Titulos'
 export default {
   name: 'Form',
   components: {
     Boton,
-    Pregunta
+    Pregunta,
+    Titulos
   },
   methods:{
     submit(){
