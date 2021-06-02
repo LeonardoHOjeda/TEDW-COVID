@@ -12,7 +12,7 @@ const routes = [{
     {
         path: '/about',
         name: 'About',
-        component: () => 
+        component: () =>
             import ('../views/About.vue')
     },
     {
@@ -44,6 +44,12 @@ const routes = [{
         name: 'PrintRecipe',
         component: () =>
             import ('../views/students/PrintRecipe.vue')
+    },
+    {
+        path: '/medics/Form',
+        name: 'Form',
+        component: () =>
+            import ('../views/medics/Form.vue')
     },
 ]
 

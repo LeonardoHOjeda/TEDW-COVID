@@ -8,6 +8,7 @@
     </b-navbar>
     <b-sidebar id="sidebar" bg-variant="dark" width="230px" no-header-close shadow backdrop>
       <template #header>
+        <!-- Nombre y correo del usuario -->
         <div class="px-2 header">
           <h5 class="mt-3 font-weight-bold">Fernando Acosta</h5>
           <p class="m-0 subtitle">fernando@gmail.com</p>
@@ -54,10 +55,11 @@
   export default {
     name: 'Drawer',
     data: () => ({
-      user: { rol: 'student' },
+      user: { rol: 'medic' },
       student_menu: [
-        { icon: 'fas fa-home', to: '/', label: 'Home' },
-        { icon: 'far fa-question-circle', to: '/about', label: 'About' },
+        { icon: 'fas fa-poll-h', to: '/students/Form', label: 'Form' },
+        { icon: 'fas fa-user-md', to: '/students/Appointment', label: 'Crear Cita' },
+        { icon: 'far fa-file-alt', to: '/students/PrintRecipe', label: 'Historial Recetas' },
         {
           icon: 'fas fa-list',
           label: 'Tree Menu',
@@ -79,12 +81,17 @@
         { icon: 'fas fa-home', to: '/', label: 'Home' },
         { icon: 'far fa-question-circle', to: '/about', label: 'About' },
       ],
+      medic_menu: [
+        { icon: 'fas fa-poll-h', to: '/medics/Form', label: 'Formulario' },
+        { icon: 'far fa-question-circle', to: '/about', label: 'About' },
+      ],
     }),
     computed: {
       menus() {
         const items = {
           student: this.student_menu,
           admin: this.admin_menu,
+          medic: this.medic_menu,
         };
         return items[this.user.rol];
       },
