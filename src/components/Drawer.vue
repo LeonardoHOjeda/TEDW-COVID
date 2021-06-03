@@ -84,6 +84,7 @@
       medic_menu: [
         { icon: 'fas fa-poll-h', to: '/medics/Form', label: 'Formulario' },
         { icon: 'fas fa-user-md', to: '/medics/Consultas', label: 'Consultas' },
+        { icon: 'fas  fa-file-medical', to: '/medics/ResultadosPruebas', label: 'Resultados Pruebas' },
         { icon: 'far fa-question-circle', to: '/about', label: 'About' },
       ],
     }),
