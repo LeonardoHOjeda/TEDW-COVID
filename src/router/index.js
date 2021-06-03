@@ -4,7 +4,9 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+    // Menu principal
+    {
         path: '/',
         name: 'Home',
         component: Home
@@ -21,6 +23,13 @@ const routes = [{
         component: () =>
             import ('../views/Login.vue')
     },
+    {
+        path: '/signup',
+        name: 'SignUp',
+        component: () =>
+            import ('../views/SignUp.vue')
+    },
+    // Estudiantes
     {
         path: '/students/Home',
         name: 'Home',
@@ -45,6 +54,7 @@ const routes = [{
         component: () =>
             import ('../views/students/PrintRecipe.vue')
     },
+    // Medicos
     {
         path: '/medics/Form',
         name: 'Form',

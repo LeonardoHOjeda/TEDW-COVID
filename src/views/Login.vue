@@ -1,6 +1,6 @@
 <template>
   <div>
-   <b-container class="mt-5">
+    <b-container class="mt-5">
       <h1>Login</h1>
       <form @submit.prevent="submit">
         <!-- Correo electronico -->
@@ -28,7 +28,7 @@
         <b-button block variant="primary" type="submit" :disabled="$v.$invalid">Login</b-button>
         <!-- <p>{{$v.$invalid}}</p> -->
       </form>
-   </b-container>
+    </b-container>
   </div>
 </template>
 
