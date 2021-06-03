@@ -80,7 +80,7 @@
       admin_menu: [
         { icon: 'fas fa-home', to: '/', label: 'Home' },
         { icon: 'far fa-question-circle', to: '/about', label: 'About' },
-        { icon: 'far fa-question-circle', to: '/signup', label: 'Registrarse' },
+        { icon: 'fas fa-user-plus', to: '/signup', label: 'Registrarse' },
       ],
       medic_menu: [
         { icon: 'fas fa-poll-h', to: '/medics/Form', label: 'Formulario' },
