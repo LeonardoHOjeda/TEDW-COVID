@@ -55,7 +55,7 @@
   export default {
     name: 'Drawer',
     data: () => ({
-      user: { rol: 'admin' },
+      user: { rol: 'medic' }, //Introduce el rol que se quiera obtener
       student_menu: [
         { icon: 'fas fa-poll-h', to: '/students/Form', label: 'Form' },
         { icon: 'fas fa-user-md', to: '/students/Appointment', label: 'Crear Cita' },
@@ -80,6 +80,7 @@
       admin_menu: [
         { icon: 'fas fa-home', to: '/', label: 'Home' },
         { icon: 'far fa-question-circle', to: '/about', label: 'About' },
+        { icon: 'fas fa-door-open', to: '/login', label: 'Iniciar Sesion' },
         { icon: 'fas fa-user-plus', to: '/signup', label: 'Registrarse' },
       ],
       medic_menu: [

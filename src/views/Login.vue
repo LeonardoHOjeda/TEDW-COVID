@@ -34,7 +34,6 @@
         </div>
   
         <b-button block variant="primary" type="submit" :disabled="$v.$invalid">Login</b-button>
-        <p>{{$v}}</p>
       </form>
     </b-container>
   </div>
