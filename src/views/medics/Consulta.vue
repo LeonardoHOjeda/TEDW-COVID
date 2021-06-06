@@ -12,9 +12,6 @@
     <div class="form-group mb-3">
       <h4>Sintomas</h4>
       <textarea class="form-control" cols="90" rows="5" placeholder="Ingresa aqui los sintomas..." readonly></textarea>
-      <!-- <div v-if="compruebaLongitud" class="invalid-feedback">
-        Escribe un valor valido
-      </div> -->
     </div>
     <div class="mb-3">
       <h4>Fotos y/o videos</h4>
@@ -25,29 +22,42 @@
         <div class="mr-4 mb-4">
           <a href="https://serviciotecnicoiphonedoteu.files.wordpress.com/2016/06/pyrpvsx.jpg?w=620&h=830" target="_blank"><img src="https://serviciotecnicoiphonedoteu.files.wordpress.com/2016/06/pyrpvsx.jpg?w=620&h=830" alt="" class="w-100"></a>
         </div>
-        <!-- <iframe
-          src="https://www.microsoft.com/es-es/videoplayer/embed/RWfmWf?pid=ocpVideo0-innerdiv-oneplayer&postJsllMsg=true&maskLevel=20&market=es-es" 
-          frameborder="0" allowfullscreen></iframe> -->
           <div class="mr-4 mb-4">
             <iframe src="https://www.microsoft.com/es-es/videoplayer/embed/RWfmWf?pid=ocpVideo0-innerdiv-oneplayer&postJsllMsg=true&maskLevel=20&market=es-es" frameborder="0" allowfullscreen></iframe>
-            <!-- <img src="https://www.microsoft.com/es-es/videoplayer/embed/RWfmWf?pid=ocpVideo0-innerdiv-oneplayer&postJsllMsg=true&maskLevel=20&market=es-es" alt=""> -->
           </div>
       </div>
     </div>
-    
     <hr>
+    <!-- Inicio seccion medico -->
     <h4>Receta</h4>
-    <div class="my-3">
-      <h5>Diagnostico</h5>
-      <input class="form-control" type="text" placeholder="Ingresa aqui el diagnostico...">
+    <!-- Inicio Formulario -->
+    <h5 :class="checked ? 'text-danger' : ''">Sospechoso</h5>
+    <div>
+      <b-form-checkbox v-model="checked" name="check-button" switch>
+        <p v-if="checked" class="text-danger">Si</p>
+        <p class="text-success" v-else>No</p>
+      </b-form-checkbox>
     </div>
-    <label class="badge badge-primary py-2 mr-2" for="cantidadMedicinas">Numero de medicamentos</label>
-    <input type="number" id="cantidadMedicinas" name="cantidadMedicinas" min="0" max="10" v-model.number="cantidadMedicamentos">
-    <div v-if="cantidadMedicamentos > 10" class="alert alert-danger" role="alert">
-      El numero de medicamentos no puede ser MAYOR a 10
-    </div>
-    <div v-else>
-      <form action="#">
+    <form action="#"> <!--Falta agregar la accion del submit-->
+    
+      <!-- Levantar orden -->
+      <div v-if="checked">
+        <h5>Levantar orden</h5>
+        <b-form-select v-model="selected" :options="options" class="mb-3"></b-form-select>
+        <b-button :disabled="block" block variant="danger">Levantar orden <i class="fas fa-viruses"></i></b-button>
+      </div>
+
+      <div class="my-3 form-group">
+        <h5>Diagnostico</h5>
+        <input class="form-control" type="text" placeholder="Ingresa aqui el diagnostico...">
+      </div>
+
+      <div class="form-group">
+        <label class="badge badge-primary py-2 mr-2" for="cantidadMedicinas">Numero de medicamentos</label>
+        <input type="number" id="cantidadMedicinas" name="cantidadMedicinas" min="0" max="10" v-model.number="cantidadMedicamentos">
+      </div>
+
+      <div v-if="cantidadMedicamentos <= 10">
         <div v-for="index in cantidadMedicamentos" :key="index" class="mb-3">
           <h5>Medicamento {{index}}</h5>
           <div class="form-group">
@@ -61,8 +71,12 @@
           </div>
         </div>
         <b-button variant="success" block>Enviar receta <i class="fas fa-paper-plane"></i></b-button>
-      </form>
-    </div>
+      </div>
+      <div v-else class="alert alert-danger" role="alert">
+        El numero de medicamentos no puede ser MAYOR a 10
+      </div>
+    </form> 
+    <!-- Fin formulario -->
   </div>
 </template>
 
@@ -70,11 +84,20 @@
 import Titulos from '../../components/Titulos'
 export default {
   components: {
-    Titulos
+    Titulos,
   },
   data(){
     return{
-      cantidadMedicamentos: 0
+      cantidadMedicamentos: 0,
+      checkbox: false,
+      selected: '0',
+      checked: false,
+      options: [
+        {value: '0', text: '---Por favor, selecciona una opcion---', disabled: true},
+        {value: '1', text: 'Prueba rapida de sangre'},
+        {value: '2', text: 'Prueba rapida de antigeno'},
+        {value: '3', text: 'Prueba PCR'}
+      ]
     }
   }
 }

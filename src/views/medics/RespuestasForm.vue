@@ -5,9 +5,8 @@
     </div>
     <Titulos titulo="Respuestas del formulario " subtitulo=""/>
     <h3 class="font-weight-light text-center">Aqui podras observar las respuestas del formulario con el id: {{$route.params.id}}</h3>
-
+    <h4>Solicitar prueba</h4>
     <b-form-select v-model="selected" :options="options" class="mb-3"></b-form-select>
-    <p>{{selected}}</p>
     <b-button :disabled="block" block variant="danger">Levantar orden <i class="fas fa-viruses"></i></b-button>
   </div>
 </template>
