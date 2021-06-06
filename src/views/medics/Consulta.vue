@@ -39,12 +39,13 @@
       </b-form-checkbox>
     </div>
     <form action="#"> <!--Falta agregar la accion del submit-->
-    
+
       <!-- Levantar orden -->
-      <div v-if="checked">
+        <!-- Anexar el id de usuario y id del medico -->
+      <div v-if="checked" class="mb-3">
         <h5>Levantar orden</h5>
-        <b-form-select v-model="selected" :options="options" class="mb-3"></b-form-select>
-        <b-button :disabled="block" block variant="danger">Levantar orden <i class="fas fa-viruses"></i></b-button>
+        <b-form-select v-model="selected" :options="options"></b-form-select>
+        <!-- <b-button :disabled="block" block variant="danger">Levantar orden <i class="fas fa-viruses"></i></b-button> -->
       </div>
 
       <div class="my-3 form-group">
@@ -61,7 +62,7 @@
         <div v-for="index in cantidadMedicamentos" :key="index" class="mb-3">
           <h5>Medicamento {{index}}</h5>
           <div class="form-group">
-            <select class="custom-select mb-3" name="" id="">
+            <select class="custom-select mb-3" name="medicamento_id" id="">
               <option value="0" disabled>--Seleccione Medicina---</option>
               <option value="">Medicina 1</option>
               <option value="">Medicina 2</option>
