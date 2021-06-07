@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div class="mt-3 text-center">
+      <b-alert
+        :show="dismissCountDown"
+        dismissible
+        :variant="mensaje.color"
+        @dismissed="dismissCountDown=0"
+        @dismiss-count-down="countDownChanged"
+      >
+        {{mensaje.texto}}
+      </b-alert>
+    </div>
     <b-container class="mt-5">
       <h1>Registrar usuario</h1>
       <form @submit.prevent="submit">
@@ -11,11 +22,11 @@
             id="name" 
             type="text" 
             placeholder="Nombre..."
-            v-model="$v.name.$model"
-            :class="{'is-invalid': $v.name.$error, 'is-valid': $v.name.required}"
+            v-model="$v.nombre.$model"
+            :class="{'is-invalid': $v.nombre.$error, 'is-valid': $v.nombre.required}"
             >
-            <p class="text-danger" v-if="!$v.name.minLength">Minimo 4 caracteres</p>
-            <p class="text-danger" v-if="!$v.name.required && $v.name.$dirty ">Campo Requerido</p>
+            <p class="text-danger" v-if="!$v.nombre.minLength">Minimo 4 caracteres</p>
+            <p class="text-danger" v-if="!$v.nombre.required && $v.nombre.$dirty ">Campo Requerido</p>
         </div>
         <!-- Apellidos -->
           <!-- Paterno -->
@@ -26,25 +37,25 @@
             id="last_nameFather" 
             type="text" 
             placeholder="Apellido Paterno..."
-            v-model="$v.last_nameFather.$model"
-            :class="{'is-invalid': $v.last_nameFather.$error, 'is-valid': $v.last_nameFather.required}"
+            v-model="$v.a_paterno.$model"
+            :class="{'is-invalid': $v.a_paterno.$error, 'is-valid': $v.a_paterno.required}"
             >
-            <p class="text-danger" v-if="!$v.last_nameFather.minLength">Minimo 4 caracteres</p>
-            <p class="text-danger" v-if="!$v.last_nameFather.required && $v.last_nameFather.$dirty ">Campo Requerido</p>
+            <p class="text-danger" v-if="!$v.a_paterno.minLength">Minimo 4 caracteres</p>
+            <p class="text-danger" v-if="!$v.a_paterno.required && $v.a_paterno.$dirty ">Campo Requerido</p>
         </div>
           <!-- Materno -->
         <div class="mb-3">
-          <label class="form-label" for="last_nameMother">Apellido Materno</label>
+          <label class="form-label" for="a_materno">Apellido Materno</label>
           <input 
             class="form-control" 
-            id="last_nameMother" 
+            id="a_materno" 
             type="text" 
             placeholder="Apellido Materno..."
-            v-model="$v.last_nameMother.$model"
-            :class="{'is-invalid': $v.last_nameMother.$error, 'is-valid': $v.last_nameMother.required}"
+            v-model="$v.a_materno.$model"
+            :class="{'is-invalid': $v.a_materno.$error, 'is-valid': $v.a_materno.required}"
             >
-            <p class="text-danger" v-if="!$v.last_nameMother.minLength">Minimo 4 caracteres</p>
-            <p class="text-danger" v-if="!$v.last_nameMother.required && $v.last_nameMother.$dirty ">Campo Requerido</p>
+            <p class="text-danger" v-if="!$v.a_materno.minLength">Minimo 4 caracteres</p>
+            <p class="text-danger" v-if="!$v.a_materno.required && $v.a_materno.$dirty ">Campo Requerido</p>
         </div>
         <!-- Correo electronico -->
         <div class="mb-3">
@@ -90,10 +101,11 @@
             :class="{'is-invalid': $v.repeatPassword.$error, 'is-valid': $v.repeatPassword.required}"
             id="passwordRepeat">
           <p class="text-danger" v-if="!$v.repeatPassword.sameAsPassword">Las contrasenas no coinciden</p>
+          <input type="hidden" name="carrera_id" value="1">
           <!-- <p class="text-danger" v-if="!$v.password.required">Campo requerido</p> -->
           <!-- <p>{{$v.repeatPassword}}</p> -->
         </div>
-        <b-button block variant="success" type="submit" :disabled="$v.$invalid">Registrarse</b-button>
+        <b-button block variant="success" type="submit" :disabled="$v.$invalid">Registrarse <i class="fas fa-user-plus"></i></b-button>
         <!-- <p>{{$v.$invalid}}</p> -->
       </form>
     </b-container>
@@ -103,27 +115,32 @@
 <script>
 import { required, email, minLength, sameAs} from 'vuelidate/lib/validators'
 export default {
-  name: 'Login',
     data() {
       return {
-        name: '',
-        last_nameFather: '',
-        last_nameMother: '',
-        email: '',
-        password: '',
-        repeatPassword: ''
+          email: '',
+          password: '',
+          repeatPassword: '',
+          nombre: '',
+          a_paterno: '',
+          a_materno: '',
+          dismissSecs: 5,
+          dismissCountDown: 0,
+          mensaje: {
+            texto: '',
+            color: ''
+          }
       }
     },
     validations: {
-      name:{
+      nombre:{
         required,
         minLength: minLength(4)
       },
-      last_nameFather:{
+      a_paterno:{
         required,
         minLength: minLength(4)
       },
-      last_nameMother:{
+      a_materno:{
         required,
         minLength: minLength(4)
       },
@@ -139,13 +156,50 @@ export default {
     },
     methods: {
       submit(){
-        console.log('Submit!');
+        const jsonData = {
+          nombre: this.nombre,
+          a_paterno: this.a_paterno,
+          a_materno: this.a_materno,
+          email: this.email,
+          password: this.password,
+          carrera_id: 1
+        }
+        console.log(jsonData);
         this.$v.$touch()
         if(this.$v.$invalid){
           console.log('Se genero un error');
         }else{
-          console.log('Todos los campos correctos');
+          this.axios.post('/estudiantes/signup', jsonData)
+            .then(res => {
+              console.log(res);
+              this.nombre = ''
+              this.a_paterno = ''
+              this.a_materno = ''
+              this.email = ''
+              this.password = ''
+              this.repeatPassword = ''
+
+              this.mensaje.color = 'success'
+              this.mensaje.texto = 'Se ha creado el usuario de manera exitosa'
+              this.mostrarAlerta()
+            })
+            .catch(e => {
+              console.log(e.response);
+              if(e.response.data.message){
+                this.mensaje.texto = 'Error: ' + e.response.data.message + ' favor de corregir los valores o contacar al dpto de TI'
+              } else {
+                this.mensaje.texto = 'Ocurrio un error de sistema'
+              }
+              this.mensaje.color = 'danger'
+              this.mostrarAlerta()
+            })
         }
+      },
+      mostrarAlerta(){
+        this.dismissCountDown = this.dismissSecs
+      },
+      countDownChanged(dismissCountDown){
+        this.dismissCountDown = dismissCountDown
       }
     }
   }

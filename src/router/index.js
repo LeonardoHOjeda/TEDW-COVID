@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+// import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -34,25 +35,41 @@ const routes = [
         path: '/students/Home',
         name: 'Home',
         component: () =>
-            import ('../views/students/Home.vue')
+            import ('../views/students/Home.vue'),
+        meta: { requireAuth: true }
     },
     {
         path: '/students/Form',
         name: 'Form',
         component: () =>
-            import ('../views/students/Form.vue')
+            import ('../views/students/Form.vue'),
+        meta: {
+            requireAuth: true,
+            student_auth: true,
+            admin_auth: false
+        }
     },
     {
         path: '/students/Appointment',
         name: 'Appointment',
         component: () =>
-            import ('../views/students/Appointment.vue')
+            import ('../views/students/Appointment.vue'),
+        meta: {
+            requireAuth: true,
+            student_auth: true,
+            admin_auth: false
+        }
     },
     {
         path: '/students/PrintRecipe',
         name: 'PrintRecipe',
         component: () =>
-            import ('../views/students/PrintRecipe.vue')
+            import ('../views/students/PrintRecipe.vue'),
+        meta: {
+            requireAuth: true,
+            student_auth: true,
+            admin_auth: false
+        }
     },
     // Medicos
     {
@@ -93,5 +110,39 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
+
+router.beforeEach((to, from, next) => {
+    let token = localStorage.getItem('token');
+    let role = localStorage.getItem('role');
+    if (to.meta.requireAuth) {
+        if (!role || !token) {
+            next({ name: 'Login' })
+                // router.push({ name: 'Login' })
+        } else
+        if (to.meta.admin_auth) {
+            if (role === 'administrador') {
+                return next();
+            } else {
+                next({ name: 'Login' })
+            }
+        } else
+        if (to.meta.student_auth) {
+            if (role === 'estudiante') {
+                return next();
+            } else {
+                next({ name: 'Login' })
+            }
+        }
+    } else {
+        return next();
+    }
+
+    // const rutaProtegia = to.matched.some(record => record.meta.requireAuth)
+    // if (rutaProtegia && store.state.token === '') {
+    //     next({ name: 'Login' });
+    // } else {
+    //     next();
+    // }
+});
 
 export default router

@@ -42,16 +42,17 @@
             </b-collapse>
           </div>
         </div>
-        <router-link exact to="/login" class="nav-menu" active-class="active">
+        <a @click="cerrarSesion()" class="nav-menu" active-class="active">
           <i class="fas fa-sign-out-alt"></i>
           Salir
-        </router-link>
+        </a>
       </div>
     </b-sidebar>
   </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
   export default {
     name: 'Drawer',
     data: () => ({
@@ -100,6 +101,9 @@
         return items[this.user.rol];
       },
     },
+    methods: {
+      ...mapActions(['cerrarSesion'])
+    }
   };
 </script>
 

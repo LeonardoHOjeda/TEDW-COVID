@@ -38,7 +38,6 @@
           <button class="btn btn-success btn-block" type="submit" :disabled="bloquear">Solicitar Cita</button>
         </div>
       </form>
-      <p>{{cita}}</p>
     </div>
   </div>
 </template>
