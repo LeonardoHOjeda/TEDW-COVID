@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
   import Footer from './components/Footer';
   import Navbar from './components/Navbar';
 
@@ -17,5 +18,11 @@
       Footer,
       Navbar,
     },
+    methods: {
+      ...mapActions(['cerrarSesion', 'leerToken'])
+    },
+    created(){
+      this.leerToken();
+    }
   };
 </script>

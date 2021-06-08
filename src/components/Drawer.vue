@@ -7,11 +7,11 @@
       </b-container>
     </b-navbar>
     <b-sidebar id="sidebar" bg-variant="dark" width="230px" no-header-close shadow backdrop>
-      <template #header>
+      <template #header v-if="token">
         <!-- Nombre y correo del usuario -->
         <div class="px-2 header">
-          <h5 class="mt-3 font-weight-bold">Fernando Acosta</h5>
-          <p class="m-0 subtitle">fernando@gmail.com</p>
+          <h5 class="mt-3 font-weight-bold">{{`${usuarioDB.estudiante.nombre} ${usuarioDB.estudiante.a_paterno}`}}</h5>
+          <p class="m-0 subtitle">{{`${usuarioDB.email}`}}</p>
         </div>
       </template>
       <hr />
@@ -52,11 +52,11 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
   export default {
     name: 'Drawer',
     data: () => ({
-      user: { rol: 'medic' }, //Introduce el rol que se quiera obtener
+      user: { rol: 'student' }, //Introduce el rol que se quiera obtener
       student_menu: [
         { icon: 'fas fa-poll-h', to: '/students/Form', label: 'Form' },
         { icon: 'fas fa-user-md', to: '/students/Appointment', label: 'Crear Cita' },
@@ -100,6 +100,7 @@ import {mapActions} from 'vuex'
         };
         return items[this.user.rol];
       },
+      ...mapState(['usuarioDB', 'token']),
     },
     methods: {
       ...mapActions(['cerrarSesion'])

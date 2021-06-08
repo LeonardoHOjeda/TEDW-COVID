@@ -5,6 +5,7 @@ import router from '../router'
 
 // libreria para decodificar el jwt
 // import decode from 'jwt-decode'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -40,7 +41,16 @@ export default new Vuex.Store({
             localStorage.removeItem('token')
             localStorage.removeItem('role')
             router.push({ name: 'Login' })
+        },
+        leerToken({ commit }) {
+            const token = localStorage.getItem('token')
+            if (token) {
+                commit('obtenerUsuario', token)
+            } else {
+                commit('obtenerUsuario', '')
+            }
         }
     },
-    modules: {}
+    modules: {},
+    plugins: [createPersistedState()],
 })
