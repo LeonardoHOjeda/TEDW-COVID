@@ -51,7 +51,7 @@
         </div>
         <!-- Modalidad de la cita -->
         <div class="form-group mb-3">
-          <button @click="cargar = !cargar" class="btn btn-success btn-block" type="submit" :disabled="bloquear">Solicitar Cita</button>
+          <button @click="cargando = true" class="btn btn-success btn-block" type="submit" :disabled="bloquear">Solicitar Cita</button>
         </div>
       </form>
     </div>
@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       variant: 'primary',
-      cargando: true,
+      cargando: false,
       cita: {
         textoTextArea: '',
         modalidad: '',
@@ -115,15 +115,17 @@ export default {
             textoTextArea: '',
             modalidad: ''
           }
+          this.cargando = false
           this.$refs.file.value = null;
         }).catch((err) => {
           console.log(err.response)
           this.mensaje.color = 'danger'
           this.mensaje.texto = `Error: ${err.response.data.statusCode} -> ${err.response.data.message}`
           this.mostrarAlerta()
+          this.cargando = false
           return;
         });
-        this.cargando = false
+        
       
       console.log(this.cita.modalidad);
     },
