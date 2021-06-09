@@ -10,6 +10,7 @@ Este proyecto hasta el momento (09 de Junio de 2021) esta usando la siguientes l
 - **JWT-Decode:** Usamos esta libreria que nos ayuda a decodificar tokens JWT.
 - **Moment JS:** Usamos esta libreria que nos ayuda a formatear las fechas.
 - **SweetAlert2:** Usamos esta libreria que nos ayuda a crear alertas mas atractivas visualmente.
+- **Bootstrap-icons:** Usamos esta libreria para insertar iconos a nuestros componentes
 
 ## Notas 
 Este proyecto esta usando como backend el proyecto de [covid-itc](https://github.com/FernandoAcTr/covid-itc)

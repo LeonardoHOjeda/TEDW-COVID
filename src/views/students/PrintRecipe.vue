@@ -111,11 +111,6 @@ export default {
       });
     },
     listarConsultas(){
-      // let config = {
-      //   header: {
-      //     Authorization: `token ${this.token}`
-      //   }
-      // }
       this.axios.get(`/consultas/usuario/${this.usuario.usuario_id}`, {
         headers: {
           'Authorization': `Bearer ${this.token}`
