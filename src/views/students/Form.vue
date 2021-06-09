@@ -5,7 +5,7 @@
       subtitulo="Contesta la siguiente encuesta, evita mentir, esto es para protegernos a TODOS"
     />
     <!-- Seccion del formulario -->
-    <form @submit.prevent="submit" action="" class="mt-5">
+    <form @submit.prevent="submit" class="mt-5">
       <div class="container">
         <hr>
         <!-- Pregunta 1 -->
@@ -62,7 +62,7 @@
         Por favor, contesta todos los campos que son obligatorios
       </div>
       <div class="my-5 text-center">
-        <Boton texto="Enviar formulario"/>
+        <b-button variant="primary" block type="submit">Enviar formulario <i class="fas fa-poll-h"></i></b-button>
       </div>
     </form>
     
@@ -70,13 +70,18 @@
 </template>
 
 <script>
-import Boton from '../../components/Boton'
 import Pregunta from '../../components/Pregunta'
 import Titulos from '../../components/Titulos'
 export default {
   name: 'Form',
+  // data(){
+  //   return {
+  //     usuario_id: '',
+  //     otros_sintomas: '',
+  //     respuestas: []
+  //   }
+  // },
   components: {
-    Boton,
     Pregunta,
     Titulos
   },

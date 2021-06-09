@@ -7,14 +7,15 @@
       </b-container>
     </b-navbar>
     <b-sidebar id="sidebar" bg-variant="dark" width="230px" no-header-close shadow backdrop>
+      <!-- Nombre y correo del usuario -->
       <template #header v-if="token">
-        <!-- Nombre y correo del usuario -->
         <div class="px-2 header">
-          <h5 class="mt-3 font-weight-bold">{{`${usuarioDB.estudiante.nombre} ${usuarioDB.estudiante.a_paterno}`}}</h5>
-          <p class="m-0 subtitle">{{`${usuarioDB.email}`}}</p>
+          <h5 class="mt-3 font-weight-bold">{{`${usuario.estudiante.nombre} ${usuario.estudiante.a_paterno}`}}</h5>
+          <p class="m-0 subtitle">{{`${usuario.email}`}}</p>
         </div>
       </template>
       <hr />
+      <!-- Empieza la navegacion -->
       <div class="px-2 py-2">
         <div v-for="(menu, i) in menus" :key="i">
           <router-link v-if="menu.to" exact :to="menu.to" class="nav-menu" active-class="active">
@@ -47,6 +48,7 @@
           Salir
         </a>
       </div>
+      <!-- Termina navegacion -->
     </b-sidebar>
   </div>
 </template>
@@ -100,10 +102,13 @@ import {mapActions, mapState} from 'vuex'
         };
         return items[this.user.rol];
       },
-      ...mapState(['usuarioDB', 'token']),
+      ...mapState(['usuario', 'token']),
     },
     methods: {
-      ...mapActions(['cerrarSesion'])
+      ...mapActions(['cerrarSesion', 'leerToken'])
+    },
+    created(){
+      this.leerToken();
     }
   };
 </script>
