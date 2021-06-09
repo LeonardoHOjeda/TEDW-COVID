@@ -5,6 +5,11 @@
       subtitulo="En esta seccion podras solicitar una consulta con un medico, a continuacion deberas de llenar el siguiente formulario"
     />
     <div class="mt-3 text-center">
+      <b-spinner
+        :variant="variant"
+        :key="variant"
+        v-if="cargando"
+        ></b-spinner>
       <b-alert
         :show="dismissCountDown"
         dismissible
@@ -27,7 +32,7 @@
         </div>
         <!-- File uploader -->
         <div class="form-group" mb-3>
-          <h4 for="exampleFormControlFile1">Subir fotografias/video</h4>
+          <h4 for="exampleFormControlFile1">Subir fotografias/video <span class="badge badge-pill badge-warning">max 3 elementos</span></h4>
           <input accept="image/*, video/*" type="file" ref="file" class="form-control-file" id="evidencias" multiple>
         </div>
 
@@ -46,7 +51,7 @@
         </div>
         <!-- Modalidad de la cita -->
         <div class="form-group mb-3">
-          <button class="btn btn-success btn-block" type="submit" :disabled="bloquear">Solicitar Cita</button>
+          <button @click="cargar = !cargar" class="btn btn-success btn-block" type="submit" :disabled="bloquear">Solicitar Cita</button>
         </div>
       </form>
     </div>
@@ -61,6 +66,8 @@ import Titulos from '../../components/Titulos'
 export default {
   data() {
     return {
+      variant: 'primary',
+      cargando: true,
       cita: {
         textoTextArea: '',
         modalidad: '',
@@ -78,28 +85,6 @@ export default {
     Titulos
   },
   methods: {
-    // onFileChange(e){
-    //   console.log(e.target.files.length);
-    //   console.log(this.$refs);
-    // //   console.log(this.$refs.file.files);
-    // //   this.evidencias = []
-    // //   let fileList = Array.prototype.slice.call(e.target.files)
-    // //   console.log(fileList);
-    // //   // fileList.forEach((valor) => {
-    // //   //   console.log("Existe el valor "+ valor);
-    // //   // });
-
-    // //   // fileList.forEach(f => {
-    // //   //   let reader = new FileReader()
-
-    // //   //   reader.onload = function (e){
-    // //   //     this.evidencias.push(e.target.result)
-    // //   //   }
-    // //   //   reader.readAsDataURL(f)
-    // //   // })
-    // //   // console.log(e.target.files);
-    // //   console.log(this.evidencias);
-    // },
     procesarFormulario(){
       let formData = new FormData()
       let config = {headers: {'Authorization': `Bearer ${this.token}`}}
@@ -119,6 +104,8 @@ export default {
       formData.append('modalidad', consultaDatos.modalidad)
     
       console.log(consultaDatos);
+
+      this.cargando = true
       this.axios.post('/consultas', formData, config)
         .then(result => {
           console.log(result)
@@ -137,6 +124,7 @@ export default {
           this.mostrarAlerta()
           return;
         });
+        this.cargando = false
       
       console.log(this.cita.modalidad);
     },

@@ -33,20 +33,20 @@ const routes = [
     // Estudiantes
     {
         path: '/students/Home',
-        name: 'Home',
+        name: 'HomeS',
         component: () =>
             import ('../views/students/Home.vue'),
         meta: { requireAuth: true }
     },
     {
         path: '/students/Form',
-        name: 'Form',
+        name: 'FormS',
         component: () =>
             import ('../views/students/Form.vue'),
         meta: {
             requireAuth: true,
             student_auth: true,
-            admin_auth: false
+            // admin_auth: false
         }
     },
     {
@@ -57,7 +57,7 @@ const routes = [
         meta: {
             requireAuth: true,
             student_auth: true,
-            admin_auth: false
+            // admin_auth: false
         }
     },
     {
@@ -74,7 +74,7 @@ const routes = [
     // Medicos
     {
         path: '/medics/Form',
-        name: 'Form',
+        name: 'FormM',
         component: () =>
             import ('../views/medics/Form.vue')
     },
@@ -116,21 +116,25 @@ router.beforeEach((to, from, next) => {
     let role = localStorage.getItem('role');
     if (to.meta.requireAuth) {
         if (!role || !token) {
-            next({ name: 'Login' })
-                // router.push({ name: 'Login' })
+            // next({ name: 'Login' })
+            router.push({ name: 'Login' })
+                .catch(() => true)
         } else
         if (to.meta.admin_auth) {
             if (role === 'administrador') {
                 return next();
             } else {
-                next({ name: 'Login' })
+                // next({ name: 'Login' })
+                router.push({ name: 'Login' })
             }
         } else
         if (to.meta.student_auth) {
             if (role === 'estudiante') {
-                return next();
+                next();
             } else {
-                next({ name: 'Login' })
+                // next({ name: 'Login' })
+                router.push({ name: 'Login' })
+                    .catch(() => true)
             }
         }
     } else {
