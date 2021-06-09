@@ -29,7 +29,10 @@
             <td v-if="item.medico">{{item.medico.nombre}} {{item.medico.a_paterno}}</td>
             <td v-else>Sin medico</td>
             <td>{{item.modalidad}}</td>
-            <td>Descargar PDF</td>
+            <td v-if="item.medico">
+              <a :href="`http://localhost:3000/consultas/receta/${item.solicitud_id}?token=${token}`" target="_blank">Descargar Receta <i class="fas fa-file-pdf"></i></a>
+            </td>
+            <td v-else>No hay receta disponible <i class="fas fa-window-close"></i></td>
             <td>
               <b-button @click="showAlertDelete(item.solicitud_id)" :class="item.status === 'atendida' ? 'noDelete' : ''" variant="danger" :disabled="item.status === 'atendida'">Eliminar consulta <i class="fas fa-trash-alt"></i></b-button>
             </td>

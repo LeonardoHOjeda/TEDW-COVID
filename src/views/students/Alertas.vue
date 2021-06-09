@@ -2,6 +2,16 @@
   <div>
     <Titulos titulo="Alertas!" subtitulo="En esta seccion podras encontrar las alertas que se encuentran disponibles para ti"/>
 
+    <b-alert
+        class="text-center"
+        :show="dismissCountDown"
+        dismissible
+        :variant="mensaje.color"
+        @dismissed="dismissCountDown=0"
+        @dismiss-count-down="countDownChanged"
+      >
+        {{mensaje.texto}}
+      </b-alert>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -42,7 +52,13 @@ export default {
       variant: 'danger',
       cargando: true,
       alertas: [],
-      moment: moment
+      moment: moment,
+      dismissSecs: 5,
+      dismissCountDown: 0,
+      mensaje: {
+        texto: '',
+        color: ''
+      }
     }
   },
   components: {
@@ -78,23 +94,34 @@ export default {
                   })
           }).catch((err) => {
             console.log(err);
+            this.mensaje.texto = `Ha surgido un error: ${err.response.data.statusCode}`
+            this.mensaje.color = "danger"
+            this.mostrarAlerta()
           });
         }
       })
       
     },
     listarAlertas(){
-      console.log(this.token);
       let config = {headers: {'Authorization': `Bearer ${this.token}`}}
       this.axios.get(`/alertas/usuario/${this.usuario.usuario_id}`, config)
         .then((res) => {
-          console.log(res);
           this.alertas = []
           this.alertas = res.data
           this.cargando = false
         }).catch((err) => {
-          console.log(err);
+          console.log(err.response);
+          this.mensaje.texto = `Ha surgido un error: ${err.response.data.statusCode}`
+          this.mensaje.color = "danger"
+          this.mostrarAlerta()
+          this.cargando = false
         });
+    },
+    mostrarAlerta(){
+        this.dismissCountDown = this.dismissSecs
+      },
+    countDownChanged(dismissCountDown){
+      this.dismissCountDown = dismissCountDown
     }
   },
   created(){
