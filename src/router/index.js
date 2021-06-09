@@ -44,7 +44,7 @@ const routes = [
         component: () =>
             import ('../views/students/Form.vue'),
         meta: {
-            requireAuth: true,
+            // requireAuth: true,
             student_auth: true,
             // admin_auth: false
         }
@@ -55,7 +55,7 @@ const routes = [
         component: () =>
             import ('../views/students/Appointment.vue'),
         meta: {
-            requireAuth: true,
+            // requireAuth: true,
             student_auth: true,
             // admin_auth: false
         }
@@ -66,7 +66,18 @@ const routes = [
         component: () =>
             import ('../views/students/PrintRecipe.vue'),
         meta: {
-            requireAuth: true,
+            // requireAuth: true,
+            student_auth: true,
+            admin_auth: false
+        }
+    },
+    {
+        path: '/students/Alertas',
+        name: 'Alertas',
+        component: () =>
+            import ('../views/students/Alertas.vue'),
+        meta: {
+            // requireAuth: true,
             student_auth: true,
             admin_auth: false
         }

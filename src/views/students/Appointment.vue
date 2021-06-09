@@ -105,7 +105,6 @@ export default {
     
       console.log(consultaDatos);
 
-      this.cargando = true
       this.axios.post('/consultas', formData, config)
         .then(result => {
           console.log(result)

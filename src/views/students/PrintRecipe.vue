@@ -21,8 +21,8 @@
         <tbody>
           <tr :class="item.medico ? 'table-success' : ''" v-for="(item, index) in consultas" :key="index">
             <th scope="row">{{index+1}}</th>
-            <td scope="row">{{moment(item.fecha_solicitud).format('MMMM Do YYYY')}}</td>
-            <td v-if="item.fecha_atencion" scope="row">{{moment(item.fecha_atencion).format('MMMM Do YYYY')}}</td>
+            <td scope="row">{{moment(item.fecha_solicitud).calendar()}}</td>
+            <td v-if="item.fecha_atencion" scope="row">{{moment(item.fecha_atencion).calendar()}}</td>
             <td v-else>Aun no atendida</td>
             <td scope="row">{{item.status}}</td>
             <td scope="row">{{item.sintomas}}</td>

@@ -63,6 +63,7 @@ import {mapActions, mapState} from 'vuex'
         { icon: 'fas fa-poll-h', to: '/students/Form', label: 'Form' },
         { icon: 'fas fa-user-md', to: '/students/Appointment', label: 'Crear Cita' },
         { icon: 'far fa-file-alt', to: '/students/PrintRecipe', label: 'Historial Recetas' },
+        { icon: 'fas fa-exclamation-circle', to: '/students/Alertas', label: 'Alertas' },
         {
           icon: 'fas fa-list',
           label: 'Tree Menu',
