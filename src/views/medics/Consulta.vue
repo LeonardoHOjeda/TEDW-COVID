@@ -15,16 +15,18 @@
     </div>
     <div class="mb-3">
       <h4>Fotos y/o videos</h4>
-      <div v-for="(item, index) in evidencias" :key="index" class="d-flex flex-wrap">
-        <div v-if="item.url.substr(item.url.length - 3) === 'mp4'" class="mr-4 mb-4">
-          <h2>
-            <a class="badge badge-primary" :href="`http://${item.url}`" target="_blank">Link al video <i class="fas fa-video"></i></a>
-          </h2>
-        </div>
-        <div v-else class="mr-4 mb-4">
-          <a :href="`${item.url}`" target="_blank">
-            <img :src="`${item.url}`" :alt="`${item.url}`">
-          </a>
+      <div class="d-flex flex-wrap">
+        <div v-for="(item, index) in evidencias" :key="index">
+          <div v-if="item.url.substr(item.url.length - 3) === 'mp4'" class="mr-4 mb-4">
+            <iframe :src="`https://${item.url}`" frameborder="0" allowfullscreen></iframe>
+            <br>
+              <a class="badge badge-primary" :href="`http://${item.url}`" target="_blank">Link al video <i class="fas fa-video"></i></a>
+          </div>
+          <div v-else class="mr-4 mb-4">
+            <a :href="`${item.url}`" target="_blank">
+              <img :src="`${item.url}`" :alt="`${item.url}`">
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -39,44 +41,48 @@
         <p class="text-success" v-else>No</p>
       </b-form-checkbox>
     </div>
-    <form action="#"> <!--Falta agregar la accion del submit-->
 
+    <form @submit.prevent="enviaReceta" action="#">
       <!-- Levantar orden -->
         <!-- Anexar el id de usuario y id del medico -->
       <div v-if="checked" class="mb-3">
         <h5>Levantar orden</h5>
         <b-form-select v-model="selected" :options="options"></b-form-select>
-        <!-- <b-button :disabled="block" block variant="danger">Levantar orden <i class="fas fa-viruses"></i></b-button> -->
       </div>
 
       <div class="my-3 form-group">
         <h5>Diagnostico</h5>
-        <input class="form-control" type="text" placeholder="Ingresa aqui el diagnostico...">
+        <input name="diagnostico" class="form-control" type="text" placeholder="Ingresa aqui el diagnostico..." v-model="diagnostico">
       </div>
 
-      <div class="form-group">
-        <label class="badge badge-primary py-2 mr-2" for="cantidadMedicinas">Numero de medicamentos</label>
-        <input type="number" id="cantidadMedicinas" name="cantidadMedicinas" min="0" max="10" v-model.number="cantidadMedicamentos">
-      </div>
+      
 
       <div v-if="cantidadMedicamentos <= 10">
-        <div v-for="index in cantidadMedicamentos" :key="index" class="mb-3">
+        <div v-for="(medicamento, index) in medicamentos" :key="index" class="mb-3">
           <h5>Medicamento {{index}}</h5>
-          <div class="form-group">
-            <select class="custom-select mb-3" name="medicamento_id" id="">
-              <option value="0" disabled>--Seleccione Medicina---</option>
-              <option value="">Medicina 1</option>
-              <option value="">Medicina 2</option>
-              <option value="">Medicina 3</option>
+          <div class="form-group"  >
+            <select class="custom-select mb-3" name="medicamento_id" id="" v-model="medicamento.medicamento.medicamento_id">
+              <option value="0" disabled selected>--Seleccione Medicina---</option>
+              <option v-for="(item, index) in medicinas" :key="index" :value="item.medicamento.medicamento_id">{{item.medicamento.descripcion}}</option>
             </select>
-            <input :name="'medicamento_' + index" class="form-control" type="text" :placeholder="'Ingresa aqui las instrucciones del medicamento ' + index">
+            <input v-model="medicamento.receta" :name="`medicamentos[${index}][receta]`" class="form-control" type="text" :placeholder="'Ingresa aqui las instrucciones del medicamento ' + index">
+            <p>{{medicamento}}</p>
           </div>
         </div>
-        <b-button variant="success" block>Enviar receta <i class="fas fa-paper-plane"></i></b-button>
+        <div class="d-flex justify-content-around">
+          <div class="form-group">
+            <button @click="agregaMedicamento" type="button" class="btn btn-info">Agregar medicamento <i class="fas fa-plus-circle"></i></button>
+          </div>
+          <div class="form-group">
+            <button @click="eliminaMedicamento" type="button" class="btn btn-danger">Elimina medicamento <i class="fas fa-minus-circle"></i></button>
+          </div>
+        </div>
+        <b-button variant="success" block type="submit">Enviar receta <i class="fas fa-paper-plane"></i></b-button>
       </div>
       <div v-else class="alert alert-danger" role="alert">
         El numero de medicamentos no puede ser MAYOR a 10
       </div>
+      
     </form> 
     <!-- Fin formulario -->
   </div>
@@ -85,6 +91,7 @@
 <script>
 import Titulos from '../../components/Titulos'
 import {mapState} from 'vuex'
+import moment from 'moment';
 export default {
   components: {
     Titulos,
@@ -92,6 +99,7 @@ export default {
   data(){
     return{
       modalidad: '',
+      moment: moment,
       sintomas: '',
       cantidadMedicamentos: 0,
       evidencias: [],
@@ -104,44 +112,97 @@ export default {
         {value: '2', text: 'Prueba rapida de antigeno'},
         {value: '3', text: 'Prueba PCR'}
       ],
-      playerOptions: {
-        // videojs options
-          muted: true,
-          language: 'en',
-          playbackRates: [0.7, 1.0, 1.5, 2.0],
-          sources: [{
-            type: "video/mp4",
-            src: "nyc3.digitaloceanspaces.com/covid19-itc/1623270161527.mp4"
-          }],
-      }
+      medico_id: '',
+      status: 'atendida',
+      diagnostico: '',
+      medicamentos: [{
+        receta: '',
+        medicamento: {
+          medicamento_id: 1,
+        }
+      }],
+      medicinas: [],
+      receta: ''
     }
   },
   computed: {
     ...mapState(['usuario','token']),
   },
   created(){
-    this.muestraConsulta()
+    this.muestraConsulta(),
+    this.muestraMedicamentos()
   },
   methods:{
     muestraConsulta(){
-      
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
       this.axios.get(`/consultas/${this.$route.params.id}`, config)
         .then((res) => {
-          console.log(res);
-          console.log(res.data.evidencias);
           this.modalidad = res.data.modalidad
           this.sintomas = res.data.sintomas
-          console.warn(res.data.evidencias.length);
           for (let i = 0; i < res.data.evidencias.length; i++){
             this.evidencias.push({
               url: res.data.evidencias[i].url
             })
           }
-          console.log(res.data.evidencias[0].url);
-          console.log(this.evidencias[0].url['type']);
         }).catch((err) => {
           console.log(err);
+        });
+    },
+    muestraMedicamentos(){
+      let config = {headers:{'Authorization': `Bearer ${this.token}`}}
+      this.axios.get('/medicamentos', config)
+        .then((res) => {
+          for (let i = 0; i < res.data.length; i++){
+            this.medicinas.push({
+              medicamento: res.data[i]
+            })
+          }
+          console.log(this.medicamentos);
+        }).catch((err) => {
+          console.log(err);
+        });
+    },
+    agregaMedicamento(){
+      this.medicamentos.push({
+        receta: '',
+        medicamento: {
+          medicamento_id: '',
+          descripcion: ''
+        }
+      })
+    },
+    eliminaMedicamento(){
+      this.medicamentos.pop({
+        receta: '',
+        medicamento: {
+          medicamento_id: '',
+        }
+      })
+    },
+    enviaReceta(){
+      let config = {headers:{'Authorization': `Bearer ${this.token}`}}
+      let enviarDatos = {
+        medico_id: this.usuario.usuario_id,
+        status: 'atendida',
+        diagnostico: this.diagnostico,
+        fecha_atencion: moment().format(),
+        medicamentos: []
+      }
+
+      let nuevoArreglo = {}
+      console.log(this.medicamentos);
+      for (let i = 0; i < this.medicamentos.length; i++) {
+        nuevoArreglo['receta'] = this.medicamentos[i].receta
+        nuevoArreglo['medicamento_id'] = this.medicamentos[i].medicamento.medicamento_id
+        enviarDatos.medicamentos.push(nuevoArreglo)
+      }
+      console.log(nuevoArreglo);
+      console.log(enviarDatos);
+      this.axios.put(`/consultas/${this.$route.params.id}`, enviarDatos, config)
+        .then((res) => {
+          console.log(res);
+        }).catch((err) => {
+          console.log(err.response);
         });
     }
   }
@@ -157,8 +218,9 @@ export default {
     max-width: 250px;
     max-height: 500px;
   }
-  iframe{
-    width: 500px;
-    height: 350px;
+
+  iframe {
+    width: 600px;
+    height: 400px;
   }
 </style>
