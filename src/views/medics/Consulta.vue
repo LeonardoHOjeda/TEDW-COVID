@@ -191,19 +191,23 @@ export default {
       let nuevoArreglo = {}
       console.log(this.medicamentos);
       for (let i = 0; i < this.medicamentos.length; i++) {
-        nuevoArreglo['receta'] = this.medicamentos[i].receta
-        nuevoArreglo['medicamento_id'] = this.medicamentos[i].medicamento.medicamento_id
-        enviarDatos.medicamentos.push(nuevoArreglo)
+        enviarDatos.medicamentos.push({
+          "receta": this.medicamentos[i].receta,
+          "medicamento_id": this.medicamentos[i].medicamento.medicamento_id
+        })
+        // nuevoArreglo['receta'] = this.medicamentos[i].receta
+        // nuevoArreglo['medicamento_id'] = this.medicamentos[i].medicamento.medicamento_id
+        // enviarDatos.medicamentos.push(nuevoArreglo)
       }
       console.log(nuevoArreglo);
       console.log(enviarDatos);
-      let config = {headers:{'Authorization': `Bearer ${this.token}`}}
-      this.axios.put(`/consultas/${this.$route.params.id}`, enviarDatos, config)
-        .then((res) => {
-          console.log(res);
-        }).catch((err) => {
-          console.log(err.response);
-        });
+      // let config = {headers:{'Authorization': `Bearer ${this.token}`}}
+      // this.axios.put(`/consultas/${this.$route.params.id}`, enviarDatos, config)
+      //   .then((res) => {
+      //     console.log(res);
+      //   }).catch((err) => {
+      //     console.log(err.response);
+      //   });
     }
   }
 }
