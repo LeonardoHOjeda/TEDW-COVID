@@ -7,24 +7,25 @@
     <h3 class="font-weight-light text-center">Consulta realizada por: alumno</h3>
     <div class="mb-3">
       <h4>Modalidad</h4>
-      <p>Virtual</p>
+      <p class="text-capitalize">{{modalidad}}</p>
     </div>
     <div class="form-group mb-3">
       <h4>Sintomas</h4>
-      <textarea class="form-control" cols="90" rows="5" placeholder="Ingresa aqui los sintomas..." readonly></textarea>
+      <textarea v-model="sintomas" class="form-control" cols="90" rows="5" placeholder="Ingresa aqui los sintomas..." readonly></textarea>
     </div>
     <div class="mb-3">
       <h4>Fotos y/o videos</h4>
-      <div class="d-flex flex-wrap">
-        <div class="mr-4 mb-4">
-          <img src="https://www.elagoradiario.com/wp-content/uploads/2020/11/zoonosis-compartir-enfermedades-One-Healh-1-1140x600.jpg" alt="">
+      <div v-for="(item, index) in evidencias" :key="index" class="d-flex flex-wrap">
+        <div v-if="item.url.substr(item.url.length - 3) === 'mp4'" class="mr-4 mb-4">
+          <h2>
+            <a class="badge badge-primary" :href="`http://${item.url}`" target="_blank">Link al video <i class="fas fa-video"></i></a>
+          </h2>
         </div>
-        <div class="mr-4 mb-4">
-          <a href="https://serviciotecnicoiphonedoteu.files.wordpress.com/2016/06/pyrpvsx.jpg?w=620&h=830" target="_blank"><img src="https://serviciotecnicoiphonedoteu.files.wordpress.com/2016/06/pyrpvsx.jpg?w=620&h=830" alt="" class="w-100"></a>
+        <div v-else class="mr-4 mb-4">
+          <a :href="`${item.url}`" target="_blank">
+            <img :src="`${item.url}`" :alt="`${item.url}`">
+          </a>
         </div>
-          <div class="mr-4 mb-4">
-            <iframe src="https://www.microsoft.com/es-es/videoplayer/embed/RWfmWf?pid=ocpVideo0-innerdiv-oneplayer&postJsllMsg=true&maskLevel=20&market=es-es" frameborder="0" allowfullscreen></iframe>
-          </div>
       </div>
     </div>
     <hr>
@@ -83,13 +84,17 @@
 
 <script>
 import Titulos from '../../components/Titulos'
+import {mapState} from 'vuex'
 export default {
   components: {
     Titulos,
   },
   data(){
     return{
+      modalidad: '',
+      sintomas: '',
       cantidadMedicamentos: 0,
+      evidencias: [],
       checkbox: false,
       selected: '0',
       checked: false,
@@ -98,7 +103,46 @@ export default {
         {value: '1', text: 'Prueba rapida de sangre'},
         {value: '2', text: 'Prueba rapida de antigeno'},
         {value: '3', text: 'Prueba PCR'}
-      ]
+      ],
+      playerOptions: {
+        // videojs options
+          muted: true,
+          language: 'en',
+          playbackRates: [0.7, 1.0, 1.5, 2.0],
+          sources: [{
+            type: "video/mp4",
+            src: "nyc3.digitaloceanspaces.com/covid19-itc/1623270161527.mp4"
+          }],
+      }
+    }
+  },
+  computed: {
+    ...mapState(['usuario','token']),
+  },
+  created(){
+    this.muestraConsulta()
+  },
+  methods:{
+    muestraConsulta(){
+      
+      let config = {headers:{'Authorization': `Bearer ${this.token}`}}
+      this.axios.get(`/consultas/${this.$route.params.id}`, config)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data.evidencias);
+          this.modalidad = res.data.modalidad
+          this.sintomas = res.data.sintomas
+          console.warn(res.data.evidencias.length);
+          for (let i = 0; i < res.data.evidencias.length; i++){
+            this.evidencias.push({
+              url: res.data.evidencias[i].url
+            })
+          }
+          console.log(res.data.evidencias[0].url);
+          console.log(this.evidencias[0].url['type']);
+        }).catch((err) => {
+          console.log(err);
+        });
     }
   }
 }

@@ -29,6 +29,11 @@ require('moment/locale/es');
 
 Vue.use(require('vue-moment'), { moment })
 
+//Video JS
+import VueVideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css'
+Vue.use(VueVideoPlayer)
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 

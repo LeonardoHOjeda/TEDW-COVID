@@ -44,9 +44,10 @@ const routes = [
         component: () =>
             import ('../views/students/Form.vue'),
         meta: {
-            // requireAuth: true,
+            requireAuth: true,
             student_auth: true,
-            // admin_auth: false
+            admin_auth: false,
+            medic_auth: false
         }
     },
     {
@@ -55,9 +56,10 @@ const routes = [
         component: () =>
             import ('../views/students/Appointment.vue'),
         meta: {
-            // requireAuth: true,
+            requireAuth: true,
             student_auth: true,
-            // admin_auth: false
+            admin_auth: false,
+            medic_auth: false
         }
     },
     {
@@ -66,9 +68,10 @@ const routes = [
         component: () =>
             import ('../views/students/PrintRecipe.vue'),
         meta: {
-            // requireAuth: true,
+            requireAuth: true,
             student_auth: true,
-            admin_auth: false
+            admin_auth: false,
+            medic_auth: false
         }
     },
     {
@@ -77,9 +80,10 @@ const routes = [
         component: () =>
             import ('../views/students/Alertas.vue'),
         meta: {
-            // requireAuth: true,
+            requireAuth: true,
             student_auth: true,
-            admin_auth: false
+            admin_auth: false,
+            medic_auth: false
         }
     },
     // Medicos
@@ -87,31 +91,61 @@ const routes = [
         path: '/medics/Form',
         name: 'FormM',
         component: () =>
-            import ('../views/medics/Form.vue')
+            import ('../views/medics/Form.vue'),
+        meta: {
+            requireAuth: true,
+            student_auth: false,
+            medic_auth: true,
+            admin_auth: false
+        }
     },
     {
         path: '/medics/Form/:id',
         name: 'RespuestasForm',
         component: () =>
-            import ('../views/medics/RespuestasForm.vue')
+            import ('../views/medics/RespuestasForm.vue'),
+        meta: {
+            requireAuth: true,
+            student_auth: false,
+            medic_auth: true,
+            admin_auth: false
+        }
     },
     {
         path: '/medics/Consultas',
         name: 'Consultas',
         component: () =>
-            import ('../views/medics/Consultas.vue')
+            import ('../views/medics/Consultas.vue'),
+        meta: {
+            requireAuth: true,
+            student_auth: false,
+            medic_auth: true,
+            admin_auth: false
+        }
     },
     {
         path: '/medics/Consultas/:id',
         name: 'Consulta',
         component: () =>
-            import ('../views/medics/Consulta.vue')
+            import ('../views/medics/Consulta.vue'),
+        meta: {
+            requireAuth: true,
+            student_auth: false,
+            medic_auth: true,
+            admin_auth: false
+        }
     },
     {
         path: '/medics/ResultadosPruebas',
         name: 'ResultadosPruebas',
         component: () =>
-            import ('../views/medics/ResultadosPruebas.vue')
+            import ('../views/medics/ResultadosPruebas.vue'),
+        meta: {
+            requireAuth: true,
+            student_auth: false,
+            medic_auth: true,
+            admin_auth: false
+        }
     },
 
 ]
@@ -141,6 +175,15 @@ router.beforeEach((to, from, next) => {
         } else
         if (to.meta.student_auth) {
             if (role === 'estudiante') {
+                next();
+            } else {
+                // next({ name: 'Login' })
+                router.push({ name: 'Login' })
+                    .catch(() => true)
+            }
+        } else
+        if (to.meta.medic_auth) {
+            if (role === 'medico') {
                 next();
             } else {
                 // next({ name: 'Login' })

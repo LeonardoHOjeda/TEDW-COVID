@@ -11,6 +11,7 @@ Este proyecto hasta el momento (09 de Junio de 2021) esta usando la siguientes l
 - **Moment JS:** Usamos esta libreria que nos ayuda a formatear las fechas.
 - **SweetAlert2:** Usamos esta libreria que nos ayuda a crear alertas mas atractivas visualmente.
 - **Bootstrap-icons:** Usamos esta libreria para insertar iconos a nuestros componentes
+- **Video.JS:** Usamos esta libreria para poder visualizar videos.
 
 ## Notas 
 Este proyecto esta usando como backend el proyecto de [covid-itc](https://github.com/FernandoAcTr/covid-itc)
