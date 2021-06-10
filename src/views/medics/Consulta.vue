@@ -180,9 +180,8 @@ export default {
       })
     },
     enviaReceta(){
-      let config = {headers:{'Authorization': `Bearer ${this.token}`}}
       let enviarDatos = {
-        medico_id: this.usuario.usuario_id,
+        medico_id: this.usuario.medico.medico_id,
         status: 'atendida',
         diagnostico: this.diagnostico,
         fecha_atencion: moment().format(),
@@ -198,6 +197,7 @@ export default {
       }
       console.log(nuevoArreglo);
       console.log(enviarDatos);
+      let config = {headers:{'Authorization': `Bearer ${this.token}`}}
       this.axios.put(`/consultas/${this.$route.params.id}`, enviarDatos, config)
         .then((res) => {
           console.log(res);

@@ -19,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr :class="item.medico ? 'table-success' : ''" v-for="(item, index) in consultas" :key="index">
+          <tr :class="item.status === 'atendida' ? 'table-success' : ''" v-for="(item, index) in consultas" :key="index">
             <th scope="row">{{index+1}}</th>
             <td scope="row">{{moment(item.fecha_solicitud).calendar()}}</td>
             <td v-if="item.fecha_atencion" scope="row">{{moment(item.fecha_atencion).calendar()}}</td>
@@ -29,7 +29,7 @@
             <td v-if="item.medico">{{item.medico.nombre}} {{item.medico.a_paterno}}</td>
             <td v-else>Sin medico</td>
             <td>{{item.modalidad}}</td>
-            <td v-if="item.medico">
+            <td v-if="item.status === 'atendida'">
               <a :href="`http://localhost:3000/consultas/receta/${item.solicitud_id}?token=${token}`" target="_blank">Descargar Receta <i class="fas fa-file-pdf"></i></a>
             </td>
             <td v-else>No hay receta disponible <i class="fas fa-window-close"></i></td>
