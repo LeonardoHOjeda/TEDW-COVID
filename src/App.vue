@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar :name="$route.name" :isLoggedIn="true" />
+    <Navbar :name="$route.name" :isLoggedIn="isLoggedIn" />
     <b-container>
       <router-view />
     </b-container>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
   import Footer from './components/Footer';
   import Navbar from './components/Navbar';
 
@@ -20,6 +20,12 @@ import { mapActions } from 'vuex';
     },
     methods: {
       ...mapActions(['cerrarSesion', 'leerToken'])
+    },
+    computed: {
+      ...mapState(['usuario']),
+      isLoggedIn(){
+        return this.usuario.rol !== ""
+      }
     },
     created(){
       this.leerToken();

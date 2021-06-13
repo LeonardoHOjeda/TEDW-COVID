@@ -13,16 +13,23 @@ export default new Vuex.Store({
     plugins: [createPersistedState()],
     state: {
         token: '',
-        usuario: '',
+        usuario: {
+            rol: '',
+            email: '',
+        },
         rol: ''
     },
     mutations: {
         obtenerUsuario(state, payload) {
-            state.token = payload.token;
-            if (payload === '') {
-                state.usuario = '';
+            if (payload === null) {
+                state.token = null;
+                state.usuario = {
+                    rol: '',
+                    email: '',
+                };
                 state.rol = '';
             } else {
+                state.token = payload.token;
                 state.usuario = payload.usuario;
                 state.rol = payload.usuario.rol.rol;
                 if (state.rol === 'estudiante') {
@@ -39,7 +46,7 @@ export default new Vuex.Store({
             commit('obtenerUsuario', payload)
         },
         cerrarSesion({ commit }) {
-            commit('obtenerUsuario', '')
+            commit('obtenerUsuario', null)
             localStorage.removeItem('token')
             localStorage.removeItem('role')
             localStorage.removeItem('usuario')
@@ -55,7 +62,7 @@ export default new Vuex.Store({
                 console.log(payload.role);
                 commit('obtenerUsuario', payload)
             } else {
-                commit('obtenerUsuario', '')
+                commit('obtenerUsuario', null)
             }
         }
     },

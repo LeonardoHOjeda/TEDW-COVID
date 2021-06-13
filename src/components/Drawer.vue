@@ -10,7 +10,7 @@
       <!-- Nombre y correo del usuario -->
       <template #header v-if="token">
         <div class="px-2 header">
-          <h5 class="mt-3 font-weight-bold">{{`${usuario.estudiante.nombre} ${usuario.estudiante.a_paterno}`}}</h5>
+          <h5 class="mt-3 font-weight-bold">{{`${usuario[usuario.rol.rol].nombre} ${usuario[usuario.rol.rol].a_paterno}`}}</h5>
           <p class="m-0 subtitle">{{`${usuario.email}`}}</p>
         </div>
       </template>
@@ -58,7 +58,6 @@ import {mapActions, mapState} from 'vuex'
   export default {
     name: 'Drawer',
     data: () => ({
-      user: { rol: 'student' }, //Introduce el rol que se quiera obtener
       student_menu: [
         { icon: 'fas fa-poll-h', to: '/students/Form', label: 'Form' },
         { icon: 'fas fa-user-md', to: '/students/Appointment', label: 'Crear Cita' },
@@ -97,11 +96,11 @@ import {mapActions, mapState} from 'vuex'
     computed: {
       menus() {
         const items = {
-          student: this.student_menu,
-          admin: this.admin_menu,
-          medic: this.medic_menu,
+          estudiante: this.student_menu,
+          medico: this.medic_menu,
         };
-        return items[this.user.rol];
+
+        return items[this.usuario.rol.rol];
       },
       ...mapState(['usuario', 'token']),
     },

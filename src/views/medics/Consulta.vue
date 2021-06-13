@@ -201,13 +201,18 @@ export default {
       }
       console.log(nuevoArreglo);
       console.log(enviarDatos);
-      // let config = {headers:{'Authorization': `Bearer ${this.token}`}}
-      // this.axios.put(`/consultas/${this.$route.params.id}`, enviarDatos, config)
-      //   .then((res) => {
-      //     console.log(res);
-      //   }).catch((err) => {
-      //     console.log(err.response);
-      //   });
+      let config = {headers:{'Authorization': `Bearer ${this.token}`}}
+      this.axios.put(`/consultas/${this.$route.params.id}`, enviarDatos, config)
+        .then((res) => {
+          console.log(res);
+          this.$swal({
+                title: 'Consulta atendida con exito!',
+                text: 'Tu consulta ha sido atendida con exito, sigue asi!',
+                icon: 'success'
+              })
+        }).catch((err) => {
+          console.log(err.response);
+        });
     }
   }
 }
