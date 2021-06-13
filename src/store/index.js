@@ -34,6 +34,8 @@ export default new Vuex.Store({
                 state.rol = payload.usuario.rol.rol;
                 if (state.rol === 'estudiante') {
                     router.push({ path: 'students/Form' })
+                } else if (state.rol === 'medico') {
+                    router.push({ path: 'medics/Form' })
                 }
             }
         }

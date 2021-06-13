@@ -35,7 +35,7 @@ export default {
 <style>
   footer {
   position: relative;
-  /* negative value of footer height */
+  /* negative value of footer height*/
   bottom: 0;
   height: 180px;
   clear: both;

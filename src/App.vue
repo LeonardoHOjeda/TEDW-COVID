@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <Navbar :name="$route.name" :isLoggedIn="isLoggedIn" />
-    <b-container>
-      <router-view />
-    </b-container>
+    <div class="contenedor">
+      <b-container>
+        <router-view />
+      </b-container>
+    </div>
     <Footer />
   </div>
 </template>
@@ -32,3 +34,9 @@ import { mapActions, mapState } from 'vuex';
     }
   };
 </script>
+
+<style>
+  .contenedor{
+    min-height: calc(100vh - 180px);
+  }
+</style>
