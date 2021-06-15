@@ -42,20 +42,14 @@ export default {
         cargando: true,
         sortBy: 'otros_sintomas',
         moment: moment,
-        // Note 'isActive' is left out and will not appear in the rendered table
         fields: [
           { key: 'id_encuesta',label: 'ID',sortable: false},
           { key: 'usuario',sortable: false},
-          { key: 'fecha_aplicacion',sortable: false},
-          { key: 'otros_sintomas',label: 'Sintomas',sortable: true},
+          { key: 'fecha_aplicacion',sortable: true},
+          { key: 'otros_sintomas',label: 'Sintomas',sortable: false},
           { key: 'acciones'}
         ],
-        items: [
-          // { isActive: true, sintomas: 'Si', nombre_usuario: 'Dickerson', id: '1' },
-          // { isActive: false, sintomas: 'Si', nombre_usuario: 'Larsen', id: '2' },
-          // { isActive: false, sintomas: 'No', nombre_usuario: 'Geneva', id: '3' },
-          // { isActive: true, sintomas: 'Si', nombre_usuario: 'Jami', id: '4' }
-        ],
+        items: [],
       }
     },
     computed:{
@@ -107,9 +101,6 @@ export default {
             })
             this.cargando = false
           }
-          console.log(this.items);
-          console.log(res);
-
         }).catch((err) => {
           console.log(err.response);
           this.cargando = false

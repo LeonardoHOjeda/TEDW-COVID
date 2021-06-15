@@ -59,9 +59,6 @@ export default new Vuex.Store({
             const payload = JSON.parse(localStorage.getItem('vuex'))
                 // const usuarioDB = localStorage.getItem('usuarioDB');
             if (payload) {
-                console.log(payload);
-                console.log(payload.usuario);
-                console.log(payload.role);
                 commit('obtenerUsuario', payload)
             } else {
                 commit('obtenerUsuario', null)
