@@ -9,7 +9,7 @@
       <div class="container">
         <hr>
         <!-- Pregunta 1 -->
-        <Pregunta pregunta="Pregunta #1: ¿Siente fiebre, escalofrios como los de una gripe o una fiebre con una temperatura tomada por la boca de 38.1˚ C (100.6˚F) o más?" nameInput="pregunta1" idInputYes="Si1"  idInputNo="No1"/>
+        <Pregunta pregunta="Pregunta #1: ¿Siente fiebre, escalofrios como los de una gripe o una fiebre con una temperatura tomada por la boca de 38.1˚ C (100.6˚F) o más?" nameInput="pregunta1" idInputYes="Si1"  idInputNo="No1" @obtenerValor="inputSelected"/>
         <hr>
         <!-- Pregunta 2 -->
         <Pregunta pregunta="Pregunta #2: ¿Ha tenido una pérdida repentina del olfato sin congestión nasal (nariz tapada), con o sin pérdida del gusto?" nameInput="pregunta2" idInputYes="Si2"  idInputNo="No2"/>
@@ -74,13 +74,12 @@ import Pregunta from '../../components/Pregunta'
 import Titulos from '../../components/Titulos'
 export default {
   name: 'Form',
-  // data(){
-  //   return {
-  //     usuario_id: '',
-  //     otros_sintomas: '',
-  //     respuestas: []
-  //   }
-  // },
+  data() {
+    return {
+      respuestas: [],
+      otros_sintomas: ''
+    }
+  },
   components: {
     Pregunta,
     Titulos
@@ -94,6 +93,9 @@ export default {
         // }else{
         //   console.log('Todos los campos correctos');
         // }
+    },
+    inputSelected(selectedInput){
+      console.log(selectedInput);
     }
   }
 }

@@ -37,7 +37,6 @@ export default {
         sortBy: 'solicitud_id',
         // Note 'isActive' is left out and will not appear in the rendered table
         fields: [
-          { key: 'solicitud_id', label: 'ID', sortable: false },
           { key: 'modalidad', sortable: false },
           { key: 'fecha_solicitud', sortable: true },
           { key: 'sintomas', sortable: true,

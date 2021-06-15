@@ -4,7 +4,7 @@
       <b-button href="../Consultas" variant="primary"><i class="fas fa-long-arrow-alt-left"></i> Regresar</b-button>
     </div>
     <Titulos titulo="Consulta" subtitulo=""/>
-    <h3 class="font-weight-light text-center">Consulta realizada por: alumno</h3>
+    <h3 class="font-weight-light text-center">Consulta realizada por: {{alumno}}</h3>
     <div class="mb-3">
       <h4>Modalidad</h4>
       <p class="text-capitalize">{{modalidad}}</p>
@@ -66,7 +66,6 @@
               <option v-for="(item, index) in medicinas" :key="index" :value="item.medicamento.medicamento_id">{{item.medicamento.descripcion}}</option>
             </select>
             <input v-model="medicamento.receta" :name="`medicamentos[${index}][receta]`" class="form-control" type="text" :placeholder="'Ingresa aqui las instrucciones del medicamento ' + index">
-            <p>{{medicamento}}</p>
           </div>
         </div>
         <div class="d-flex justify-content-around">
@@ -122,7 +121,8 @@ export default {
         }
       }],
       medicinas: [],
-      receta: ''
+      receta: '',
+      alumno: ''
     }
   },
   computed: {
@@ -137,15 +137,17 @@ export default {
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
       this.axios.get(`/consultas/${this.$route.params.id}`, config)
         .then((res) => {
+          console.log(res);
           this.modalidad = res.data.modalidad
           this.sintomas = res.data.sintomas
+          this.alumno = res.data.usuario.email
           for (let i = 0; i < res.data.evidencias.length; i++){
             this.evidencias.push({
               url: res.data.evidencias[i].url
             })
           }
         }).catch((err) => {
-          console.log(err);
+          console.log(err.response);
         });
     },
     muestraMedicamentos(){
