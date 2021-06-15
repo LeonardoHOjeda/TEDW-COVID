@@ -1,26 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 // import store from '../store'
 
 Vue.use(VueRouter)
 
 const routes = [
-    // Menu principal
-    {
-        path: '/',
-        name: 'Home',
-        component: Home
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: () =>
-            import ('../views/About.vue')
-    },
-    ...require('../modules/login/router'),
-    ...require('../modules/students/router'),
-    ...require('../modules/medics/router')
+    ...require('./modules/home/router'),
+    ...require('./modules/login/router'),
+    ...require('./modules/students/router'),
+    ...require('./modules/medics/router')
 ]
 
 const router = new VueRouter({
