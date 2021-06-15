@@ -12,7 +12,7 @@
       <p>Filtrado por: <b>{{sortBy}}</b></p>
     </div>
     <b-table :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center">
-      <template v-slot:cell(acciones)="data" #cell(acciones)>
+      <template v-slot:cell(acciones)="data">
         <b-button variant="outline-info" size="sm" :to="`./Form/${data.item.id_encuesta}`">Ver respuestas <i class="far fa-eye"></i></b-button>
           <!-- <button class="btn btn-warning btn-sm">Ver respuestas <i class="far fa-eye"></i></button> -->
       </template>

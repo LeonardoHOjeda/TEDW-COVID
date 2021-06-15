@@ -5,7 +5,7 @@
       <p>Filtrado por: <b>{{sortBy}}</b></p>
     </div>
     <b-table :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center">
-      <template v-slot:cell(acciones)="data" #cell(acciones)>
+      <template v-slot:cell(acciones)="data">
         <b-button variant="outline-success" size="sm" :to="`./Consultas/${data.item.solicitud_id}`">Atender cita <i class="fas fa-book-medical"></i></b-button>
           <!-- <button class="btn btn-warning btn-sm">Ver respuestas <i class="far fa-eye"></i></button> -->
       </template>

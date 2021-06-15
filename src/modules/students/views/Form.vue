@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import Pregunta from '../../../components/Pregunta'
+import Pregunta from '../components/Pregunta'
 import Titulos from '../../../components/Titulos'
 export default {
   name: 'Form',
