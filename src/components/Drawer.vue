@@ -10,7 +10,7 @@
       <!-- Nombre y correo del usuario -->
       <template #header v-if="token">
         <div class="px-2 header">
-          <h5 class="mt-3 font-weight-bold">{{`${usuario[usuario.rol.rol].nombre} ${usuario[usuario.rol.rol].a_paterno}`}}</h5>
+          <h5 class="mt-3 font-weight-bold">{{`${infoUsuario.nombre} ${infoUsuario.a_paterno}`}}</h5>
           <p class="m-0 subtitle">{{`${usuario.email}`}}</p>
         </div>
       </template>
@@ -54,15 +54,27 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+  import { mapActions, mapGetters, mapState } from 'vuex';
   export default {
     name: 'Drawer',
     data: () => ({
       student_menu: [
         { icon: 'fas fa-poll-h', to: '/students/Form', label: 'Form' },
-        { icon: 'fas fa-user-md', to: '/students/Appointment', label: 'Crear Cita' },
-        { icon: 'far fa-file-alt', to: '/students/PrintRecipe', label: 'Historial Recetas' },
-        { icon: 'fas fa-exclamation-circle', to: '/students/Alertas', label: 'Alertas' },
+        {
+          icon: 'fas fa-user-md',
+          to: '/students/Appointment',
+          label: 'Crear Cita',
+        },
+        {
+          icon: 'far fa-file-alt',
+          to: '/students/PrintRecipe',
+          label: 'Historial Recetas',
+        },
+        {
+          icon: 'fas fa-exclamation-circle',
+          to: '/students/Alertas',
+          label: 'Alertas',
+        },
         {
           icon: 'fas fa-list',
           label: 'Tree Menu',
@@ -81,15 +93,51 @@ import {mapActions, mapState} from 'vuex'
         },
       ],
       admin_menu: [
-        { icon: 'fas fa-home', to: '/', label: 'Home' },
-        { icon: 'far fa-question-circle', to: '/about', label: 'About' },
-        { icon: 'fas fa-door-open', to: '/login', label: 'Iniciar Sesion' },
-        { icon: 'fas fa-user-plus', to: '/signup', label: 'Registrarse' },
+        { icon: 'fas fa-home', to: '/admin/home', label: 'Home' },
+        {
+          icon: 'fas fa-building',
+          to: '/admin/departamentos',
+          label: 'Departamentos',
+        },
+        {
+          icon: 'fas fa-book-reader',
+          to: '/admin/carreras',
+          label: 'Carreras',
+        },
+        {
+          icon: 'fas fa-user-graduate',
+          to: '/admin/estudiantes',
+          label: 'Estudiantes',
+        },
+        {
+          icon: 'fas fa-user-friends',
+          to: '/admin/personal',
+          label: 'Personal Académico',
+        },
+        {
+          icon: 'fas fa-book-medical',
+          to: '/admin/tipo_prueba',
+          label: 'Tipos de Prueba',
+        },
+        {
+          icon: 'fas fa-prescription-bottle-alt',
+          to: '/admin/medicamentos',
+          label: 'Medicamentos',
+        },
+        {
+          icon: 'fas fa-user',
+          to: '/admin/usuarios',
+          label: 'Usuarios',
+        },
       ],
       medic_menu: [
         { icon: 'fas fa-poll-h', to: '/medics/Form', label: 'Formulario' },
         { icon: 'fas fa-user-md', to: '/medics/Consultas', label: 'Consultas' },
-        { icon: 'fas  fa-file-medical', to: '/medics/ResultadosPruebas', label: 'Resultados Pruebas' },
+        {
+          icon: 'fas  fa-file-medical',
+          to: '/medics/ResultadosPruebas',
+          label: 'Resultados Pruebas',
+        },
         { icon: 'far fa-question-circle', to: '/about', label: 'About' },
       ],
     }),
@@ -98,18 +146,19 @@ import {mapActions, mapState} from 'vuex'
         const items = {
           estudiante: this.student_menu,
           medico: this.medic_menu,
+          administrador: this.admin_menu,
         };
-
         return items[this.usuario.rol.rol];
       },
       ...mapState(['usuario', 'token']),
+      ...mapGetters(['infoUsuario']),
     },
     methods: {
-      ...mapActions(['cerrarSesion', 'leerToken'])
+      ...mapActions(['cerrarSesion', 'leerToken']),
     },
-    created(){
+    created() {
       this.leerToken();
-    }
+    },
   };
 </script>
 
@@ -138,16 +187,16 @@ import {mapActions, mapState} from 'vuex'
     color: white;
   }
   .nav-menu i {
-    margin-right: 20px;
+    margin-right: 10px;
   }
   .nav-menu:hover {
     background-color: rgba(173, 173, 173, 0.2);
   }
-  .nav-menu .fa-chevron-left{
+  .nav-menu .fa-chevron-left {
     font-size: 13px;
     margin-top: 5px;
   }
-  .nav-menu.not-collapsed .fa-chevron-left{
+  .nav-menu.not-collapsed .fa-chevron-left {
     transform: rotate(-90deg);
   }
   .subtitle {
