@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import router from '../router'
+import router from './router'
 
 // libreria para decodificar el jwt
 // import decode from 'jwt-decode'

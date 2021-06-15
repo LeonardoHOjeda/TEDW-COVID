@@ -62,7 +62,7 @@
 import { mapState } from 'vuex';
 // import Pregunta from '../../components/Pregunta'
 // import Boton from '../../components/Boton'
-import Titulos from '../../components/Titulos'
+import Titulos from '../../../components/Titulos.vue'
 export default {
   data() {
     return {

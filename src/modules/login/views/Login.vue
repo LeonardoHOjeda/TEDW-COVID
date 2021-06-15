@@ -41,7 +41,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import { required, email, minLength} from 'vuelidate/lib/validators'
+import { required, email} from 'vuelidate/lib/validators'
 export default {
     data() {
       return {
@@ -53,8 +53,7 @@ export default {
     validations: {
       email:{required, email},
       password: {
-        required,
-        minLength: minLength(6)
+        required
       }
     },
     methods: {
