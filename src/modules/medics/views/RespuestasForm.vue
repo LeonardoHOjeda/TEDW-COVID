@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mt-3">
-      <b-button href="../Form" variant="primary"><i class="fas fa-long-arrow-alt-left"></i> Regresar</b-button>
+      <router-link to="/medics/Form" class="btn btn-primary"><i class="fas fa-long-arrow-alt-left"></i> Regresar</router-link>
     </div>
     <Titulos titulo="Respuestas del formulario " subtitulo=""/>
     <h3 class="font-weight-light text-center">Aqui podras observar las respuestas del formulario con el id: {{$route.params.id}}</h3>
