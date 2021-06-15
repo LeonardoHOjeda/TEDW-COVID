@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import Titulos from '../../components/Titulos'
+import Titulos from '../../../components/Titulos'
 import {mapState} from 'vuex'
 import moment from 'moment';
 export default {

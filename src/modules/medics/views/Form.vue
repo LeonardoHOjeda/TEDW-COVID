@@ -29,7 +29,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import Titulos from '../../components/Titulos'
+import Titulos from '../../../components/Titulos'
 import moment from 'moment';
 export default {
   components: {

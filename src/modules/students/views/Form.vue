@@ -70,8 +70,8 @@
 </template>
 
 <script>
-import Pregunta from '../../components/Pregunta'
-import Titulos from '../../components/Titulos'
+import Pregunta from '../../../components/Pregunta'
+import Titulos from '../../../components/Titulos'
 export default {
   name: 'Form',
   data() {
