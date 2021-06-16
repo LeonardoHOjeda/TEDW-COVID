@@ -24,11 +24,12 @@
       ...mapActions(['cerrarSesion', 'reloadState']),
     },
     computed: {
-      ...mapState(['usuario']),
+      ...mapState(['usuario', 'token']),
       ...mapGetters(['isLoggedIn']),
     },
     created() {
       this.reloadState();
+      this.axios.defaults.headers = { Authorization: `Bearer ${this.token}` };
     },
   };
 </script>

@@ -8,7 +8,8 @@ const routes = [
     ...require('./modules/home/router'),
     ...require('./modules/login/router'),
     ...require('./modules/students/router'),
-    ...require('./modules/medics/router')
+    ...require('./modules/medics/router'),
+    ...require('./modules/administrator/router')
 ]
 
 const router = new VueRouter({

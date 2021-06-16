@@ -3,9 +3,10 @@ import Vuex from 'vuex'
 
 import router from './router'
 
-// libreria para decodificar el jwt
-// import decode from 'jwt-decode'
 import createPersistedState from 'vuex-persistedstate'
+
+// Modulos
+import adminModule from './modules/administrator/store'
 
 Vue.use(Vuex)
 
@@ -47,12 +48,12 @@ export default new Vuex.Store({
       localStorage.removeItem('token')
       localStorage.removeItem('role')
       localStorage.removeItem('usuario')
+      localStorage.removeItem('vuex')
       router.push({ name: 'Login' })
     },
     reloadState({ commit }) {
       const payload = JSON.parse(localStorage.getItem('vuex'))
       if (payload && payload.token) {
-        console.log('si hay payload')
         commit('obtenerUsuario', payload)
       } else {
         commit('obtenerUsuario', null)
@@ -71,5 +72,7 @@ export default new Vuex.Store({
       return state.token != null
     },
   },
-  modules: {},
+  modules: {
+    admin: adminModule,
+  },
 })
