@@ -9,9 +9,20 @@
     <div>
       <h3 class="text-center">Respuestas</h3>
       <div class="" v-for="(item, index) in respuestas" :key="index">
-        <h3>{{item.pregunta.pregunta.pregunta}}</h3>
-        <h3><span class="text-capitalize badge" :class="item.pregunta.respuesta === 'no' ? 'badge-success' : 'badge-danger'">{{item.pregunta.respuesta}}</span></h3>
+        <h5>{{item.pregunta.pregunta.pregunta}}</h5>
+        <h5><span class="text-capitalize badge" :class="item.pregunta.respuesta === 'no' ? 'badge-success' : 'badge-danger'">{{item.pregunta.respuesta}}</span></h5>
         <hr>
+      </div>
+      <div class="mb-3">
+        <h3>Otros sintomas</h3>
+        <b-form-textarea
+          id="textarea"
+          v-model="text"
+          placeholder="No hay sintomas agregados :c"
+          rows="3"
+          max-rows="6"
+          readonly
+        ></b-form-textarea>
       </div>
     </div>
     <h4>Solicitar prueba</h4>
@@ -32,6 +43,7 @@ export default {
     return {
       selected: '0',
       moment: moment,
+      text: '',
       options: [
         {value: '0', text: '---Por favor, selecciona una opcion---', disabled: true},
         {value: '1', text: 'Prueba PCR'},
@@ -58,19 +70,17 @@ export default {
   methods: {
     listarRespuestas(){
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
-      console.log(this.$route.params.id);
       this.axios.get(`/encuesta/${this.$route.params.id}`, config)
         .then((res) => {
-          console.log(res);
           let answ = res.data.respuestas
           this.fecha_aplicacion = moment(res.data.fecha_aplicacion).calendar()
           this.usuario_id = res.data.usuario.usuario_id
+          this.text = res.data.otros_sintomas
           for (let i = 0; i < answ.length; i++) {
             this.respuestas.push({
               pregunta: answ[i]
             })
           }
-          console.log(this.respuestas);
         }).catch((err) => {
           console.log(err.response);
         });
