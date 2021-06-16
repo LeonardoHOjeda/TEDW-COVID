@@ -69,20 +69,15 @@ export default {
           }
           this.axios.post('/usuarios/login', usuario)
             .then(rest => {
-              console.log(rest.data);
-              console.log('Todo bien');
               const objeto = {
                 token: rest.data.token,
                 usuario: rest.data.usuario
               }
-              // const token = rest.data.token;
-              // const usuario = rest.data.usuario;
               this.guardarUsuario(objeto);
               this.email = '',
               this.password = ''
             }).catch(err => {
               this.mensaje = 'Se encontraron errores a la hora de realizar una peticion'
-              console.log('hubo un error');
               console.log(err)
             })
         }

@@ -154,10 +154,7 @@
       ...mapGetters(['infoUsuario']),
     },
     methods: {
-      ...mapActions(['cerrarSesion', 'leerToken']),
-    },
-    created() {
-      this.leerToken();
+      ...mapActions(['cerrarSesion']),
     },
   };
 </script>

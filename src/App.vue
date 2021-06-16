@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+  import { mapActions, mapGetters, mapState } from 'vuex';
   import Footer from './components/Footer';
   import Navbar from './components/Navbar';
 
@@ -21,22 +21,20 @@ import { mapActions, mapState } from 'vuex';
       Navbar,
     },
     methods: {
-      ...mapActions(['cerrarSesion', 'leerToken'])
+      ...mapActions(['cerrarSesion', 'reloadState']),
     },
     computed: {
       ...mapState(['usuario']),
-      isLoggedIn(){
-        return this.usuario.rol !== ""
-      }
+      ...mapGetters(['isLoggedIn']),
     },
-    created(){
-      this.leerToken();
-    }
+    created() {
+      this.reloadState();
+    },
   };
 </script>
 
 <style>
-  .contenedor{
+  .contenedor {
     min-height: calc(100vh - 180px);
   }
 </style>
