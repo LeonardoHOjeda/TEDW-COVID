@@ -6,7 +6,7 @@
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
         <label for="depto">Nombre del departamento</label>
-        <input type="text" class="form-control" id="depto" autofocus v-model="departamento" />
+        <b-form-input type="text" class="form-control" id="depto" autofocus v-model="departamento" />
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Guardar</button>

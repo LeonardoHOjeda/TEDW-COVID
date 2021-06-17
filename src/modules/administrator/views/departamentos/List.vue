@@ -148,7 +148,7 @@
   .btn-edit {
     margin-top: 10px;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 982px) {
     .btn-edit {
       margin-top: 0;
       margin-left: 10px;

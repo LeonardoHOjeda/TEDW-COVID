@@ -24,7 +24,7 @@
 <script>
   import { mapActions, mapMutations, mapState } from 'vuex';
   export default {
-    name: 'AddDepartment',
+    name: 'UpdateDepartment',
     data: () => ({
       departamento: '',
     }),
@@ -45,7 +45,6 @@
     },
     created() {
       const id = Number(this.$route.params.id);
-      console.log(id);
       this.setSelected(id);
     },
   };

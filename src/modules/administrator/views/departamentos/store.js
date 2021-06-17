@@ -48,7 +48,7 @@ export default {
 
     async deleteDepartment({ state, commit }, payload) {
       try {
-        await axios.delete(`/departamento/${payload}`)
+        axios.delete(`/departamento/${payload}`)
         const newDepartments = state.departments.filter(
           (x) => x.departamento_id !== payload
         )
