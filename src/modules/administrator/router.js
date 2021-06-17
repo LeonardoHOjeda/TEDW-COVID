@@ -36,6 +36,22 @@ const routes = [
     name: '/admin/carreras/update/:id',
     component: () => import('./views/carreras/Update.vue'),
   },
+  //Medicamentos
+  {
+    path: '/admin/medicamentos',
+    name: '/admin/medicamentos',
+    component: () => import('./views/medicamentos/List.vue'),
+  },
+  {
+    path: '/admin/medicamentos/add',
+    name: '/admin/medicamentos/add',
+    component: () => import('./views/medicamentos/Add.vue'),
+  },
+  {
+    path: '/admin/medicamentos/update/:id',
+    name: '/admin/medicamentos/update/:id',
+    component: () => import('./views/medicamentos/Update.vue'),
+  },
 ]
 
 module.exports = routes
