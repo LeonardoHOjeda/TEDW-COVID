@@ -21,13 +21,6 @@ export default {
       state.carreras = payload
     },
     addCarrera(state, payload) {
-      console.log(payload)
-      const newCarrer = {
-        carrera: payload.carrera.nombre,
-        carrera_id: payload.carrera.carrera_id,
-        departamento: payload.carrera.departamento,
-      }
-      console.log(newCarrer)
       state.carreras.push(payload.carrera)
     },
     setSelected(state, payload) {
@@ -73,7 +66,6 @@ export default {
         })
         commit('addCarrera', resp.data)
       } catch (error) {
-        console.log(error)
         commit('setError', error)
         setTimeout(() => commit('setError', null), 4000)
       }
@@ -87,7 +79,6 @@ export default {
         })
         commit('updateCarrera', resp.data)
       } catch (error) {
-        console.log(error)
         commit('setError', error)
         setTimeout(() => commit('setError', null), 4000)
       }

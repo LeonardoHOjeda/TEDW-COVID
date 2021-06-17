@@ -80,7 +80,7 @@
     name: 'DepartmentList',
     data: () => ({
       search: '',
-      perPage: 5,
+      perPage: 10,
       currentPage: 1,
       fields: [
         { key: 'departamento_id', label: 'ID', sortable: true },
