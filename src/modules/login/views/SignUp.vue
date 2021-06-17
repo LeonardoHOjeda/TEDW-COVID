@@ -100,12 +100,11 @@
         </div>
         <div class="mb-3">
           <label for="carrea" class="form-label">Selecciona tu carrera</label>
-          <select class="custom-select">
-            <option selected disabled>--Selecciona una carrera--</option>
-            <!-- <option v-for="(item, index) in carreras" :key="index" :value="item.id">One</option> -->
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select class="custom-select" v-model="carrera">
+            <option disabled value="">--Selecciona una carrera--</option>
+            <option  v-for="(item, index) in carreras" :key="index" :value="item.carrera_id">{{item.carrera}}</option>
           </select>
+          <p>{{carrera}}</p>
         </div>
         <b-button block variant="success" type="submit" :disabled="$v.$invalid">Registrarse <i class="fas fa-user-plus"></i></b-button>
         <!-- <p>{{$v.$invalid}}</p> -->
@@ -120,12 +119,14 @@ export default {
     data() {
       return {
         carreras: [],
+        selected: '',
           email: '',
           password: '',
           repeatPassword: '',
           nombre: '',
           a_paterno: '',
           a_materno: '',
+          carrera: '',
           dismissSecs: 5,
           dismissCountDown: 0,
           mensaje: {
@@ -165,7 +166,7 @@ export default {
           a_materno: this.a_materno,
           email: this.email,
           password: this.password,
-          carrera_id: 1
+          carrera_id: this.carrera
         }
         console.log(jsonData);
         this.$v.$touch()
@@ -202,6 +203,11 @@ export default {
         this.axios.get('/carrera')
           .then((res) => {
             console.log(res);
+            for (let i = 0; i < res.data.length; i++) {
+              this.carreras.push(res.data[i])
+            }
+            // this.carreras = res.data.carrera
+            console.log(this.carreras);
           }).catch((err) => {
             console.log(err.response);
           });
