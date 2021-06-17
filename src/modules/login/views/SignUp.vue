@@ -70,10 +70,7 @@
             />
           <p class="text-danger" v-if="!$v.email.email">Este email es incorrecto</p>
           <p class="text-danger" v-if="!$v.email.required && $v.email.$dirty ">Campo Requerido</p>
-          <!-- <p class="text-danger" v-if="!$v.email.required">Campo requerido</p> -->
-          <!-- <p>{{$v.email}}</p> -->
         </div>
-  
         <!-- Constrasena -->
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
@@ -86,8 +83,6 @@
             id="password">
           <p class="text-danger" v-if="!$v.password.minLength">Minimo 6 caracteres</p>
           <p class="text-danger" v-if="!$v.password.required && $v.password.$dirty ">Campo Requerido</p>
-          <!-- <p class="text-danger" v-if="!$v.password.required">Campo requerido</p> -->
-          <!-- <p>{{$v.password}}</p> -->
         </div>
 
         <!-- Repite Contrasena -->
@@ -102,8 +97,15 @@
             id="passwordRepeat">
           <p class="text-danger" v-if="!$v.repeatPassword.sameAsPassword">Las contrasenas no coinciden</p>
           <input type="hidden" name="carrera_id" value="1">
-          <!-- <p class="text-danger" v-if="!$v.password.required">Campo requerido</p> -->
-          <!-- <p>{{$v.repeatPassword}}</p> -->
+        </div>
+        <div class="mb-3">
+          <label for="carrea" class="form-label">Selecciona tu carrera</label>
+          <select class="custom-select">
+            <option selected disabled>--Selecciona una carrera--</option>
+            <!-- <option v-for="(item, index) in carreras" :key="index" :value="item.id">One</option> -->
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
         </div>
         <b-button block variant="success" type="submit" :disabled="$v.$invalid">Registrarse <i class="fas fa-user-plus"></i></b-button>
         <!-- <p>{{$v.$invalid}}</p> -->
@@ -117,6 +119,7 @@ import { required, email, minLength, sameAs} from 'vuelidate/lib/validators'
 export default {
     data() {
       return {
+        carreras: [],
           email: '',
           password: '',
           repeatPassword: '',
@@ -195,12 +198,23 @@ export default {
             })
         }
       },
+      obtenerCarreras(){
+        this.axios.get('/carrera')
+          .then((res) => {
+            console.log(res);
+          }).catch((err) => {
+            console.log(err.response);
+          });
+      },
       mostrarAlerta(){
         this.dismissCountDown = this.dismissSecs
       },
       countDownChanged(dismissCountDown){
         this.dismissCountDown = dismissCountDown
       }
+    },
+    created(){
+      this.obtenerCarreras()
     }
   }
 </script>

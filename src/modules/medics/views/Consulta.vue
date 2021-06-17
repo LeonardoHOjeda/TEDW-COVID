@@ -59,7 +59,7 @@
 
       <div v-if="cantidadMedicamentos <= 10">
         <div v-for="(medicamento, index) in medicamentos" :key="index" class="mb-3">
-          <h5>Medicamento {{index}}</h5>
+          <h5>Medicamento {{index+1}}</h5>
           <div class="form-group"  >
             <select class="custom-select mb-3" name="medicamento_id" id="" v-model="medicamento.medicamento.medicamento_id">
               <option value="0" disabled selected>--Seleccione Medicina---</option>

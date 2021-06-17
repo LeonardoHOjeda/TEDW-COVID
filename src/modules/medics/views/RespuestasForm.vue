@@ -46,9 +46,9 @@ export default {
       text: '',
       options: [
         {value: '0', text: '---Por favor, selecciona una opcion---', disabled: true},
-        {value: '1', text: 'Prueba PCR'},
-        {value: '2', text: 'Prueba rapida de antigeno'},
-        {value: '3', text: 'Prueba rapida de sangre'}
+        // {value: '1', text: 'Prueba PCR'},
+        // {value: '2', text: 'Prueba rapida de antigeno'},
+        // {value: '3', text: 'Prueba rapida de sangre'}
       ],
       fecha_aplicacion: '',
       respuestas: [],
@@ -84,7 +84,18 @@ export default {
         }).catch((err) => {
           console.log(err.response);
         });
-
+      this.axios.get('/tipo_prueba', config)
+        .then((res) => {
+          console.log(res.data.length);
+          for (let i = 0; i < res.data.length; i++){
+            this.options.push({
+              value: res.data[i].tipo_id,
+              text: res.data[i].descripcion
+            })
+          }
+        }).catch((err) => {
+          console.log(err.response);
+        });
     },
     crearOrden(){
       console.log(this.selected);

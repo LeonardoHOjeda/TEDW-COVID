@@ -33,7 +33,7 @@
             >
           <p class="text-danger" v-if="!$v.password.required && $v.password.$dirty ">Campo Requerido</p>
         </div>
-        <b-button block variant="primary" type="submit" :disabled="$v.$invalid">Login</b-button>
+        <b-button block variant="primary" type="submit" :disabled="$v.$invalid"><div v-if="loading" class="spinner-border spinner-border-sm"></div> Login</b-button>
       </form>
     </b-container>
   </div>
@@ -47,7 +47,8 @@ export default {
       return {
         email: '',
         password: '',
-        mensaje: ''
+        mensaje: '',
+        loading: false
       }
     },
     validations: {
@@ -59,6 +60,7 @@ export default {
     methods: {
       ...mapActions(['guardarUsuario']),
       login(){
+        this.loading = true
         this.$v.$touch()
         if(this.$v.$invalid){
           console.log('Se genero un error');
