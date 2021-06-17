@@ -76,6 +76,11 @@
           label: 'Alertas',
         },
         {
+          icon: 'fas fa-virus',
+          to: '/students/Ordenes',
+          label: 'Ordenes de pruebas',
+        },
+        {
           icon: 'fas fa-list',
           label: 'Tree Menu',
           submenus: [

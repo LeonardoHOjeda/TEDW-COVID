@@ -7,7 +7,6 @@ Este proyecto hasta el momento (09 de Junio de 2021) esta usando la siguientes l
 - **Vuelidate:** Usamos esta libreria para validar los campos de los formularios.
 - **FontAwesome:** Usamos esta libreria para colocar iconos en nuestros componentes.
 - **Axios:** Usamos esta libreria de JavaScript ya que nos permite hacer operaciones como cliente HTTP.
-- **JWT-Decode:** Usamos esta libreria que nos ayuda a decodificar tokens JWT.
 - **Moment JS:** Usamos esta libreria que nos ayuda a formatear las fechas.
 - **SweetAlert2:** Usamos esta libreria que nos ayuda a crear alertas mas atractivas visualmente.
 - **Bootstrap-icons:** Usamos esta libreria para insertar iconos a nuestros componentes
