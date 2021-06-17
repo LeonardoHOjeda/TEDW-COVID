@@ -1,4 +1,5 @@
 const routes = [
+  //departamentos
   {
     path: '/admin/home',
     name: '/admin/home',
@@ -18,6 +19,22 @@ const routes = [
     path: '/admin/departamentos/update/:id',
     name: '/admin/departamentos/update/:id',
     component: () => import('./views/departamentos/Update.vue'),
+  },
+  //Carreras
+  {
+    path: '/admin/carreras',
+    name: '/admin/carreras',
+    component: () => import('./views/carreras/List.vue'),
+  },
+  {
+    path: '/admin/carreras/add',
+    name: '/admin/carreras/add',
+    component: () => import('./views/carreras/Add.vue'),
+  },
+  {
+    path: '/admin/carreras/update/:id',
+    name: '/admin/carreras/update/:id',
+    component: () => import('./views/carreras/Update.vue'),
   },
 ]
 

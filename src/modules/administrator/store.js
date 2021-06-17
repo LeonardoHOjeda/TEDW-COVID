@@ -1,4 +1,5 @@
 import departments from './views/departamentos/store'
+import carreras from './views/carreras/store'
 
 export default {
   namespaced: true,
@@ -8,5 +9,6 @@ export default {
   getters: {},
   modules: {
     departments,
+    carreras,
   },
 }
