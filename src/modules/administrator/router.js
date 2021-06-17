@@ -52,6 +52,22 @@ const routes = [
     name: '/admin/medicamentos/update/:id',
     component: () => import('./views/medicamentos/Update.vue'),
   },
+  //Tipos de Prueba
+  {
+    path: '/admin/tipo_prueba',
+    name: '/admin/tipo_prueba',
+    component: () => import('./views/tipo_prueba/List.vue'),
+  },
+  {
+    path: '/admin/tipo_prueba/add',
+    name: '/admin/tipo_prueba/add',
+    component: () => import('./views/tipo_prueba/Add.vue'),
+  },
+  {
+    path: '/admin/tipo_prueba/update/:id',
+    name: '/admin/tipo_prueba/update/:id',
+    component: () => import('./views/tipo_prueba/Update.vue'),
+  },
 ]
 
 module.exports = routes
