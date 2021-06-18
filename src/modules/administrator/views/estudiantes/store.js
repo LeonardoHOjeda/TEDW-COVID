@@ -35,6 +35,7 @@ export default {
         }
         return x
       })
+      state.selected = null
     },
   },
   actions: {
@@ -61,7 +62,6 @@ export default {
         })
         commit('addEstudiante', resp.data.estudiante)
       } catch (error) {
-        console.log(error.response)
         commit('setError', error)
         setTimeout(() => commit('setError', null), 4000)
       }
@@ -77,7 +77,6 @@ export default {
         })
         commit('updateEstudiante', resp.data)
       } catch (error) {
-        console.log(error)
         commit('setError', error)
         setTimeout(() => commit('setError', null), 4000)
       }

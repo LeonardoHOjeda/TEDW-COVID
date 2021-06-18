@@ -33,6 +33,7 @@ export default {
       state.tipos = state.tipos.map((x) =>
         x.tipo_id === payload.tipo_id ? payload : x
       )
+      state.selected = null
     },
   },
   actions: {

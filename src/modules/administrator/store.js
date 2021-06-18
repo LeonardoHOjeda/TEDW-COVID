@@ -4,6 +4,7 @@ import medicamentos from './views/medicamentos/store'
 import tipo_prueba from './views/tipo_prueba/store'
 import estudiantes from './views/estudiantes/store'
 import personal from './views/personal/store'
+import medicos from './views/medicos/store'
 
 export default {
   namespaced: true,
@@ -18,5 +19,6 @@ export default {
     tipo_prueba,
     estudiantes,
     personal,
+    medicos,
   },
 }

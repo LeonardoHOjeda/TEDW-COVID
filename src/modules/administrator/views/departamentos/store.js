@@ -33,6 +33,7 @@ export default {
       state.departments = state.departments.map((x) =>
         x.departamento_id === payload.departamento_id ? payload : x
       )
+      state.selected = null
     },
   },
   actions: {

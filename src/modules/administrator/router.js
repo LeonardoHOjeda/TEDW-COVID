@@ -100,6 +100,22 @@ const routes = [
     name: '/admin/personal/update/:id',
     component: () => import('./views/personal/Update.vue'),
   },
+  //Medicos
+  {
+    path: '/admin/medicos',
+    name: '/admin/medicos',
+    component: () => import('./views/medicos/List.vue'),
+  },
+  {
+    path: '/admin/medicos/add',
+    name: '/admin/medicos/add',
+    component: () => import('./views/medicos/Add.vue'),
+  },
+  {
+    path: '/admin/medicos/update/:id',
+    name: '/admin/medicos/update/:id',
+    component: () => import('./views/medicos/Update.vue'),
+  },
 ]
 
 module.exports = routes

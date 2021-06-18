@@ -31,6 +31,7 @@ export default {
       state.carreras = state.carreras.map((x) =>
         x.carrera_id === payload.carrera_id ? payload : x
       )
+      state.selected = null
     },
   },
   actions: {

@@ -5,7 +5,7 @@ import router from '@/router'
 export default {
   namespaced: true,
   state: {
-    personal: [],
+    medicos: [],
     error: null,
     selected: null,
   },
@@ -17,67 +17,68 @@ export default {
         message: payload.response.data.message || payload.message,
       }
     },
-    setPersonal(state, payload) {
-      state.personal = payload
+    setMedicos(state, payload) {
+      state.medicos = payload
     },
-    addPersonal(state, payload) {
-      state.personal.push(payload)
+    addMedico(state, payload) {
+      state.medicos.push(payload)
     },
     setSelected(state, payload) {
-      const select = state.personal.find((x) => x.personal_id === payload)
+      const select = state.medicos.find((x) => x.medico_id === payload)
       state.selected = select
     },
-    updatePersonal(state, payload) {
-      state.personal = state.personal.map((x) => {
-        if (x.personal_id === payload.personal_id) {
+    updateMedico(state, payload) {
+      state.medicos = state.medicos.map((x) => {
+        if (x.medico_id === payload.medico_id) {
           payload.usuario = x.usuario
           return payload
         }
         return x
       })
-      state.selected = null
     },
   },
   actions: {
-    async fetchPersonal({ commit }) {
+    async fetchMedicos({ commit }) {
       try {
-        const resp = await axios.get('/personal')
-        commit('setPersonal', resp.data)
+        const resp = await axios.get('/medicos')
+        commit('setMedicos', resp.data)
       } catch (error) {
         commit('setError', error)
         setTimeout(() => commit('setError', null), 4000)
       }
     },
 
-    async addPersonal({ commit }, payload) {
+    async addMedico({ commit }, payload) {
       try {
         router.go(-1)
-        const resp = await axios.post('/personal/signup', {
+        const resp = await axios.post('/medicos/signup', {
           email: payload.email,
           password: 'CONTROL-COVID-2021',
           nombre: payload.nombre,
           a_materno: payload.a_materno,
           a_paterno: payload.a_paterno,
-          departamento_id: payload.departamento,
           rfc: payload.rfc,
+          cedula: payload.cedula,
         })
-        commit('addPersonal', resp.data.saved)
+        commit('addMedico', resp.data)
       } catch (error) {
+        console.log(error.response)
         commit('setError', error)
         setTimeout(() => commit('setError', null), 4000)
       }
     },
-    async updatePersonal({ commit }, payload) {
+    async updateMedico({ commit }, payload) {
       try {
         router.go(-1)
-        const resp = await axios.put(`/personal/${payload.id}`, {
+        axios.put(`/medicos/${payload.medico_id}`, {
           nombre: payload.nombre,
           a_materno: payload.a_materno,
           a_paterno: payload.a_paterno,
-          departamento_id: payload.departamento,
           rfc: payload.rfc,
+          cedula: payload.cedula,
         })
-        commit('updatePersonal', resp.data)
+        console.log(payload)
+        commit('updateMedico', payload)
       } catch (error) {
         commit('setError', error)
         setTimeout(() => commit('setError', null), 4000)

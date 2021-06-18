@@ -64,6 +64,20 @@
         </router-link>
       </div>
       <div class="col-md-4">
+        <router-link to="/admin/medicos">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-user-md"></i>Médicos
+              </h5>
+              <p
+                class="card-text"
+              >Accede a un listado de todos los médicos registrados en la aplicación. Podrás actualizar su información personal así como su usuario</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+      <div class="col-md-4">
         <router-link to="/admin/tipo_prueba">
           <div class="card">
             <div class="card-body">
@@ -77,6 +91,9 @@
           </div>
         </router-link>
       </div>
+    </div>
+
+    <div class="row">
       <div class="col-md-4">
         <router-link to="/admin/medicamentos">
           <div class="card">
@@ -89,10 +106,8 @@
           </div>
         </router-link>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-4">
+      <!-- <div class="col-md-4">
         <router-link to="/admin/usuarios">
           <div class="card">
             <div class="card-body">
@@ -105,7 +120,7 @@
             </div>
           </div>
         </router-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

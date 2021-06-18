@@ -33,6 +33,7 @@ export default {
       state.medicamentos = state.medicamentos.map((x) =>
         x.medicamento_id === payload.medicamento_id ? payload : x
       )
+      state.selected = null
     },
   },
   actions: {

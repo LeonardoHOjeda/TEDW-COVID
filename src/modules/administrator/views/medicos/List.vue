@@ -3,8 +3,8 @@
     <b-alert v-if="error!=null" show variant="danger" dismissible fade>{{error.message}}</b-alert>
 
     <div class="d-flex justify-content-between mb-3">
-      <h3 class="m-0">Personal Académico</h3>
-      <router-link to="/admin/personal/add" class="btn btn-sm btn-success">
+      <h3 class="m-0">Médicos</h3>
+      <router-link to="/admin/medicos/add" class="btn btn-sm btn-success">
         <i class="fas fa-plus mr-2"></i>Dar de Alta
       </router-link>
     </div>
@@ -13,12 +13,12 @@
         <b-table
           striped
           hover
-          :items="personal"
+          :items="medicos"
           :fields="fields"
           :filter="search"
           :per-page="perPage"
           :current-page="currentPage"
-          responsive="sm"
+          :responsive="true"
           :busy="bussy"
         >
           <template #thead-top>
@@ -70,10 +70,6 @@
                     class="badge badge-primary"
                   >{{ row.item.usuario.sospechoso ? 'SI' :'NO' }}</span>
                 </li>
-                <li class="list-group-item">
-                  Requiere Encuesta:
-                  <p class="badge badge-primary">{{ row.item.usuario.requireSurvey ? 'SI' :'NO'}}</p>
-                </li>
               </ul>
             </b-card>
           </template>
@@ -81,7 +77,7 @@
           <template #cell(acciones)="row">
             <div>
               <router-link
-                :to="`/admin/personal/update/${row.item.personal_id}`"
+                :to="`/admin/medicos/update/${row.item.medico_id}`"
                 size="sm"
                 class="btn btn-sm btn-warning text-white btn-edit"
               >
@@ -96,7 +92,7 @@
       <b-col cols="3">
         <b-pagination
           v-model="currentPage"
-          :total-rows="personal.length"
+          :total-rows="medicos.length"
           :per-page="perPage"
           align="fill"
           size="sm"
@@ -109,7 +105,7 @@
 <script>
   import { mapActions, mapState } from 'vuex';
   export default {
-    name: 'PersonalList',
+    name: 'MedicosList',
     data: () => ({
       search: '',
       perPage: 10,
@@ -119,7 +115,7 @@
         { key: 'a_paterno', label: 'Apellido Paterno', sortable: true },
         { key: 'a_materno', label: 'Apellido Materno', sortable: true },
         { key: 'rfc', label: 'RFC', sortable: true },
-        { key: 'departamento', sortable: true },
+        { key: 'cedula', sortable: true },
         { key: 'usuario', sortable: false },
         { key: 'acciones', sortable: false },
       ],
@@ -127,13 +123,13 @@
       bussy: false,
     }),
     computed: {
-      ...mapState('admin/personal', ['personal', 'error']),
+      ...mapState('admin/medicos', ['medicos', 'error']),
     },
     methods: {
-      ...mapActions('admin/personal', ['fetchPersonal']),
+      ...mapActions('admin/medicos', ['fetchMedicos']),
     },
     created() {
-      this.fetchPersonal();
+      this.fetchMedicos();
     },
   };
 </script>

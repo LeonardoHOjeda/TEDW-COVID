@@ -115,6 +115,11 @@
           label: 'Personal Académico',
         },
         {
+          icon: 'fas fa-user-md',
+          to: '/admin/medicos',
+          label: 'Médicos',
+        },
+        {
           icon: 'fas fa-book-medical',
           to: '/admin/tipo_prueba',
           label: 'Tipos de Prueba',
@@ -124,11 +129,11 @@
           to: '/admin/medicamentos',
           label: 'Medicamentos',
         },
-        {
-          icon: 'fas fa-user',
-          to: '/admin/usuarios',
-          label: 'Usuarios',
-        },
+        // {
+        //   icon: 'fas fa-user',
+        //   to: '/admin/usuarios',
+        //   label: 'Usuarios',
+        // },
       ],
       medic_menu: [
         { icon: 'fas fa-poll-h', to: '/medics/Form', label: 'Formulario' },
