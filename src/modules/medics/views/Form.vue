@@ -11,19 +11,23 @@
     <div>
       <p>Filtrado por: <b>{{sortBy}}</b></p>
     </div>
-    <b-table :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center">
+    <b-table :busy="cargando" :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center">
       <template v-slot:cell(acciones)="data">
         <b-button variant="outline-info" size="sm" :to="`./Form/${data.item.id_encuesta}`">Ver respuestas <i class="far fa-eye"></i></b-button>
           <!-- <button class="btn btn-warning btn-sm">Ver respuestas <i class="far fa-eye"></i></button> -->
       </template>
+      <template #table-busy>
+        <div class="text-center text-info my-2">
+          <b-spinner
+            :variant="variant"
+            :key="variant"
+            class="align-middle"
+          ></b-spinner>
+          <strong>Cargando...</strong>
+        </div>
+      </template>
     </b-table>
-    <div class="text-center">
-      <b-spinner
-        :variant="variant"
-        :key="variant"
-        v-if="cargando"
-      ></b-spinner>
-    </div>
+    
   </div>
 </template>
 

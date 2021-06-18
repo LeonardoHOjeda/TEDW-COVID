@@ -4,8 +4,12 @@
       <div class="container-fluid text-center text-md-left">
         <div class="row">
           <div class="col-md-6 mt-md-0 mt-3"> <!--Grid column-->
-          <h5 class="text-uppercase font-weight-bold text-center">Footer text 1</h5>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos nesciunt, inventore tempore tenetur recusandae vel quo illo quia neque autem voluptatem vitae at rerum nemo possimus, nulla, rem incidunt et.</p>
+          <div class="text-center">
+            <h4 class="text-uppercase font-weight-bold text-center">Obtener este proyecto</h4>
+            <h5><i class="fab fa-github"></i><a class="footer-link" href="https://github.com/LeonardoHOjeda/TEDW-COVID" target="_blank"> Repositorio FrontEnd</a></h5>
+            <h5><i class="fab fa-github"></i><a class="footer-link" href="https://github.com/FernandoAcTr/covid-itc" target="_blank"> Repositorio Backend</a></h5>
+            <h5><i class="fas fa-globe"></i><a class="footer-link" href="https://covid-itc.netlify.app/" target="_blank"> Proyecto en Netlify</a></h5>
+          </div>
           </div>
           <hr class="clearfix w-100 d-md-none pb-3">
           <div class="col-md-6 mb-md-0 mb-3">
@@ -40,5 +44,13 @@ export default {
   height: 180px;
   clear: both;
   background-color: red;
+  }
+
+  .footer-link {
+    color: white;
+  }
+
+  .footer-link:hover{
+    color: rgb(6, 210, 6);
   }
 </style>

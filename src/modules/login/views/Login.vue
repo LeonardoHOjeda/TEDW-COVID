@@ -80,6 +80,7 @@ export default {
               this.password = ''
             }).catch(err => {
               this.mensaje = 'Se encontraron errores a la hora de realizar una peticion'
+              this.loading = false
               console.log(err)
             })
         }

@@ -140,8 +140,8 @@
         { icon: 'fas fa-user-md', to: '/medics/Consultas', label: 'Consultas' },
         {
           icon: 'fas  fa-file-medical',
-          to: '/medics/ResultadosPruebas',
-          label: 'Resultados Pruebas',
+          to: '/medics/Ordenes',
+          label: 'Ordenes',
         },
         { icon: 'far fa-question-circle', to: '/about', label: 'About' },
       ],
