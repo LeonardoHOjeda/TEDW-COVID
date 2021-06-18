@@ -43,7 +43,7 @@
             </b-tr>
           </template>
 
-          <template #cell(actions)="row">
+          <template #cell(acciones)="row">
             <div>
               <b-btn size="sm" variant="danger" @click="confirmDelete(row.item.departamento_id)">
                 <i class="fas fa-trash"></i>
@@ -85,7 +85,7 @@
       fields: [
         { key: 'departamento_id', label: 'ID', sortable: true },
         { key: 'departamento', sortable: true },
-        { key: 'actions', sortable: false },
+        { key: 'acciones', sortable: false },
       ],
       pageOptions: [5, 10, 15],
       bussy: false,

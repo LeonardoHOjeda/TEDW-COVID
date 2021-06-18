@@ -3,9 +3,9 @@
     <b-alert v-if="error!=null" show variant="danger" dismissible fade>{{error.message}}</b-alert>
 
     <div class="d-flex justify-content-between mb-3">
-      <h3 class="m-0">Carreras</h3>
-      <router-link to="/admin/carreras/add" class="btn btn-sm btn-success">
-        <i class="fas fa-plus mr-2"></i>Agregar
+      <h3 class="m-0">Estudiantes</h3>
+      <router-link to="/admin/estudiantes/add" class="btn btn-sm btn-success">
+        <i class="fas fa-plus mr-2"></i>Dar de Alta
       </router-link>
     </div>
     <b-row>
@@ -13,7 +13,7 @@
         <b-table
           striped
           hover
-          :items="carreras"
+          :items="estudiantes"
           :fields="fields"
           :filter="search"
           :per-page="perPage"
@@ -34,7 +34,7 @@
                   ></b-form-select>
                 </div>
               </b-th>
-              <b-th colspan="4">
+              <b-th colspan="5">
                 <p class="h6 text-right">
                   Buscar
                   <input type="search" class="search" v-model="search" />
@@ -43,17 +43,45 @@
             </b-tr>
           </template>
 
-          <template #cell(departamento)="row">
-            <div>{{row.value.departamento}}</div>
+          <template #cell(carrera)="row">
+            <div>{{row.item.carrera.carrera}}</div>
+          </template>
+
+          <template #cell(usuario)="row">
+            <div>
+              <button class="btn btn-sm btn-primary" @click="row.toggleDetails">Ver Usuario</button>
+            </div>
+          </template>
+
+          <template #row-details="row">
+            <b-card>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: {{ row.item.usuario.usuario_id }}</li>
+                <li class="list-group-item">Email: {{ row.item.usuario.email }}</li>
+                <li class="list-group-item">
+                  Habilitado:
+                  <span
+                    class="badge badge-primary"
+                  >{{ row.item.usuario.habilitado ? 'SI' :'NO' }}</span>
+                </li>
+                <li class="list-group-item">
+                  Sospechoso:
+                  <span
+                    class="badge badge-primary"
+                  >{{ row.item.usuario.sospechoso ? 'SI' :'NO' }}</span>
+                </li>
+                <li class="list-group-item">
+                  Requiere Encuesta:
+                  <p class="badge badge-primary">{{ row.item.usuario.requireSurvey ? 'SI' :'NO'}}</p>
+                </li>
+              </ul>
+            </b-card>
           </template>
 
           <template #cell(acciones)="row">
             <div>
-              <b-btn size="sm" variant="danger" @click="confirmDelete(row.item.carrera_id)">
-                <i class="fas fa-trash"></i>
-              </b-btn>
               <router-link
-                :to="`/admin/carreras/update/${row.item.carrera_id}`"
+                :to="`/admin/estudiantes/update/${row.item.estudiante_id}`"
                 size="sm"
                 class="btn btn-sm btn-warning text-white btn-edit"
               >
@@ -68,7 +96,7 @@
       <b-col cols="3">
         <b-pagination
           v-model="currentPage"
-          :total-rows="carreras.length"
+          :total-rows="estudiantes.length"
           :per-page="perPage"
           align="fill"
           size="sm"
@@ -81,42 +109,30 @@
 <script>
   import { mapActions, mapState } from 'vuex';
   export default {
-    name: 'CarreraList',
+    name: 'EstudiantesList',
     data: () => ({
       search: '',
-      perPage: 5,
+      perPage: 10,
       currentPage: 1,
       fields: [
-        { key: 'carrera_id', label: 'ID', sortable: true },
+        { key: 'nombre', sortable: true },
+        { key: 'a_paterno', label: 'Apellido Paterno', sortable: true },
+        { key: 'a_materno', label: 'Apellido Materno', sortable: true },
         { key: 'carrera', sortable: true },
-        { key: 'departamento', sortable: true },
+        { key: 'usuario', sortable: true },
         { key: 'acciones', sortable: false },
       ],
       pageOptions: [5, 10, 15],
       bussy: false,
     }),
     computed: {
-      ...mapState('admin/carreras', ['carreras', 'error']),
+      ...mapState('admin/estudiantes', ['estudiantes', 'error']),
     },
     methods: {
-      ...mapActions('admin/carreras', ['fetchCarreras', 'deleteCarrera']),
-      async confirmDelete(id) {
-        const result = await this.$swal({
-          title: 'Eliminar',
-          text: '¿Estas seguro? Estas acción no se puede deshacer',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sí, Eliminar',
-        });
-        if (result.isConfirmed) {
-          this.bussy = true;
-          await this.deleteCarrera(id);
-          this.bussy = false;
-        }
-      },
+      ...mapActions('admin/estudiantes', ['fetchEstudiantes']),
     },
     created() {
-      this.fetchCarreras();
+      this.fetchEstudiantes();
     },
   };
 </script>
