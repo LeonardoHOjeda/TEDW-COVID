@@ -3,8 +3,8 @@
     <b-alert v-if="error!=null" show variant="danger" dismissible fade>{{error.message}}</b-alert>
 
     <div class="d-flex justify-content-between mb-3">
-      <h3 class="m-0">Estudiantes</h3>
-      <router-link to="/admin/estudiantes/add" class="btn btn-sm btn-success">
+      <h3 class="m-0">Personal Académico</h3>
+      <router-link to="/admin/personal/add" class="btn btn-sm btn-success">
         <i class="fas fa-plus mr-2"></i>Dar de Alta
       </router-link>
     </div>
@@ -13,7 +13,7 @@
         <b-table
           striped
           hover
-          :items="estudiantes"
+          :items="personal"
           :fields="fields"
           :filter="search"
           :per-page="perPage"
@@ -43,8 +43,8 @@
             </b-tr>
           </template>
 
-          <template #cell(carrera)="row">
-            <div>{{row.item.carrera.carrera}}</div>
+          <template #cell(departamento)="row">
+            <div>{{row.item.departamento.departamento}}</div>
           </template>
 
           <template #cell(usuario)="row">
@@ -81,7 +81,7 @@
           <template #cell(acciones)="row">
             <div>
               <router-link
-                :to="`/admin/estudiantes/update/${row.item.estudiante_id}`"
+                :to="`/admin/personal/update/${row.item.personal_id}`"
                 size="sm"
                 class="btn btn-sm btn-warning text-white btn-edit"
               >
@@ -96,7 +96,7 @@
       <b-col cols="3">
         <b-pagination
           v-model="currentPage"
-          :total-rows="estudiantes.length"
+          :total-rows="personal.length"
           :per-page="perPage"
           align="fill"
           size="sm"
@@ -109,7 +109,7 @@
 <script>
   import { mapActions, mapState } from 'vuex';
   export default {
-    name: 'EstudiantesList',
+    name: 'PersonalList',
     data: () => ({
       search: '',
       perPage: 10,
@@ -118,7 +118,8 @@
         { key: 'nombre', sortable: true },
         { key: 'a_paterno', label: 'Apellido Paterno', sortable: true },
         { key: 'a_materno', label: 'Apellido Materno', sortable: true },
-        { key: 'carrera', sortable: true },
+        { key: 'rfc', label: 'RFC', sortable: true },
+        { key: 'departamento', sortable: true },
         { key: 'usuario', sortable: false },
         { key: 'acciones', sortable: false },
       ],
@@ -126,13 +127,13 @@
       bussy: false,
     }),
     computed: {
-      ...mapState('admin/estudiantes', ['estudiantes', 'error']),
+      ...mapState('admin/personal', ['personal', 'error']),
     },
     methods: {
-      ...mapActions('admin/estudiantes', ['fetchEstudiantes']),
+      ...mapActions('admin/personal', ['fetchPersonal']),
     },
     created() {
-      this.fetchEstudiantes();
+      this.fetchPersonal();
     },
   };
 </script>

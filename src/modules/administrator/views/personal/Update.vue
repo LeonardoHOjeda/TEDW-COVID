@@ -1,6 +1,6 @@
 <template>
   <div class="mt-4">
-    <h3>Actualizar la información de un estudiante</h3>
+    <h3>Registrar al Personal Académico</h3>
     <form @submit.prevent="handleSubmit">
       <!-- Nombre -->
       <div class="mb-3">
@@ -39,10 +39,26 @@
           required
         />
       </div>
-      <!-- Carrera -->
+      <!-- RFC -->
+      <div class="mb-3">
+        <label class="form-label">RFC</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="RFC"
+          v-model="selected.rfc"
+          max="13"
+          required
+        />
+      </div>
+      <!-- Departamento -->
       <div class="form-group">
-        <label class="form-label">Carrera</label>
-        <b-form-select v-model="selected.carrera.carrera_id" :options="carreras" required></b-form-select>
+        <label class="form-label">Departamento</label>
+        <b-form-select
+          v-model="selected.departamento.departamento_id"
+          :options="departamentos"
+          required
+        ></b-form-select>
       </div>
       <b-button variant="success" type="submit">Guardar</b-button>
     </form>
@@ -54,34 +70,36 @@
   export default {
     data() {
       return {
-        carreras: [],
+        departamentos: [],
       };
     },
     computed: {
-      ...mapState('admin/estudiantes', ['selected']),
+      ...mapState('admin/personal', ['selected']),
     },
     methods: {
-      ...mapActions('admin/estudiantes', ['updateEstudiante']),
-      ...mapMutations('admin/estudiantes', ['setSelected']),
+      ...mapActions('admin/personal', ['updatePersonal']),
+      ...mapMutations('admin/personal', ['setSelected']),
       handleSubmit() {
-        this.updateEstudiante({
+        this.updatePersonal({
           nombre: this.selected.nombre,
           a_paterno: this.selected.a_paterno,
           a_materno: this.selected.a_materno,
-          carrera: this.selected.carrera.carrera_id,
-          id: this.selected.estudiante_id,
+          rfc: this.selected.rfc,
+          departamento: this.selected.departamento.departamento_id,
+          id: this.selected.personal_id,
         });
       },
     },
     async created() {
-      const resp = await this.axios.get('/carrera');
-      this.carreras = resp.data.map((x) => {
-        return { value: x.carrera_id, text: x.carrera };
+      const resp = await this.axios.get('/departamento');
+      this.departamentos = resp.data.map((x) => {
+        return { value: x.departamento_id, text: x.departamento };
       });
 
       //set selected
       const id = this.$route.params.id;
       this.setSelected(id);
+      console.log(this.selected);
     },
   };
 </script>

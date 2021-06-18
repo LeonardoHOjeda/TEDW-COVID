@@ -5,7 +5,7 @@ import router from '@/router'
 export default {
   namespaced: true,
   state: {
-    estudiantes: [],
+    personal: [],
     error: null,
     selected: null,
   },
@@ -17,19 +17,19 @@ export default {
         message: payload.response.data.message || payload.message,
       }
     },
-    setEstudiantes(state, payload) {
-      state.estudiantes = payload
+    setPersonal(state, payload) {
+      state.personal = payload
     },
-    addEstudiante(state, payload) {
-      state.estudiantes.push(payload)
+    addPersonal(state, payload) {
+      state.personal.push(payload)
     },
     setSelected(state, payload) {
-      const select = state.estudiantes.find((x) => x.estudiante_id === payload)
+      const select = state.personal.find((x) => x.personal_id === payload)
       state.selected = select
     },
-    updateEstudiante(state, payload) {
-      state.estudiantes = state.estudiantes.map((x) => {
-        if (x.estudiante_id === payload.estudiante_id) {
+    updatePersonal(state, payload) {
+      state.personal = state.personal.map((x) => {
+        if (x.personal_id === payload.personal_id) {
           payload.usuario = x.usuario
           return payload
         }
@@ -38,44 +38,46 @@ export default {
     },
   },
   actions: {
-    async fetchEstudiantes({ commit }) {
+    async fetchPersonal({ commit }) {
       try {
-        const resp = await axios.get('/estudiantes')
-        commit('setEstudiantes', resp.data)
+        const resp = await axios.get('/personal')
+        commit('setPersonal', resp.data)
       } catch (error) {
         commit('setError', error)
         setTimeout(() => commit('setError', null), 4000)
       }
     },
 
-    async addEstudiante({ commit }, payload) {
+    async addPersonal({ commit }, payload) {
       try {
         router.go(-1)
-        const resp = await axios.post('/estudiantes/signup', {
+        const resp = await axios.post('/personal/signup', {
           email: payload.email,
           password: 'CONTROL-COVID-2021',
           nombre: payload.nombre,
           a_materno: payload.a_materno,
           a_paterno: payload.a_paterno,
-          carrera_id: payload.carrera,
+          departamento_id: payload.departamento,
+          rfc: payload.rfc,
         })
-        commit('addEstudiante', resp.data.estudiante)
+        commit('addPersonal', resp.data.saved)
       } catch (error) {
         console.log(error.response)
         commit('setError', error)
         setTimeout(() => commit('setError', null), 4000)
       }
     },
-    async updateEstudiante({ commit }, payload) {
+    async updatePersonal({ commit }, payload) {
       try {
         router.go(-1)
-        const resp = await axios.put(`/estudiantes/${payload.id}`, {
+        const resp = await axios.put(`/personal/${payload.id}`, {
           nombre: payload.nombre,
           a_materno: payload.a_materno,
           a_paterno: payload.a_paterno,
-          carrera_id: payload.carrera,
+          departamento_id: payload.departamento,
+          rfc: payload.rfc,
         })
-        commit('updateEstudiante', resp.data)
+        commit('updatePersonal', resp.data)
       } catch (error) {
         console.log(error)
         commit('setError', error)

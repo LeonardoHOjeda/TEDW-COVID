@@ -84,6 +84,22 @@ const routes = [
     name: '/admin/estudiantes/update/:id',
     component: () => import('./views/estudiantes/Update.vue'),
   },
+  //Personal
+  {
+    path: '/admin/personal',
+    name: '/admin/personal',
+    component: () => import('./views/personal/List.vue'),
+  },
+  {
+    path: '/admin/personal/add',
+    name: '/admin/personal/add',
+    component: () => import('./views/personal/Add.vue'),
+  },
+  {
+    path: '/admin/personal/update/:id',
+    name: '/admin/personal/update/:id',
+    component: () => import('./views/personal/Update.vue'),
+  },
 ]
 
 module.exports = routes
