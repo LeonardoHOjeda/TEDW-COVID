@@ -70,7 +70,7 @@
           />
           <label class="custom-control-label" for="swSospechoso">Sospechoso</label>
         </div>
-        <div class="custom-control custom-switch form-group">
+        <div class="custom-control custom-switch form-group" v-if="usuario.rol.rol !== 'medico'">
           <input
             type="checkbox"
             class="custom-control-input"

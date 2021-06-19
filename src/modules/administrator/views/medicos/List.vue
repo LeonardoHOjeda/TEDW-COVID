@@ -56,7 +56,6 @@
           <template #row-details="row">
             <b-card>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: {{ row.item.usuario.usuario_id }}</li>
                 <li class="list-group-item">Email: {{ row.item.usuario.email }}</li>
                 <li class="list-group-item">
                   Habilitado:
@@ -69,6 +68,14 @@
                   <span
                     class="badge badge-primary"
                   >{{ row.item.usuario.sospechoso ? 'SI' :'NO' }}</span>
+                </li>
+                <li class="list-group-item">
+                  <router-link
+                    :to="`/admin/usuarios/update/${row.item.usuario.usuario_id}`"
+                    class="btn btn-sm btn-warning text-white btn-edit"
+                  >
+                    <i class="fas fa-pen"></i>
+                  </router-link>
                 </li>
               </ul>
             </b-card>
