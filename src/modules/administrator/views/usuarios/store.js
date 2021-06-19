@@ -31,16 +31,8 @@ export default {
     },
 
     async updateUser({ state, commit }, payload) {
-      const { habilitado, sospechoso, requireSurvey, email, password } = payload
       try {
-        const resp = await axios.put(`/usuarios/${state.usuario.usuario_id}`, {
-          habilitado,
-          sospechoso,
-          requireSurvey,
-          email,
-          password,
-        })
-        console.log(resp)
+        await axios.put(`/usuarios/${state.usuario.usuario_id}`, payload)
         router.go(-1)
       } catch (error) {
         console.log(error)

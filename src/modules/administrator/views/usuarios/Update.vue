@@ -46,6 +46,12 @@
             />
           </div>
         </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Rol de Usuario</label>
+          <div class="col-sm-10">
+            <b-form-select v-model="usuario.rol.rol" :options="roles" required></b-form-select>
+          </div>
+        </div>
         <div class="custom-control custom-switch form-group">
           <input
             type="checkbox"
@@ -94,6 +100,15 @@
       loading: false,
       password: '',
       repeatPassword: '',
+      rol: null,
+      roles: [
+        { value: 'estudiante', text: 'Estudiante' },
+        { value: 'monitor', text: 'Monitor' },
+        { value: 'personal', text: 'Personal' },
+        { value: 'administrador', text: 'Administrador' },
+        { value: 'directivo', text: 'Directivo' },
+        { value: 'medico', text: 'Medico' },
+      ],
     }),
     computed: {
       ...mapState('admin/usuarios', ['usuario']),
@@ -102,14 +117,19 @@
       ...mapActions('admin/usuarios', ['fetchUsuario', 'updateUser']),
       handleSubmit() {
         this.$v.$touch();
-        if (!this.$v.$invalid) {
+        console.log(this.$v);
+        if (this.$v.repeatPassword.sameAsPassword) {
+          this.loading = true;
           this.updateUser({
             habilitado: this.usuario.habilitado,
             sospechoso: this.usuario.sospechoso,
             requireSurvey: this.usuario.requireSurvey,
             email: this.usuario.email,
             password: this.password,
+            rol: this.usuario.rol.rol,
           });
+        } else {
+          console.log('error');
         }
       },
     },
@@ -123,7 +143,6 @@
       const usuario_id = this.$route.params.id;
       this.loading = true;
       await this.fetchUsuario(usuario_id);
-      console.log(this.usuario);
       this.loading = false;
     },
   };
