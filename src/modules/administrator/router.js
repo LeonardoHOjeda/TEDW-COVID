@@ -116,6 +116,12 @@ const routes = [
     name: '/admin/medicos/update/:id',
     component: () => import('./views/medicos/Update.vue'),
   },
+  //usuarios
+  {
+    path: '/admin/usuarios/update/:id',
+    name: '/admin/usuarios/update/:id',
+    component: () => import('./views/usuarios/Update.vue'),
+  },
 ]
 
 module.exports = routes
