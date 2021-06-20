@@ -51,5 +51,21 @@ export default {
       const resp = await axios.get('/reportes/total_consultas')
       commit('setTotalConsultas', resp.data.consultas)
     },
+
+    printPage() {
+      window.onbeforeprint = function() {
+        const btnDownload = document.querySelector('#btn_download')
+        const footer = document.querySelector('footer')
+        btnDownload.style.display = 'none'
+        footer.style.display = 'none'
+      }
+      window.onafterprint = function() {
+        const btnDownload = document.querySelector('#btn_download')
+        const footer = document.querySelector('footer')
+        btnDownload.style.display = 'block'
+        footer.style.display = 'block'
+      }
+      window.print()
+    },
   },
 }

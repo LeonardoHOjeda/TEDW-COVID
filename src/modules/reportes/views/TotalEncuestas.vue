@@ -2,9 +2,9 @@
   <div class="mt-4">
     <div class="d-flex justify-content-between mb-3">
       <h3 class="m-0">Total de Encuestas Aplicadas</h3>
-      <a href="#" class="btn btn-sm btn-success">
-        <i class="fas fa-file-download mr-2"></i>Descargar PDF
-      </a>
+      <button @click="printPage" class="btn btn-sm btn-success" id="btn_download">
+        <i class="fas fa-file-download mr-2"></i>Imprimir
+      </button>
     </div>
 
     <div class="card">
@@ -92,7 +92,7 @@
       ...mapState('reportes', ['totalEncuestas']),
     },
     methods: {
-      ...mapActions('reportes', ['fetchTotalEncuestas']),
+      ...mapActions('reportes', ['fetchTotalEncuestas', 'printPage']),
       generateColor() {
         return [
           Math.floor(Math.random() * 255),
