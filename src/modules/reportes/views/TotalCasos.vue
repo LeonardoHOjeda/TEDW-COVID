@@ -12,13 +12,16 @@
         <div class="card" style="border-radius: 10px">
           <div class="card-header">Por Carrera</div>
           <div class="card-body">
-            <div class="row">
+            <div class="row" v-if="loaded">
               <div class="col-md-6">
-                <line-chart :chartdata="chartDataCarreras" :options="options" v-if="loaded" />
+                <line-chart :chartdata="chartDataCarreras" :options="options" />
               </div>
               <div class="col-md-6">
-                <pie-chart :chartdata="chartDataCarreras" :options="options" v-if="loaded" />
+                <pie-chart :chartdata="chartDataCarreras" :options="options" />
               </div>
+            </div>
+            <div v-else class="text-center">
+              <b-spinner variant="primary" label="Spinning"></b-spinner>
             </div>
           </div>
         </div>
@@ -26,13 +29,16 @@
         <div class="card mt-3" style="border-radius: 10px">
           <div class="card-header">Por Departamento</div>
           <div class="card-body">
-            <div class="row">
+            <div class="row" v-if="loaded">
               <div class="col-md-6">
-                <line-chart :chartdata="chartDataDepartamentos" :options="options" v-if="loaded" />
+                <line-chart :chartdata="chartDataDepartamentos" :options="options" />
               </div>
               <div class="col-md-6">
-                <pie-chart :chartdata="chartDataDepartamentos" :options="options" v-if="loaded" />
+                <pie-chart :chartdata="chartDataDepartamentos" :options="options" />
               </div>
+            </div>
+            <div v-else class="text-center">
+              <b-spinner variant="primary" label="Spinning"></b-spinner>
             </div>
           </div>
         </div>
@@ -97,7 +103,6 @@
     },
     async created() {
       await this.fetchTotalCasos();
-      console.log(this.totalCasos);
       this.totalCasos.carrera.forEach((item) => {
         const color = this.generateColor();
         this.chartDataCarreras.labels.push(item.carrera);
