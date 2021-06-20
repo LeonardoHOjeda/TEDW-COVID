@@ -11,6 +11,11 @@ export default {
       carrera: [],
       departamento: [],
     },
+    totalEncuestas: {
+      carrera: [],
+      departamento: [],
+    },
+    totalConsultas: [],
   },
   mutations: {
     setCasosDetectados(state, payload) {
@@ -18,6 +23,12 @@ export default {
     },
     setTotalCasos(state, payload) {
       state.totalCasos = payload
+    },
+    setTotalEncuestas(state, payload) {
+      state.totalEncuestas = payload
+    },
+    setTotalConsultas(state, payload) {
+      state.totalConsultas = payload
     },
   },
   actions: {
@@ -29,6 +40,16 @@ export default {
     async fetchTotalCasos({ commit }) {
       const resp = await axios.get('/reportes/total_casos')
       commit('setTotalCasos', resp.data)
+    },
+
+    async fetchTotalEncuestas({ commit }) {
+      const resp = await axios.get('/reportes/total_encuestas')
+      commit('setTotalEncuestas', resp.data)
+    },
+
+    async fetchTotalConsultas({ commit }) {
+      const resp = await axios.get('/reportes/total_consultas')
+      commit('setTotalConsultas', resp.data.consultas)
     },
   },
 }
