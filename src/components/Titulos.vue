@@ -11,11 +11,11 @@ export default {
   props: {
     titulo: {
       type: String,
-      default: 'Titulo h1'
+      default: ''
     },
     subtitulo: {
       type: String,
-      default: 'Subtitulo h3'
+      default: ''
     },
   }
 }

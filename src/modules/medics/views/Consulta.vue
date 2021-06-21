@@ -131,62 +131,50 @@ export default {
   computed: {
     ...mapState(['usuario','token']),
   },
-  created(){
-    this.muestraConsulta(),
-    this.muestraMedicamentos(),
-    this.muestraTiposPrueba()
+  async created(){
+    await this.muestraConsulta(),
+    await this.muestraMedicamentos(),
+    await this.muestraTiposPrueba()
   },
   methods:{
     // Muestra los datos de la consulta
-    muestraConsulta(){
+    async muestraConsulta(){
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
       // obten todos los datos de la consulta
-      this.axios.get(`/consultas/${this.$route.params.id}`, config)
-        .then((res) => {
-          this.modalidad = res.data.modalidad
-          this.sintomas = res.data.sintomas
-          this.alumno = res.data.usuario.email
-          this.usuario_id = res.data.usuario.usuario_id
-          for (let i = 0; i < res.data.evidencias.length; i++){
-            this.evidencias.push({
-              url: res.data.evidencias[i].url
-            })
-          }
-        }).catch((err) => {
-          this.mensaje = err.response.data
-        });
+      const res = await this.axios.get(`/consultas/${this.$route.params.id}`, config)
+        this.modalidad = res.data.modalidad
+        this.sintomas = res.data.sintomas
+        this.alumno = res.data.usuario.email
+        this.usuario_id = res.data.usuario.usuario_id
+        for (let i = 0; i < res.data.evidencias.length; i++){
+          this.evidencias.push({
+            url: res.data.evidencias[i].url
+          })
+        }
       // Obten todos los tipos de prueba
     },
 
     // Obten todos los medicamentos de la BD
-    muestraMedicamentos(){
+    async muestraMedicamentos(){
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
-      this.axios.get('/medicamentos', config)
-        .then((res) => {
-          for (let i = 0; i < res.data.length; i++){
-            this.medicinas.push({
-              medicamento: res.data[i]
-            })
-          }
-        }).catch((err) => {
-          this.mensaje = err.response.data
-        });
+      const res = await this.axios.get('/medicamentos', config)
+        for (let i = 0; i < res.data.length; i++){
+          this.medicinas.push({
+            medicamento: res.data[i]
+          })
+        }
     },
 
     //Obten todos los tipos de pruebas de la BD
-    muestraTiposPrueba(){
+    async muestraTiposPrueba(){
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
-      this.axios.get('/tipo_prueba', config)
-        .then((res) => {
-          for (let i = 0; i < res.data.length; i++){
-            this.options.push({
-              value: res.data[i].tipo_id,
-              text: res.data[i].descripcion
-            })
-          }
-        }).catch((err) => {
-          this.mensaje = err.response.data
-        });
+      const res = await this.axios.get('/tipo_prueba', config)
+        for (let i = 0; i < res.data.length; i++){
+          this.options.push({
+            value: res.data[i].tipo_id,
+            text: res.data[i].descripcion
+          })
+        }
     },
     agregaMedicamento(){
       this.medicamentos.push({

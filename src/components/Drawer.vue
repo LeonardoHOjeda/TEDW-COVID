@@ -24,7 +24,7 @@
           </router-link>
           <div v-else class="tree-menu">
             <a v-b-toggle="`collapse-${i}`" class="nav-menu" active-class="active">
-              <i class="fas fa-list"></i>
+              <i :class="menu.icon"></i>
               {{menu.label}}
               <i class="fas fa-chevron-left float-right"></i>
             </a>
@@ -120,6 +120,11 @@
           label: 'Personal Académico',
         },
         {
+          icon: 'fas fa-user-md',
+          to: '/admin/medicos',
+          label: 'Médicos',
+        },
+        {
           icon: 'fas fa-book-medical',
           to: '/admin/tipo_prueba',
           label: 'Tipos de Prueba',
@@ -130,9 +135,30 @@
           label: 'Medicamentos',
         },
         {
-          icon: 'fas fa-user',
-          to: '/admin/usuarios',
-          label: 'Usuarios',
+          icon: 'fas fa-chart-bar',
+          label: 'Reportes',
+          submenus: [
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/casos_detectados',
+              label: 'Casos detectados',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_casos',
+              label: 'Total de Casos',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_encuestas',
+              label: 'Total de Encuestas',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_consultas',
+              label: 'Total de Consultas',
+            },
+          ],
         },
       ],
       medic_menu: [
