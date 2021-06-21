@@ -6,7 +6,7 @@
         <router-view />
       </b-container>
     </div>
-    <Footer />
+    <Footer v-if="isLoggedIn" />
   </div>
 </template>
 

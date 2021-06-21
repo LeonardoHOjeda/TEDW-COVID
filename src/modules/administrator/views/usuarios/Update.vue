@@ -117,7 +117,6 @@
       ...mapActions('admin/usuarios', ['fetchUsuario', 'updateUser']),
       handleSubmit() {
         this.$v.$touch();
-        console.log(this.$v);
         if (this.$v.repeatPassword.sameAsPassword) {
           this.loading = true;
           this.updateUser({
