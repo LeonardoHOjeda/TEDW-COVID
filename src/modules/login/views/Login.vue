@@ -368,4 +368,8 @@
   .is-invalid {
     border: 1px solid rgba(255, 0, 0, 0.4) !important;
   }
+
+  button[type="submit"]:disabled{
+    background-color: #e1e1e1;
+  }
 </style>
