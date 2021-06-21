@@ -21,7 +21,6 @@
 import { mapState } from 'vuex'
 import Titulos from '../../../components/Titulos'
 import moment from 'moment';
-import router from '../router'
 export default {
   data() {
     return {

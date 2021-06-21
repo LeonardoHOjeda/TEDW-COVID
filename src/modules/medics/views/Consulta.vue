@@ -132,9 +132,9 @@ export default {
     ...mapState(['usuario','token']),
   },
   async created(){
-    await this.muestraConsulta(),
-    await this.muestraMedicamentos(),
-    await this.muestraTiposPrueba()
+    await this.muestraConsulta();
+    await this.muestraMedicamentos();
+    await this.muestraTiposPrueba();
   },
   methods:{
     // Muestra los datos de la consulta
@@ -202,7 +202,6 @@ export default {
         medicamentos: []
       }
 
-      let nuevoArreglo = {}
       for (let i = 0; i < this.medicamentos.length; i++) {
         enviarDatos.medicamentos.push({
           "receta": this.medicamentos[i].receta,
@@ -213,7 +212,7 @@ export default {
 
       // Envia la receta y actualiza el estatus a 'atendida'
       this.axios.put(`/consultas/${this.$route.params.id}`, enviarDatos, config)
-        .then((res) => {
+        .then(() => {
           this.$swal({
                 title: 'Consulta atendida con exito!',
                 text: 'Tu consulta ha sido atendida con exito, sigue asi!',
@@ -229,7 +228,7 @@ export default {
           tipo_id: this.selected
         }
         this.axios.post('/ordenes', orden, config)
-          .then((res) => {
+          .then(() => {
             this.selected = '0'
           }).catch((err) => {
             console.log(err.response);

@@ -32,6 +32,7 @@ export default {
 
     async updateUser({ state, commit }, payload) {
       try {
+        if (payload.password === '') delete payload.password
         await axios.put(`/usuarios/${state.usuario.usuario_id}`, payload)
         router.go(-1)
       } catch (error) {
