@@ -80,22 +80,14 @@
           to: '/students/Ordenes',
           label: 'Ordenes de pruebas',
         },
-        {
-          icon: 'fas fa-list',
-          label: 'Tree Menu',
-          submenus: [
-            { icon: 'far fa-question-circle', to: '/pagina1', label: 'Pagina 1' },
-            { icon: 'far fa-question-circle', to: '/pagina2', label: 'Pagina 2' },
-          ],
-        },
-        {
-          icon: 'fas fa-list',
-          label: 'Otro Tree Menu',
-          submenus: [
-            { icon: 'far fa-question-circle', to: '/pagina1', label: 'Pagina 1' },
-            { icon: 'far fa-question-circle', to: '/pagina2', label: 'Pagina 2' },
-          ],
-        },
+        // {
+        //   icon: 'fas fa-list',
+        //   label: 'Otro Tree Menu',
+        //   submenus: [
+        //     { icon: 'far fa-question-circle', to: '/pagina1', label: 'Pagina 1' },
+        //     { icon: 'far fa-question-circle', to: '/pagina2', label: 'Pagina 2' },
+        //   ],
+        // },
       ],
       admin_menu: [
         { icon: 'fas fa-home', to: '/admin/home', label: 'Home' },
@@ -171,6 +163,36 @@
         },
         { icon: 'far fa-question-circle', to: '/about', label: 'About' },
       ],
+      director_menu: [
+        { icon: 'fas fa-home', to: '/director/home', label: 'Home' },
+        { icon: 'fas fa-chart-pie', to: '/director/dashboard', label: 'Dashboard' },
+        {
+          icon: 'fas fa-chart-bar',
+          label: 'Reportes',
+          submenus: [
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/casos_detectados',
+              label: 'Casos detectados',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_casos',
+              label: 'Total de Casos',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_encuestas',
+              label: 'Total de Encuestas',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_consultas',
+              label: 'Total de Consultas',
+            },
+          ],
+        },
+      ],
     }),
     computed: {
       menus() {
@@ -178,6 +200,7 @@
           estudiante: this.student_menu,
           medico: this.medic_menu,
           administrador: this.admin_menu,
+          directivo: this.director_menu,
         };
         return items[this.usuario.rol.rol];
       },

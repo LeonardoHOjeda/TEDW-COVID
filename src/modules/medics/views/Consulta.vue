@@ -132,9 +132,9 @@ export default {
     ...mapState(['usuario','token']),
   },
   async created(){
-    await this.muestraConsulta(),
-    await this.muestraMedicamentos(),
-    await this.muestraTiposPrueba()
+    await this.muestraConsulta();
+    await this.muestraMedicamentos();
+    await this.muestraTiposPrueba();
   },
   methods:{
     // Muestra los datos de la consulta
