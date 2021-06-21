@@ -98,19 +98,7 @@
   };
 </script>
 
-<style>
-  /* BASIC */
-
-  h2 {
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    display: inline-block;
-    margin: 40px 8px 10px 8px;
-    color: #cccccc;
-  }
-
+<style scoped>
   /* STRUCTURE */
 
   .wrapper {
@@ -144,17 +132,6 @@
     text-align: center;
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;
-  }
-
-  /* TABS */
-
-  h2.inactive {
-    color: #cccccc;
-  }
-
-  h2.active {
-    color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
   }
 
   /* FORM TYPOGRAPHY*/
@@ -369,7 +346,7 @@
     border: 1px solid rgba(255, 0, 0, 0.4) !important;
   }
 
-  button[type="submit"]:disabled{
+  button[type='submit']:disabled {
     background-color: #e1e1e1;
   }
 </style>

@@ -10,9 +10,12 @@
       >{{mensaje.texto}}</b-alert>
     </div>
     <div class="row justify-content-center p-3">
-      <div class="mt-2 card mb-5 shadow col-md-7" style="border-radius: 20px">
+      <div
+        class="mt-2 card mb-5 shadow col-md-7 animate__animated animate__flipInY"
+        style="border-radius: 20px"
+      >
         <div class="card-body">
-          <h3>Registrar usuario</h3>
+          <h3 class="mb-3">Registrar usuario</h3>
           <form @submit.prevent="submit">
             <!-- Nombre -->
             <div class="mb-3 form-group row">
@@ -306,8 +309,9 @@
   };
 </script>
 
-<style>
+<style scoped>
   button[type='submit']:disabled {
     background-color: #e1e1e1;
+    border-color: #e1e1e1;
   }
 </style>
