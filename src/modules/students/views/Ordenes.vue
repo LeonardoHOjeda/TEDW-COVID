@@ -9,15 +9,19 @@
             <th scope="col">Fecha de deteccion</th>
             <th scope="col">Tipo de prueba</th>
             <th scope="col">Medico</th>
+            <th scope="col">Descargar orden</th>
           </tr>
         </thead>
         <tbody>
-          <tr :class="item.resultado === 'POSITIVO' ? 'table-danger' : ''" v-for="(item, index) in ordenes" :key="index">
+          <tr :class="item.resultado === 'POSITIVO' ? 'table-danger' : 'table-success'" v-for="(item, index) in ordenes" :key="index">
             <td scope="row" v-if="item.resultado !== null">{{item.resultado}}</td>
             <td v-else>Sin resultado</td>
             <td>{{moment(item.fecha_deteccion).calendar()}}</td>
             <td>{{item.tipo.descripcion}}</td>
             <td>{{item.medico.nombre}}</td>
+            <td>
+              <a class="badge badge-info" :href="`http://localhost:3000/ordenes/pdf/${item.orden_id}?token=${token}`" target="_blank">Descargar Orden <i class="fas fa-cloud-download-alt"></i></a>
+            </td>
           </tr>
         </tbody>
       </table>
