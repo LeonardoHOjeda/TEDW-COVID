@@ -1,36 +1,30 @@
 <template>
   <div class="mt-5">
-    <footer class="page-footer font-small bg-secondary text-white pt-4">
-      <!-- Copyright -->
-      <div class="bg-dark text-white text-center py-3">© Antonio Garcia Cubas
-        <a href="#">Link</a>
-      </div>
-      <!-- Copyright -->
+    <footer class="page-footer">
+      <p>TECNM en Celaya ©</p>
+      <p>Antonio García Cubas 600, Fovissste, 38010 Celaya, Gto.</p>
     </footer>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'Footer'
-}
+  export default {
+    name: 'Footer',
+  };
 </script>
 
-<style>
-  footer {
-  position: relative;
-  /* negative value of footer height*/
-  bottom: 0;
-  height: 180px;
-  clear: both;
-  background-color: red;
+<style scoped>
+  .page-footer {
+    text-align: center;
+    padding: 2rem 0 0.5rem 0;
+    background-color: whitesmoke;
   }
 
-  .footer-link {
-    color: white;
+  .page-footer p {
+    margin: 0;
   }
 
-  .footer-link:hover{
+  .footer-link:hover {
     color: rgb(6, 210, 6);
   }
 </style>
