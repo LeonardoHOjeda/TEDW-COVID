@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5">
+  <b-container class="mt-5">
     <h3 class="mb-4">Panel de Administración</h3>
     <div class="row">
       <div class="col-md-4">
@@ -106,23 +106,8 @@
           </div>
         </router-link>
       </div>
-
-      <!-- <div class="col-md-4">
-        <router-link to="/admin/usuarios">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">
-                <i class="fas fa-user"></i>Usuarios
-              </h5>
-              <p
-                class="card-text"
-              >Accede a un listado de todos los usuarios registrados en el sistema. Podrás borrarlos, inhabilitarlos o actualizar su información, como la contraseña o el email</p>
-            </div>
-          </div>
-        </router-link>
-      </div> -->
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>

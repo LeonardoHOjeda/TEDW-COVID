@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <Navbar :name="$route.name" :isLoggedIn="isLoggedIn" />
-    <div class="contenedor">
+    <div style="min-height:100vh">
       <router-view />
     </div>
-    <Footer v-if="isLoggedIn" />
+    <Footer />
   </div>
 </template>
 
@@ -36,11 +36,8 @@
   html {
     scroll-behavior: smooth;
   }
-  .contenedor {
-    min-height: calc(100vh - 180px);
-  }
 
-  img{
+  img {
     max-width: 100%;
   }
 </style>

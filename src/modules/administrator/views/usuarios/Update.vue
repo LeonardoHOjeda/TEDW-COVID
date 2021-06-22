@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4">
+  <b-container class="mt-4">
     <div class="spinners" v-if="loading">
       <b-spinner type="grow" label="Spinning"></b-spinner>
       <b-spinner variant="primary" type="grow" label="Spinning"></b-spinner>
@@ -87,7 +87,7 @@
         </div>
       </form>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>

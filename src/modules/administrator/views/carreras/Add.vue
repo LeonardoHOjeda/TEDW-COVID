@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4">
+  <b-container class="mt-4">
     <div class="d-flex justify-content-between mb-3">
       <h3 class="m-0">Agregar carrera</h3>
     </div>
@@ -26,7 +26,7 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
       </div>
     </form>
-  </div>
+  </b-container>
 </template>
 
 <script>
