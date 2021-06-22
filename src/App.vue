@@ -2,9 +2,7 @@
   <div id="app">
     <Navbar :name="$route.name" :isLoggedIn="isLoggedIn" />
     <div class="contenedor">
-      <b-container>
-        <router-view />
-      </b-container>
+      <router-view />
     </div>
     <Footer v-if="isLoggedIn" />
   </div>
@@ -35,7 +33,14 @@
 </script>
 
 <style>
+  html {
+    scroll-behavior: smooth;
+  }
   .contenedor {
     min-height: calc(100vh - 180px);
+  }
+
+  img{
+    max-width: 100%;
   }
 </style>
