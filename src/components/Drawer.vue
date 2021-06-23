@@ -140,6 +140,10 @@
         },
         { icon: 'far fa-question-circle', to: '/about', label: 'About' },
       ],
+      monitor_menu: [
+        { icon: 'fas fa-poll-h', to: '/monitor/Alerta', label: 'Enviar Alerta' },
+        { icon: 'fas fa-user-md', to: '/monitor/Trazabilidad', label: 'Trazar Personas' }
+      ],
     }),
     computed: {
       menus() {
@@ -147,6 +151,7 @@
           estudiante: this.student_menu,
           medico: this.medic_menu,
           administrador: this.admin_menu,
+          monitor: this.monitor_menu,
         };
         return items[this.usuario.rol.rol];
       },

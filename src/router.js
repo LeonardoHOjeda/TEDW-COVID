@@ -8,7 +8,8 @@ const routes = [
     ...require('./modules/home/router'),
     ...require('./modules/login/router'),
     ...require('./modules/students/router'),
-    ...require('./modules/medics/router')
+    ...require('./modules/medics/router'),
+    ...require('./modules/monitor/router')
 ]
 
 const router = new VueRouter({
@@ -45,6 +46,15 @@ router.beforeEach((to, from, next) => {
         } else
         if (to.meta.medic_auth) {
             if (role === 'medico') {
+                next();
+            } else {
+                // next({ name: 'Login' })
+                router.push({ name: 'Login' })
+                    .catch(() => true)
+            }
+        } else
+        if (to.meta.monitor_auth) {
+            if (role === 'monitor') {
                 next();
             } else {
                 // next({ name: 'Login' })

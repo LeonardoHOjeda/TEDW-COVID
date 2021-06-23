@@ -39,6 +39,7 @@ export default new Vuex.Store({
         estudiante: () => router.replace({ path: 'students/Form' }),
         medico: () => router.push({ path: 'medics/Form' }),
         administrador: () => router.replace({ path: '/admin/home' }),
+        monitor: () => router.replace({ path: '/admin/home' }),
       }
       navigator[payload.usuario.rol.rol]()
     },
@@ -64,7 +65,8 @@ export default new Vuex.Store({
       return (
         state.usuario.estudiante ||
         state.usuario.personal ||
-        state.usuario.medico
+        state.usuario.medico ||
+        state.usuario.monitor
       )
     },
     isLoggedIn(state) {
