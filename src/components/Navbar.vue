@@ -2,7 +2,7 @@
   <Drawer v-if="isLoggedIn" />
   <b-navbar v-else toggleable="md" type="dark" sticky variant="info">
     <b-container fluid>
-      <b-navbar-brand :to="{name: 'Home'}">COVID-19 APP</b-navbar-brand>
+      <b-navbar-brand :to="{name: 'Home'}"><img src="../assets/logo.png" width="50%"></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">

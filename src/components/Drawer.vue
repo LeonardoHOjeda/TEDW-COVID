@@ -3,7 +3,7 @@
     <b-navbar type="dark" sticky variant="info">
       <b-container fluid>
         <i v-b-toggle.sidebar class="fas fa-bars text-white mr-3 hamburguer"></i>
-        <b-navbar-brand :to="{name: 'Home'}">COVID-19 APP</b-navbar-brand>
+        <b-navbar-brand :to="{name: 'Home'}"><img src="../assets/logo.png" width="50%"></b-navbar-brand>
       </b-container>
     </b-navbar>
     <b-sidebar id="sidebar" bg-variant="dark" width="230px" no-header-close shadow backdrop>

@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4">
+  <b-container class="mt-4">
     <b-alert v-if="error!=null" show variant="danger" dismissible fade>{{error.message}}</b-alert>
 
     <div class="d-flex justify-content-between mb-3">
@@ -75,7 +75,7 @@
         ></b-pagination>
       </b-col>
     </b-row>
-  </div>
+  </b-container>
 </template>
 
 <script>

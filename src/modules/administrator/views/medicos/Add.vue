@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4">
+  <b-container class="mt-4">
     <h3>Registrar a un Médico</h3>
     <form @submit.prevent="handleSubmit">
       <!-- Nombre -->
@@ -64,7 +64,7 @@
 
       <b-button variant="success" type="submit">Guardar</b-button>
     </form>
-  </div>
+  </b-container>
 </template>
 
 <script>
