@@ -12,6 +12,7 @@ const routes = [
     ...require('./modules/administrator/router'),
     ...require('./modules/director/router'),
     ...require('./modules/reportes/router'),
+    ...require('./modules/monitor/router')
 ]
 
 const router = new VueRouter({
@@ -54,6 +55,15 @@ router.beforeEach((to, from, next) => {
             } else {
                 // next({ name: 'Login' })
                 router.push({ name: 'Login' }).catch(() => true)
+            }
+        } else
+        if (to.meta.monitor_auth) {
+            if (role === 'monitor') {
+                next();
+            } else {
+                // next({ name: 'Login' })
+                router.push({ name: 'Login' })
+                    .catch(() => true)
             }
         }
     } else {

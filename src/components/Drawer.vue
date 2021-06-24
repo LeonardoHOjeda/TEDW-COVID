@@ -192,6 +192,9 @@
             },
           ],
         },
+      monitor_menu: [
+        { icon: 'fas fa-poll-h', to: '/monitor/Alerta', label: 'Enviar Alerta' },
+        { icon: 'fas fa-user-md', to: '/monitor/Trazabilidad', label: 'Trazar Personas' }
       ],
     }),
     computed: {
@@ -201,6 +204,7 @@
           medico: this.medic_menu,
           administrador: this.admin_menu,
           directivo: this.director_menu,
+          monitor: this.monitor_menu,
         };
         return items[this.usuario.rol.rol];
       },
