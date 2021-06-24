@@ -12,46 +12,11 @@ import reportsModule from './modules/reportes/store'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-<<<<<<< HEAD
     plugins: [createPersistedState()],
     state: {
         token: null,
         usuario: {},
         rol: '',
-=======
-  plugins: [createPersistedState()],
-  state: {
-    token: null,
-    usuario: {},
-    rol: '',
-  },
-  mutations: {
-    obtenerUsuario(state, payload) {
-      if (payload === null) {
-        state.token = null
-        state.usuario = {}
-        state.rol = ''
-      } else {
-        state.token = payload.token
-        state.usuario = payload.usuario
-        state.rol = payload.usuario.rol.rol
-      }
-    },
-  },
-  actions: {
-    guardarUsuario({ commit }, payload) {
-      localStorage.setItem('token', payload.token)
-      localStorage.setItem('role', payload.usuario.rol.rol)
-      localStorage.setItem('usuario', payload.usuario)
-      commit('obtenerUsuario', payload)
-      const navigator = {
-        estudiante: () => router.replace({ path: 'students/Form' }),
-        medico: () => router.push({ path: 'medics/Form' }),
-        administrador: () => router.replace({ path: '/admin/home' }),
-        monitor: () => router.replace({ path: '/admin/home' }),
-      }
-      navigator[payload.usuario.rol.rol]()
->>>>>>> luciano
     },
     mutations: {
         obtenerUsuario(state, payload) {
@@ -97,29 +62,18 @@ export default new Vuex.Store({
             }
         },
     },
-<<<<<<< HEAD
     getters: {
         infoUsuario(state) {
             return (
                 state.usuario.estudiante ||
                 state.usuario.personal ||
-                state.usuario.medico
+                state.usuario.medico ||
+                state.usuario.monitor
             )
         },
         isLoggedIn(state) {
             return state.token != null
         },
-=======
-  },
-  getters: {
-    infoUsuario(state) {
-      return (
-        state.usuario.estudiante ||
-        state.usuario.personal ||
-        state.usuario.medico ||
-        state.usuario.monitor
-      )
->>>>>>> luciano
     },
     modules: {
         admin: adminModule,

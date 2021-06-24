@@ -192,6 +192,7 @@
             },
           ],
         },
+      ],
       monitor_menu: [
         { icon: 'fas fa-poll-h', to: '/monitor/Alerta', label: 'Enviar Alerta' },
         { icon: 'fas fa-user-md', to: '/monitor/Trazabilidad', label: 'Trazar Personas' }
