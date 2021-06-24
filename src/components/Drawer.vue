@@ -43,7 +43,7 @@
             </b-collapse>
           </div>
         </div>
-        <a @click="cerrarSesion()" class="nav-menu" active-class="active">
+        <a @click="cerrarSesion()" class="nav-menu text-danger puntero" active-class="active" >
           <i class="fas fa-sign-out-alt"></i>
           Salir
         </a>
@@ -255,5 +255,13 @@
   }
   .tree-menu-collapse {
     margin-left: 18px;
+  }
+
+  .puntero{
+    cursor: pointer;
+  }
+
+  .puntero:hover{
+    color: rgb(250, 58, 58)!important;
   }
 </style>

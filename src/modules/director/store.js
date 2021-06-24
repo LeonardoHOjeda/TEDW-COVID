@@ -1,26 +1,41 @@
-import departments from './views/departamentos/store'
-import carreras from './views/carreras/store'
-import medicamentos from './views/medicamentos/store'
-import tipo_prueba from './views/tipo_prueba/store'
-import estudiantes from './views/estudiantes/store'
-import personal from './views/personal/store'
-import medicos from './views/medicos/store'
-import usuarios from './views/usuarios/store'
+import axios from 'axios'
 
 export default {
-    namespaced: true,
-    state: {},
-    mutations: {},
-    actions: {},
-    getters: {},
-    modules: {
-        departments,
-        carreras,
-        medicamentos,
-        tipo_prueba,
-        estudiantes,
-        personal,
-        medicos,
-        usuarios,
+    state: {
+        estudiantesRegistrados: {
+            cantidad: ''
+        },
+        estudiantesRegistradosCarrera: {
+
+        },
+        medicosRegistrados: {
+
+        },
+        cantidadAlertasEnviadas: {
+            cantidad: ''
+        },
+        cantidadOrdenes: '',
+
+
     },
+    mutations: {
+        setEstudiantesRegistrados(state, payload) {
+            state.estudiantesRegistrados = payload
+        },
+        setEstudiantesRegistradosCarrera(state, payload) {
+            state.estudiantesRegistradosCarrera = payload
+        },
+        setMedicosRegistrados(state, payload) {
+            state.medicosRegistrados = payload
+        },
+        setCantidadAlertasEnviadas(state, payload) {
+            state.cantidadAlertasEnviadas = payload
+        },
+    },
+    actions: {
+        async fetchEstudiantesRegistrados({ commit }) {
+            const resp = await axios.get('/estudiantes')
+            console.log(resp);
+        }
+    }
 }

@@ -17,11 +17,53 @@
       </div>
       <!-- Reportes -->
       <div class="col-md-4">
-        <router-link to="/admin/tipo_prueba">
+        <router-link to="/reportes/casos_detectados">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
-                <i class="fas fa-book-medical"></i>Tipos de Prueba
+                <i class="fas fa-virus"></i></i>Casos detectados
+              </h5>
+              <p
+                class="card-text"
+              >Gestiona los tipos de Prueba de Covid 19 que el médico es capaz de ordenar</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+      <div class="col-md-4">
+        <router-link to="/reportes/total_casos">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-diagnoses"></i></i>Total de Casos
+              </h5>
+              <p
+                class="card-text"
+              >Gestiona los tipos de Prueba de Covid 19 que el médico es capaz de ordenar</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+      <div class="col-md-4">
+        <router-link to="/reportes/total_encuestas">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-poll"></i></i>Total de Encuestas
+              </h5>
+              <p
+                class="card-text"
+              >Gestiona los tipos de Prueba de Covid 19 que el médico es capaz de ordenar</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+      <div class="col-md-4">
+        <router-link to="/reportes/total_consultas">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-prescription"></i></i>Total de Consultas
               </h5>
               <p
                 class="card-text"
