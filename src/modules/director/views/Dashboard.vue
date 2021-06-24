@@ -23,10 +23,7 @@ export default {
   
   },
   methods: {
-    ...mapActions()
-    obtenerEstudiantes(){
-
-    }
+    
   },
 }
 
