@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-    <Titulos titulo="Trazar 'Culpable'" subtitulo="Aqui podras seleccionar a la persona contagiada para poder llevar un control en su trazabilidad" />
+    <Titulos titulo="Trazar 'Culpable'" subtitulo="Ahora selecciona quién es el contagiado, para llevar un control de su trazabilidad" />
     <br>
     <b-table :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center">
       <template v-slot:cell(infectado)="data">
