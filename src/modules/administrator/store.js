@@ -7,11 +7,39 @@ import personal from './views/personal/store'
 import medicos from './views/medicos/store'
 import usuarios from './views/usuarios/store'
 
+import axios from 'axios'
+
 export default {
   namespaced: true,
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+    modalidad: 'obligatoria',
+  },
+  mutations: {
+    setModalidad(state, payload) {
+      state.modalidad = payload
+    },
+  },
+  actions: {
+    async getModalidad({ commit }) {
+      try {
+        const resp = await axios.get('/encuesta/modalidad')
+        commit('setModalidad', resp.data.modalidad)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    changeModalidad({ commit }, payload) {
+      try {
+        axios.post('/encuesta/modalidad', {
+          modalidad: payload.modalidad,
+        })
+        commit('setModalidad', payload.modalidad)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+  },
   getters: {},
   modules: {
     departments,

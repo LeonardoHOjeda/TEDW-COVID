@@ -106,12 +106,67 @@
           </div>
         </router-link>
       </div>
+
+      <div class="col-md-4" v-b-modal.modal-1>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-prescription-bottle-alt"></i>Modalidad de la Prueba
+            </h5>
+            <p
+              class="card-text"
+            >Cambia la modalidad de la prueba de Covid-19 para los estudiantes y el personal, para que sea obligatoria, volutaria o aleatoria.</p>
+          </div>
+        </div>
+
+        <b-modal
+          id="modal-1"
+          title="Modalidad de la encuesta"
+          cancel-title="Cancelar"
+          ok-title="Aceptar"
+          centered
+          @ok="handleOk"
+          size="sm"
+        >
+          <b-select :options="modalidades" v-model="modalidad"></b-select>
+        </b-modal>
+      </div>
     </div>
   </b-container>
 </template>
 
 <script>
-  export default {};
+  import { mapActions, mapState } from 'vuex';
+  export default {
+    name: 'AdminHome',
+    data: () => ({
+      modalidades: [
+        { value: 'obligatoria', text: 'Obligatoria' },
+        { value: 'voluntaria', text: 'Voluntaria' },
+        { value: 'aleatoria', text: 'Aleatoria' },
+      ],
+    }),
+    computed: {
+      ...mapState('admin', ['modalidad']),
+      modalidad: {
+        get() {
+          return this.$store.state.admin.modalidad;
+        },
+        set(value) {
+          this.$store.state.admin.modalidad = value;
+        },
+      },
+    },
+    methods: {
+      ...mapActions('admin', ['getModalidad', 'changeModalidad']),
+      handleOk() {
+        this.changeModalidad({ modalidad: this.modalidad });
+      },
+    },
+    created() {
+      this.getModalidad();
+    },
+  };
 </script>
 
 <style scoped>
