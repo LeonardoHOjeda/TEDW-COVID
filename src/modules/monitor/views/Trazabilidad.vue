@@ -27,7 +27,7 @@
         <b-button
           variant="outline-info"
           size="sm"
-          @click="trazar(data.item.usuario_id, data.item.fecha_de_envio)"
+          @click="trazar(data.item.usuario_id, data.item.fecha_de_envio, data.item.usuario)"
         >
           Ver usuarios informados
           <i class="far fa-eye"></i>
@@ -58,6 +58,7 @@
         fields: [
           { key: 'fecha_de_envio', sortable: false },
           { key: 'usuario', sortable: false },
+          { key: 'email', sortable: false },
           { key: 'informacion' },
         ],
         items: [],
@@ -89,6 +90,7 @@
                 fecha_de_envio: moment(t.fecha).calendar(),
                 usuario_id: t.usuario_id,
                 usuario: t.usuario,
+                email: t.usuario_email,
                 id_trazo: t.trazabilidad_id,
               });
             });
@@ -99,12 +101,13 @@
             this.cargando = false;
           });
       },
-      trazar(id_usuario, id_fecha) {
+      trazar(usuario_id, id_fecha, usuario) {
         this.$router.push({
           name: 'Trazo',
           params: {
-            id: id_usuario,
+            id: usuario_id,
             fecha: id_fecha,
+            usuario: usuario,
           },
         });
       },

@@ -17,7 +17,7 @@
         v-if="cargando"
       ></b-spinner>
     </div>
-    <b-button @click="enviar" :disabled="block" block variant="danger">Enviar alerta(s) <i class="far fa-share-square"></i></b-button>
+    <b-button @click="enviar" variant="danger">Enviar alerta(s) <i class="far fa-share-square"></i></b-button>
   </div>
 </template>
 

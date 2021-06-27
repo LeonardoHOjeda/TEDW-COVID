@@ -8,21 +8,14 @@
     <Titulos titulo="Evidencia" subtitulo />
     <h3
       class="font-weight-light text-center"
-    >Aqui podras observar los usuarios que se alertaron en la instancia de trazabilidad con el id: {{$route.params.id}}</h3>
+    >Este es un listado de todos los usuarios que han tenido contacto con: {{$route.params.usuario}}</h3>
     <br />
     <h5 class>
       <span class="badge badge-info">Fecha de envio:</span>
       {{$route.params.fecha}}
     </h5>
     <br />
-    <b-table striped hover :items="items" :fields="fields" class="text-center">
-      <template v-slot:cell(informacion)>
-        <b-button variant="outline-info" size="sm">
-          Ver usuarios informados
-          <i class="far fa-eye"></i>
-        </b-button>
-      </template>
-    </b-table>
+    <b-table striped hover :items="items" :fields="fields" class="text-center"></b-table>
     <div class="text-center">
       <b-spinner v-if="cargando"></b-spinner>
     </div>
@@ -54,8 +47,8 @@
         medico: '',
         tipo_prueba: '',
         fields: [
-          { key: 'id_usuario', sortable: false },
           { key: 'correo', sortable: false },
+          { key: 'avisado', sortable: false },
         ],
         items: [],
       };
@@ -69,22 +62,19 @@
     methods: {
       llenar() {
         this.cargando = true;
-        let config = { headers: { Authorization: `Bearer ${this.token}` } };
         this.axios
-          .get('/trazabilidad', config)
+          .get(`/trazabilidad/${this.$route.params.id}`)
           .then((res) => {
-            for (let i = 0; i < res.data.length; i++) {
-              if (
-                moment(res.data[i].fecha).calendar() ==
-                  this.$route.params.fecha &&
-                res.data[i].usuario.usuario_id == this.$route.params.id
-              ) {
-                this.items.push({
-                  id_usuario: res.data[i].contacto.usuario_id,
-                  correo: res.data[i].contacto.email,
-                });
-              }
-            }
+            const data = res.data;
+            data.forEach((t) => {
+              console.log(t);
+              this.items.push({
+                id_usuario: t.usuario.usuario_id,
+                correo: t.contacto.email,
+                avisado: t.avisado ? 'SI' : 'NO',
+                _cellVariants: { avisado: t.avisado ? '' : 'danger' },
+              });
+            });
             this.cargando = false;
           })
           .catch((err) => {
