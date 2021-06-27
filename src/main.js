@@ -45,7 +45,7 @@ import './registerServiceWorker'
 Vue.use(VueAxios, axios)
 
 // Agregamos la URL base de la API
-axios.defaults.baseURL = 'http://localhost:3000' //Sujeto a cambios dependiendo del puerto en el que se encuentra alojado
+axios.defaults.baseURL = 'https://covid19-itc.herokuapp.com' //Sujeto a cambios dependiendo del puerto en el que se encuentra alojado
 
 Vue.config.productionTip = false
 
