@@ -38,10 +38,11 @@ export default new Vuex.Store({
             localStorage.setItem('usuario', payload.usuario)
             commit('obtenerUsuario', payload)
             const navigator = {
-                estudiante: () => router.replace({ path: 'students/Form' }),
-                medico: () => router.push({ path: 'medics/Form' }),
+                estudiante: () => router.replace({ path: '/' }),
+                medico: () => router.replace({ path: '/' }),
                 administrador: () => router.replace({ path: '/admin/home' }),
-                directivo: () => router.replace({ path: '/director/home' }),
+                directivo: () => router.replace({ path: '/' }),
+                monitor: () => router.replace({ path: '/' }),
             }
             navigator[payload.usuario.rol.rol]()
         },

@@ -3,7 +3,9 @@
     <b-navbar type="dark" sticky variant="info">
       <b-container fluid>
         <i v-b-toggle.sidebar class="fas fa-bars text-white mr-3 hamburguer"></i>
-        <b-navbar-brand :to="{name: 'Home'}"><img src="../assets/logo.png" width="50%"></b-navbar-brand>
+        <b-navbar-brand :to="{name: 'Home'}">
+          <img src="../assets/logo.png" width="50%" />
+        </b-navbar-brand>
       </b-container>
     </b-navbar>
     <b-sidebar id="sidebar" bg-variant="dark" width="230px" no-header-close shadow backdrop>
@@ -43,7 +45,7 @@
             </b-collapse>
           </div>
         </div>
-        <a @click="cerrarSesion()" class="nav-menu text-danger puntero" active-class="active" >
+        <a @click="cerrarSesion()" class="nav-menu text-danger puntero" active-class="active">
           <i class="fas fa-sign-out-alt"></i>
           Salir
         </a>
@@ -80,14 +82,6 @@
           to: '/students/Ordenes',
           label: 'Ordenes de pruebas',
         },
-        // {
-        //   icon: 'fas fa-list',
-        //   label: 'Otro Tree Menu',
-        //   submenus: [
-        //     { icon: 'far fa-question-circle', to: '/pagina1', label: 'Pagina 1' },
-        //     { icon: 'far fa-question-circle', to: '/pagina2', label: 'Pagina 2' },
-        //   ],
-        // },
       ],
       admin_menu: [
         { icon: 'fas fa-home', to: '/admin/home', label: 'Home' },
@@ -154,18 +148,21 @@
         },
       ],
       medic_menu: [
-        { icon: 'fas fa-poll-h', to: '/medics/Form', label: 'Formulario' },
+        { icon: 'fas fa-poll-h', to: '/medics/Form', label: 'Respuestas' },
         { icon: 'fas fa-user-md', to: '/medics/Consultas', label: 'Consultas' },
         {
           icon: 'fas  fa-file-medical',
           to: '/medics/Ordenes',
           label: 'Ordenes',
         },
-        { icon: 'far fa-question-circle', to: '/about', label: 'About' },
       ],
       director_menu: [
         { icon: 'fas fa-home', to: '/director/home', label: 'Home' },
-        { icon: 'fas fa-chart-pie', to: '/director/dashboard', label: 'Dashboard' },
+        {
+          icon: 'fas fa-chart-pie',
+          to: '/director/dashboard',
+          label: 'Dashboard',
+        },
         {
           icon: 'fas fa-chart-bar',
           label: 'Reportes',
@@ -195,7 +192,11 @@
       ],
       monitor_menu: [
         { icon: 'fas fa-poll-h', to: '/monitor/Alerta', label: 'Enviar Alerta' },
-        { icon: 'fas fa-user-md', to: '/monitor/Trazabilidad', label: 'Trazar Personas' }
+        {
+          icon: 'fas fa-user-md',
+          to: '/monitor/Trazabilidad',
+          label: 'Trazar Personas',
+        },
       ],
     }),
     computed: {
@@ -262,11 +263,11 @@
     margin-left: 18px;
   }
 
-  .puntero{
+  .puntero {
     cursor: pointer;
   }
 
-  .puntero:hover{
-    color: rgb(250, 58, 58)!important;
+  .puntero:hover {
+    color: rgb(250, 58, 58) !important;
   }
 </style>

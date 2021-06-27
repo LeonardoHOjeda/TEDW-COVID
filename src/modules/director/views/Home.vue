@@ -21,7 +21,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
-                <i class="fas fa-virus"></i></i>Casos detectados
+                <i class="fas fa-virus"></i>Casos detectados
               </h5>
               <p
                 class="card-text"
@@ -35,7 +35,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
-                <i class="fas fa-diagnoses"></i></i>Total de Casos
+                <i class="fas fa-diagnoses"></i>Total de Casos
               </h5>
               <p
                 class="card-text"
@@ -49,7 +49,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
-                <i class="fas fa-poll"></i></i>Total de Encuestas
+                <i class="fas fa-poll"></i>Total de Encuestas
               </h5>
               <p
                 class="card-text"
@@ -63,7 +63,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
-                <i class="fas fa-prescription"></i></i>Total de Consultas
+                <i class="fas fa-prescription"></i>Total de Consultas
               </h5>
               <p
                 class="card-text"
