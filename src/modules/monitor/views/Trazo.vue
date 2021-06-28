@@ -65,7 +65,7 @@
             const data = res.data;
             console.log(data);
             data.forEach((t) => {
-              if (moment(t.fecha).calendar() === this.$route.params.fecha) {
+              if (moment(t.fecha).format('LL') === this.$route.params.fecha) {
                 this.items.push({
                   id_usuario: t.usuario.usuario_id,
                   correo: t.contacto.email,
