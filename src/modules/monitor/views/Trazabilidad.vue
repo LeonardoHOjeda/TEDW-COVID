@@ -69,7 +69,10 @@ export default {
       this.axios.get('/trazabilidad', config)
         .then((res) => {
           for (let i = 0; i < res.data.length; i++) {
-            if(fecha_temp != res.data[i].fecha || usuario_temp != res.data[i].usuario.usuario_id)
+            if(usuario_temp != res.data[i].usuario.usuario_id ||
+                fecha_temp.substr(0, 4) != res.data[i].fecha.substr(0, 4) ||
+                fecha_temp.substr(5, 2) != res.data[i].fecha.substr(5, 2) ||
+                fecha_temp.substr(8, 2) != res.data[i].fecha.substr(8, 2))
             {
               fecha_temp = res.data[i].fecha;
               usuario_temp = res.data[i].usuario.usuario_id;
