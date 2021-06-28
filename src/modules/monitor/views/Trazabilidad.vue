@@ -39,7 +39,7 @@
         <b-button
           variant="outline-info"
           size="sm"
-          @click="trazar(data.item.usuario_id, data.item.fecha_de_envio, data.item.usuario)"
+          @click="trazar(data.item.usuario_id, data.item.fecha_de_contacto, data.item.usuario)"
         >
           Usuarios con los que tuvo contacto
           <i class="far fa-eye"></i>
@@ -69,7 +69,11 @@
         moment: moment,
         search: '',
         fields: [
-          { key: 'fecha_de_envio', sortable: false },
+          {
+            key: 'fecha_de_contacto',
+            label: 'Fecha de contacto',
+            sortable: false,
+          },
           { key: 'usuario', sortable: false },
           { key: 'email', sortable: false },
           { key: 'informacion' },
@@ -97,15 +101,16 @@
           .get('/trazabilidad', config)
           .then((res) => {
             const data = res.data;
-            console.log(data);
             data.forEach((t) => {
               if (
                 !this.items.find(
-                  (item) => item.fecha_de_envio === moment(t.fecha).format('LL')
+                  (item) =>
+                    item.usuario_id === t.usuario_id &&
+                    item.fecha_de_contacto === moment(t.fecha).format('LL')
                 )
               ) {
                 this.items.push({
-                  fecha_de_envio: moment(t.fecha).format('LL'),
+                  fecha_de_contacto: moment(t.fecha).format('LL'),
                   usuario_id: t.usuario_id,
                   usuario: t.usuario,
                   email: t.usuario_email,
