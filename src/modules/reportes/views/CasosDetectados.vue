@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4">
+  <div class="mt-4 container">
     <div class="d-flex justify-content-between mb-3">
       <h3 class="m-0">Casos Detectados</h3>
       <a
