@@ -46,10 +46,7 @@
         cargando: false,
         medico: '',
         tipo_prueba: '',
-        fields: [
-          { key: 'correo', sortable: false },
-          { key: 'avisado', sortable: false },
-        ],
+        fields: [{ key: 'correo', sortable: false }],
         items: [],
       };
     },
@@ -71,8 +68,6 @@
               this.items.push({
                 id_usuario: t.usuario.usuario_id,
                 correo: t.contacto.email,
-                avisado: t.avisado ? 'SI' : 'NO',
-                _cellVariants: { avisado: t.avisado ? '' : 'danger' },
               });
             });
             this.cargando = false;

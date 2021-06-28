@@ -29,7 +29,7 @@
           size="sm"
           @click="trazar(data.item.usuario_id, data.item.fecha_de_envio, data.item.usuario)"
         >
-          Ver usuarios informados
+          Usuarios que tuvieron contacto
           <i class="far fa-eye"></i>
         </b-button>
       </template>
@@ -86,13 +86,15 @@
             const data = res.data;
             console.log(data);
             data.forEach((t) => {
-              this.items.push({
-                fecha_de_envio: moment(t.fecha).calendar(),
-                usuario_id: t.usuario_id,
-                usuario: t.usuario,
-                email: t.usuario_email,
-                id_trazo: t.trazabilidad_id,
-              });
+              if (!this.items.find((item) => item.usuario_id === t.usuario_id)) {
+                this.items.push({
+                  fecha_de_envio: moment(t.fecha).calendar(),
+                  usuario_id: t.usuario_id,
+                  usuario: t.usuario,
+                  email: t.usuario_email,
+                  id_trazo: t.trazabilidad_id,
+                });
+              }
             });
             this.cargando = false;
           })
