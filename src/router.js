@@ -9,48 +9,52 @@ const routes = [
     ...require('./modules/login/router'),
     ...require('./modules/students/router'),
     ...require('./modules/medics/router'),
+    ...require('./modules/administrator/router'),
+    ...require('./modules/director/router'),
+    ...require('./modules/reportes/router'),
     ...require('./modules/monitor/router')
 ]
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes
+    routes,
 })
 
 router.beforeEach((to, from, next) => {
-    let token = localStorage.getItem('token');
-    let role = localStorage.getItem('role');
+    let token = localStorage.getItem('token')
+    let role = localStorage.getItem('role')
     if (to.meta.requireAuth) {
         if (!role || !token) {
             // next({ name: 'Login' })
-            router.push({ name: 'Login' })
-                .catch(() => true)
-        } else
-        if (to.meta.admin_auth) {
+            router.push({ name: 'Login' }).catch(() => true)
+        } else if (to.meta.admin_auth) {
             if (role === 'administrador') {
-                return next();
+                return next()
             } else {
                 // next({ name: 'Login' })
                 router.push({ name: 'Login' })
             }
-        } else
-        if (to.meta.student_auth) {
+        } else if (to.meta.student_auth) {
             if (role === 'estudiante') {
-                next();
+                next()
             } else {
                 // next({ name: 'Login' })
-                router.push({ name: 'Login' })
-                    .catch(() => true)
+                router.push({ name: 'Login' }).catch(() => true)
             }
-        } else
-        if (to.meta.medic_auth) {
+        } else if (to.meta.medic_auth) {
             if (role === 'medico') {
-                next();
+                next()
             } else {
                 // next({ name: 'Login' })
-                router.push({ name: 'Login' })
-                    .catch(() => true)
+                router.push({ name: 'Login' }).catch(() => true)
+            }
+        } else if (to.meta.director_auth) {
+            if (role === 'directivo') {
+                next()
+            } else {
+                // next({ name: 'Login' })
+                router.push({ name: 'Login' }).catch(() => true)
             }
         } else
         if (to.meta.monitor_auth) {
@@ -63,7 +67,7 @@ router.beforeEach((to, from, next) => {
             }
         }
     } else {
-        return next();
+        return next()
     }
 
     // const rutaProtegia = to.matched.some(record => record.meta.requireAuth)
@@ -72,6 +76,6 @@ router.beforeEach((to, from, next) => {
     // } else {
     //     next();
     // }
-});
+})
 
 export default router

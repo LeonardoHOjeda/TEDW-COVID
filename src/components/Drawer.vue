@@ -3,7 +3,9 @@
     <b-navbar type="dark" sticky variant="info">
       <b-container fluid>
         <i v-b-toggle.sidebar class="fas fa-bars text-white mr-3 hamburguer"></i>
-        <b-navbar-brand :to="{name: 'Home'}">COVID-19 APP</b-navbar-brand>
+        <b-navbar-brand :to="{name: 'Home'}">
+          <img src="../assets/logo.png" width="50%" />
+        </b-navbar-brand>
       </b-container>
     </b-navbar>
     <b-sidebar id="sidebar" bg-variant="dark" width="230px" no-header-close shadow backdrop>
@@ -24,7 +26,7 @@
           </router-link>
           <div v-else class="tree-menu">
             <a v-b-toggle="`collapse-${i}`" class="nav-menu" active-class="active">
-              <i class="fas fa-list"></i>
+              <i :class="menu.icon"></i>
               {{menu.label}}
               <i class="fas fa-chevron-left float-right"></i>
             </a>
@@ -43,7 +45,7 @@
             </b-collapse>
           </div>
         </div>
-        <a @click="cerrarSesion()" class="nav-menu" active-class="active">
+        <a @click="cerrarSesion()" class="nav-menu text-danger puntero" active-class="active">
           <i class="fas fa-sign-out-alt"></i>
           Salir
         </a>
@@ -76,20 +78,9 @@
           label: 'Alertas',
         },
         {
-          icon: 'fas fa-list',
-          label: 'Tree Menu',
-          submenus: [
-            { icon: 'far fa-question-circle', to: '/pagina1', label: 'Pagina 1' },
-            { icon: 'far fa-question-circle', to: '/pagina2', label: 'Pagina 2' },
-          ],
-        },
-        {
-          icon: 'fas fa-list',
-          label: 'Otro Tree Menu',
-          submenus: [
-            { icon: 'far fa-question-circle', to: '/pagina1', label: 'Pagina 1' },
-            { icon: 'far fa-question-circle', to: '/pagina2', label: 'Pagina 2' },
-          ],
+          icon: 'fas fa-virus',
+          to: '/students/Ordenes',
+          label: 'Ordenes de pruebas',
         },
       ],
       admin_menu: [
@@ -115,6 +106,11 @@
           label: 'Personal Académico',
         },
         {
+          icon: 'fas fa-user-md',
+          to: '/admin/medicos',
+          label: 'Médicos',
+        },
+        {
           icon: 'fas fa-book-medical',
           to: '/admin/tipo_prueba',
           label: 'Tipos de Prueba',
@@ -125,24 +121,82 @@
           label: 'Medicamentos',
         },
         {
-          icon: 'fas fa-user',
-          to: '/admin/usuarios',
-          label: 'Usuarios',
+          icon: 'fas fa-chart-bar',
+          label: 'Reportes',
+          submenus: [
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/casos_detectados',
+              label: 'Casos detectados',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_casos',
+              label: 'Total de Casos',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_encuestas',
+              label: 'Total de Encuestas',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_consultas',
+              label: 'Total de Consultas',
+            },
+          ],
         },
       ],
       medic_menu: [
-        { icon: 'fas fa-poll-h', to: '/medics/Form', label: 'Formulario' },
+        { icon: 'fas fa-poll-h', to: '/medics/Form', label: 'Respuestas' },
         { icon: 'fas fa-user-md', to: '/medics/Consultas', label: 'Consultas' },
         {
           icon: 'fas  fa-file-medical',
-          to: '/medics/ResultadosPruebas',
-          label: 'Resultados Pruebas',
+          to: '/medics/Ordenes',
+          label: 'Ordenes',
         },
-        { icon: 'far fa-question-circle', to: '/about', label: 'About' },
+      ],
+      director_menu: [
+        { icon: 'fas fa-home', to: '/director/home', label: 'Home' },
+        {
+          icon: 'fas fa-chart-pie',
+          to: '/director/dashboard',
+          label: 'Dashboard',
+        },
+        {
+          icon: 'fas fa-chart-bar',
+          label: 'Reportes',
+          submenus: [
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/casos_detectados',
+              label: 'Casos detectados',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_casos',
+              label: 'Total de Casos',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_encuestas',
+              label: 'Total de Encuestas',
+            },
+            {
+              icon: 'far fa-question-circle',
+              to: '/reportes/total_consultas',
+              label: 'Total de Consultas',
+            },
+          ],
+        },
       ],
       monitor_menu: [
         { icon: 'fas fa-poll-h', to: '/monitor/Alerta', label: 'Enviar Alerta' },
-        { icon: 'fas fa-user-md', to: '/monitor/Trazabilidad', label: 'Trazar Personas' }
+        {
+          icon: 'fas fa-user-md',
+          to: '/monitor/Trazabilidad',
+          label: 'Trazar Personas',
+        },
       ],
     }),
     computed: {
@@ -151,6 +205,7 @@
           estudiante: this.student_menu,
           medico: this.medic_menu,
           administrador: this.admin_menu,
+          directivo: this.director_menu,
           monitor: this.monitor_menu,
         };
         return items[this.usuario.rol.rol];
@@ -206,5 +261,13 @@
   }
   .tree-menu-collapse {
     margin-left: 18px;
+  }
+
+  .puntero {
+    cursor: pointer;
+  }
+
+  .puntero:hover {
+    color: rgb(250, 58, 58) !important;
   }
 </style>

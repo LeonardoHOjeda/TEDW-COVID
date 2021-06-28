@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="mt-3">
-      <b-button href="../Consultas" variant="primary"><i class="fas fa-long-arrow-alt-left"></i> Regresar</b-button>
+      <router-link to="../Consultas" class="btn btn-primary"><i class="fas fa-long-arrow-alt-left"></i> Regresar</router-link>
+    </div>
+    <div class="mt-3 text-center alert alert-danger" v-if="mensaje != ''">
+      <p>{{mensaje}}</p>
     </div>
     <Titulos titulo="Consulta" subtitulo=""/>
     <h3 class="font-weight-light text-center">Consulta realizada por: {{alumno}}</h3>
@@ -34,10 +37,10 @@
     <!-- Inicio seccion medico -->
     <h4>Receta</h4>
     <!-- Inicio Formulario -->
-    <h5 :class="checked ? 'text-danger' : ''">Sospechoso</h5>
+    <h5 :class="sospechoso ? 'text-danger' : ''">Sospechoso</h5>
     <div>
-      <b-form-checkbox v-model="checked" name="check-button" switch>
-        <p v-if="checked" class="text-danger">Si</p>
+      <b-form-checkbox v-model="sospechoso" name="check-button" switch>
+        <p v-if="sospechoso" class="text-danger">Si</p>
         <p class="text-success" v-else>No</p>
       </b-form-checkbox>
     </div>
@@ -45,9 +48,10 @@
     <form @submit.prevent="enviaReceta" action="#">
       <!-- Levantar orden -->
         <!-- Anexar el id de usuario y id del medico -->
-      <div v-if="checked" class="mb-3">
+      <div v-if="sospechoso" class="mb-3">
         <h5>Levantar orden</h5>
         <b-form-select v-model="selected" :options="options"></b-form-select>
+        <p>{{selected}}</p>
       </div>
 
       <div class="my-3 form-group">
@@ -59,13 +63,13 @@
 
       <div v-if="cantidadMedicamentos <= 10">
         <div v-for="(medicamento, index) in medicamentos" :key="index" class="mb-3">
-          <h5>Medicamento {{index}}</h5>
+          <h5>Medicamento {{index+1}}</h5>
           <div class="form-group"  >
             <select class="custom-select mb-3" name="medicamento_id" id="" v-model="medicamento.medicamento.medicamento_id">
               <option value="0" disabled selected>--Seleccione Medicina---</option>
               <option v-for="(item, index) in medicinas" :key="index" :value="item.medicamento.medicamento_id">{{item.medicamento.descripcion}}</option>
             </select>
-            <input v-model="medicamento.receta" :name="`medicamentos[${index}][receta]`" class="form-control" type="text" :placeholder="'Ingresa aqui las instrucciones del medicamento ' + index">
+            <input v-model="medicamento.receta" :name="`medicamentos[${index}][receta]`" class="form-control" type="text" :placeholder="'Ingresa aqui las instrucciones del medicamento ' + (index+1)">
           </div>
         </div>
         <div class="d-flex justify-content-around">
@@ -97,6 +101,7 @@ export default {
   },
   data(){
     return{
+      mensaje: '',
       modalidad: '',
       moment: moment,
       sintomas: '',
@@ -104,12 +109,9 @@ export default {
       evidencias: [],
       checkbox: false,
       selected: '0',
-      checked: false,
+      sospechoso: false,
       options: [
         {value: '0', text: '---Por favor, selecciona una opcion---', disabled: true},
-        {value: '1', text: 'Prueba rapida de sangre'},
-        {value: '2', text: 'Prueba rapida de antigeno'},
-        {value: '3', text: 'Prueba PCR'}
       ],
       medico_id: '',
       status: 'atendida',
@@ -122,47 +124,57 @@ export default {
       }],
       medicinas: [],
       receta: '',
-      alumno: ''
+      alumno: '',
+      usuario_id: ''
     }
   },
   computed: {
     ...mapState(['usuario','token']),
   },
-  created(){
-    this.muestraConsulta(),
-    this.muestraMedicamentos()
+  async created(){
+    await this.muestraConsulta();
+    await this.muestraMedicamentos();
+    await this.muestraTiposPrueba();
   },
   methods:{
-    muestraConsulta(){
+    // Muestra los datos de la consulta
+    async muestraConsulta(){
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
-      this.axios.get(`/consultas/${this.$route.params.id}`, config)
-        .then((res) => {
-          console.log(res);
-          this.modalidad = res.data.modalidad
-          this.sintomas = res.data.sintomas
-          this.alumno = res.data.usuario.email
-          for (let i = 0; i < res.data.evidencias.length; i++){
-            this.evidencias.push({
-              url: res.data.evidencias[i].url
-            })
-          }
-        }).catch((err) => {
-          console.log(err.response);
-        });
+      // obten todos los datos de la consulta
+      const res = await this.axios.get(`/consultas/${this.$route.params.id}`, config)
+        this.modalidad = res.data.modalidad
+        this.sintomas = res.data.sintomas
+        this.alumno = res.data.usuario.email
+        this.usuario_id = res.data.usuario.usuario_id
+        for (let i = 0; i < res.data.evidencias.length; i++){
+          this.evidencias.push({
+            url: res.data.evidencias[i].url
+          })
+        }
+      // Obten todos los tipos de prueba
     },
-    muestraMedicamentos(){
+
+    // Obten todos los medicamentos de la BD
+    async muestraMedicamentos(){
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
-      this.axios.get('/medicamentos', config)
-        .then((res) => {
-          for (let i = 0; i < res.data.length; i++){
-            this.medicinas.push({
-              medicamento: res.data[i]
-            })
-          }
-          console.log(this.medicamentos);
-        }).catch((err) => {
-          console.log(err);
-        });
+      const res = await this.axios.get('/medicamentos', config)
+        for (let i = 0; i < res.data.length; i++){
+          this.medicinas.push({
+            medicamento: res.data[i]
+          })
+        }
+    },
+
+    //Obten todos los tipos de pruebas de la BD
+    async muestraTiposPrueba(){
+      let config = {headers:{'Authorization': `Bearer ${this.token}`}}
+      const res = await this.axios.get('/tipo_prueba', config)
+        for (let i = 0; i < res.data.length; i++){
+          this.options.push({
+            value: res.data[i].tipo_id,
+            text: res.data[i].descripcion
+          })
+        }
     },
     agregaMedicamento(){
       this.medicamentos.push({
@@ -190,23 +202,17 @@ export default {
         medicamentos: []
       }
 
-      let nuevoArreglo = {}
-      console.log(this.medicamentos);
       for (let i = 0; i < this.medicamentos.length; i++) {
         enviarDatos.medicamentos.push({
           "receta": this.medicamentos[i].receta,
           "medicamento_id": this.medicamentos[i].medicamento.medicamento_id
         })
-        // nuevoArreglo['receta'] = this.medicamentos[i].receta
-        // nuevoArreglo['medicamento_id'] = this.medicamentos[i].medicamento.medicamento_id
-        // enviarDatos.medicamentos.push(nuevoArreglo)
       }
-      console.log(nuevoArreglo);
-      console.log(enviarDatos);
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
+
+      // Envia la receta y actualiza el estatus a 'atendida'
       this.axios.put(`/consultas/${this.$route.params.id}`, enviarDatos, config)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this.$swal({
                 title: 'Consulta atendida con exito!',
                 text: 'Tu consulta ha sido atendida con exito, sigue asi!',
@@ -215,6 +221,19 @@ export default {
         }).catch((err) => {
           console.log(err.response);
         });
+      if(this.selected !== '0'){
+        let orden = {
+          usuario_id: this.usuario_id,
+          medico_id: this.usuario.medico.medico_id,
+          tipo_id: this.selected
+        }
+        this.axios.post('/ordenes', orden, config)
+          .then(() => {
+            this.selected = '0'
+          }).catch((err) => {
+            console.log(err.response);
+          });
+      }
     }
   }
 }
