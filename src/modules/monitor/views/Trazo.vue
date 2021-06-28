@@ -63,12 +63,14 @@
           .get(`/trazabilidad/${this.$route.params.id}`)
           .then((res) => {
             const data = res.data;
+            console.log(data);
             data.forEach((t) => {
-              console.log(t);
-              this.items.push({
-                id_usuario: t.usuario.usuario_id,
-                correo: t.contacto.email,
-              });
+              if (moment(t.fecha).calendar() === this.$route.params.fecha) {
+                this.items.push({
+                  id_usuario: t.usuario.usuario_id,
+                  correo: t.contacto.email,
+                });
+              }
             });
             this.cargando = false;
           })

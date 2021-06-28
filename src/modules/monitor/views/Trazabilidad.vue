@@ -41,7 +41,7 @@
           size="sm"
           @click="trazar(data.item.usuario_id, data.item.fecha_de_envio, data.item.usuario)"
         >
-          Usuarios que tuvieron contacto
+          Usuarios con los que tuvo contacto
           <i class="far fa-eye"></i>
         </b-button>
       </template>
@@ -99,7 +99,11 @@
             const data = res.data;
             console.log(data);
             data.forEach((t) => {
-              if (!this.items.find((item) => item.usuario_id === t.usuario_id)) {
+              if (
+                !this.items.find(
+                  (item) => item.fecha_de_envio === moment(t.fecha).calendar()
+                )
+              ) {
                 this.items.push({
                   fecha_de_envio: moment(t.fecha).calendar(),
                   usuario_id: t.usuario_id,
