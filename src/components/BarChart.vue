@@ -3,12 +3,25 @@
 
   export default {
     extends: Bar,
+    data: () => ({
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                stepSize: 1,
+                beginAtZero: true,
+                suggestedMax: 3,
+              },
+            },
+          ],
+        },
+      },
+    }),
     props: {
       chartdata: {
-        type: Object,
-        default: null,
-      },
-      options: {
         type: Object,
         default: null,
       },

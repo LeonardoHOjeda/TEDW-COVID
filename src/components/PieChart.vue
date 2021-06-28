@@ -3,12 +3,24 @@
 
   export default {
     extends: Pie,
+    data: () => ({
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                stepSize: 1,
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
+    }),
     props: {
       chartdata: {
-        type: Object,
-        default: null,
-      },
-      options: {
         type: Object,
         default: null,
       },
