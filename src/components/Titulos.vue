@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4 container-fluid">
+  <div class="mb-4">
     <div class="card p-1 shadow-sm">
       <div class="card-body">
         <h2 class="h3">{{titulo}}</h2>
