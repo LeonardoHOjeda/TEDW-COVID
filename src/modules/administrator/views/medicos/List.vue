@@ -18,7 +18,7 @@
           :filter="search"
           :per-page="perPage"
           :current-page="currentPage"
-          :responsive="true"
+          responsive="sm"
           :busy="bussy"
         >
           <template #thead-top>

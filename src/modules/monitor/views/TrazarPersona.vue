@@ -3,7 +3,7 @@
     <br>
     <Titulos titulo="Trazar 'Culpable'" subtitulo="Ahora selecciona quién es el contagiado, para llevar un control de su trazabilidad" />
     <br>
-    <b-table :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center">
+    <b-table :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center" responsive="sm">
       <template v-slot:cell(infectado)="data">
         <b-button variant="outline-info" size="sm" @click="guardar(data.item.id)">Seleccionar <i class="fas fa-thumbtack"></i></b-button>
       </template>

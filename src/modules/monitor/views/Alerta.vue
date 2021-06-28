@@ -7,7 +7,7 @@
     </div>
     
     <Titulos titulo="Alertas" subtitulo="Aqui podras mandar alertas a las personas que se encuentren infectadas/contagiadas" />
-    <b-table :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center">
+    <b-table :sort-by.sync="sortBy" striped hover :items="items" :fields="fields" class="text-center" responsive="sm">
       <template v-slot:cell(prueba)="data">
         <b-button variant="outline-info" size="sm" :to="`./Orden/${data.item.id_orden}`">Ver resultados <i class="far fa-eye"></i></b-button>
       </template>

@@ -13,6 +13,7 @@
       :items="items"
       :fields="fields"
       class="text-center"
+      responsive="sm"
     >
       <template v-slot:cell(avisar)="data">
         <b-form-group>

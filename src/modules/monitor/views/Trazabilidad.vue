@@ -22,6 +22,7 @@
       :items="items"
       :fields="fields"
       class="text-center"
+      responsive="sm"
     >
       <template v-slot:cell(informacion)="data">
         <b-button

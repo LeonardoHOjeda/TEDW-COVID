@@ -15,7 +15,7 @@
       {{$route.params.fecha}}
     </h5>
     <br />
-    <b-table striped hover :items="items" :fields="fields" class="text-center"></b-table>
+    <b-table striped hover :items="items" :fields="fields" class="text-center" responsive="sm"></b-table>
     <div class="text-center">
       <b-spinner v-if="cargando"></b-spinner>
     </div>
