@@ -14,7 +14,18 @@
       :fields="fields"
       class="text-center"
       responsive="sm"
+      :filter="search"
     >
+      <template #thead-top>
+        <b-tr>
+          <b-th colspan="4">
+            <p class="h6 text-right">
+              Buscar
+              <input type="search" class="search" v-model="search" />
+            </p>
+          </b-th>
+        </b-tr>
+      </template>
       <template v-slot:cell(avisar)="data">
         <b-form-group>
           <input @input="enviarAlertas(data)" type="checkbox" v-model="data.item.avisar" />
@@ -46,6 +57,7 @@
         cargando: true,
         sortBy: 'usuario',
         moment: moment,
+        search: '',
         fields: [
           { key: 'id', sortable: false },
           { key: 'email', sortable: false },

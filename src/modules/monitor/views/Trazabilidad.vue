@@ -23,7 +23,18 @@
       :fields="fields"
       class="text-center"
       responsive="sm"
+      :filter="search"
     >
+      <template #thead-top>
+        <b-tr>
+          <b-th colspan="4">
+            <p class="h6 text-right">
+              Buscar
+              <input type="search" class="search" v-model="search" />
+            </p>
+          </b-th>
+        </b-tr>
+      </template>
       <template v-slot:cell(informacion)="data">
         <b-button
           variant="outline-info"
@@ -56,6 +67,7 @@
         cargando: true,
         sortBy: 'usuario',
         moment: moment,
+        search: '',
         fields: [
           { key: 'fecha_de_envio', sortable: false },
           { key: 'usuario', sortable: false },
@@ -139,5 +151,22 @@
 
   .closebtn:hover {
     color: black;
+  }
+
+  .search {
+    padding: 6px;
+    padding-left: 15px;
+    border: 1px solid #e1e1e1;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    border-radius: 20px;
+    outline: none;
+  }
+
+  .search:focus {
+    border: 1px solid #e1e1e1;
+    background-color: white;
+    border-radius: 20px;
   }
 </style>
