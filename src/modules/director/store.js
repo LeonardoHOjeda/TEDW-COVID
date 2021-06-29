@@ -1,41 +1,20 @@
 import axios from 'axios'
 
 export default {
-    state: {
-        estudiantesRegistrados: {
-            cantidad: ''
-        },
-        estudiantesRegistradosCarrera: {
-
-        },
-        medicosRegistrados: {
-
-        },
-        cantidadAlertasEnviadas: {
-            cantidad: ''
-        },
-        cantidadOrdenes: '',
-
-
+  namespaced: true,
+  state: {
+    dashboard: null,
+  },
+  mutations: {
+    setDashboard(state, payload) {
+      state.dashboard = payload
     },
-    mutations: {
-        setEstudiantesRegistrados(state, payload) {
-            state.estudiantesRegistrados = payload
-        },
-        setEstudiantesRegistradosCarrera(state, payload) {
-            state.estudiantesRegistradosCarrera = payload
-        },
-        setMedicosRegistrados(state, payload) {
-            state.medicosRegistrados = payload
-        },
-        setCantidadAlertasEnviadas(state, payload) {
-            state.cantidadAlertasEnviadas = payload
-        },
+  },
+  actions: {
+    async fetchDashboard({ commit }) {
+      const resp = await axios.get('/dashboard')
+      console.log(resp.data)
+      commit('setDashboard', resp.data)
     },
-    actions: {
-        async fetchEstudiantesRegistrados({ commit }) {
-            const resp = await axios.get('/estudiantes')
-            console.log(resp);
-        }
-    }
+  },
 }

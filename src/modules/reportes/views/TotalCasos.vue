@@ -14,10 +14,10 @@
           <div class="card-body">
             <div class="row" v-if="loaded">
               <div class="col-md-6">
-                <line-chart :chartdata="chartDataCarreras" :options="options" />
+                <bar-chart :chartdata="chartDataCarreras" />
               </div>
               <div class="col-md-6">
-                <pie-chart :chartdata="chartDataCarreras" :options="options" />
+                <pie-chart :chartdata="chartDataCarreras" />
               </div>
             </div>
             <div v-else class="text-center">
@@ -31,10 +31,10 @@
           <div class="card-body">
             <div class="row" v-if="loaded">
               <div class="col-md-6">
-                <line-chart :chartdata="chartDataDepartamentos" :options="options" />
+                <bar-chart :chartdata="chartDataDepartamentos" />
               </div>
               <div class="col-md-6">
-                <pie-chart :chartdata="chartDataDepartamentos" :options="options" />
+                <pie-chart :chartdata="chartDataDepartamentos" />
               </div>
             </div>
             <div v-else class="text-center">
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import LineChart from '@/components/BarChart.vue';
+  import BarChart from '@/components/BarChart.vue';
   import PieChart from '@/components/PieChart.vue';
   import { mapActions, mapState } from 'vuex';
 
@@ -80,13 +80,9 @@
           },
         ],
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-      },
     }),
     components: {
-      LineChart,
+      BarChart,
       PieChart,
     },
     computed: {
