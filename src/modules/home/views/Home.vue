@@ -18,7 +18,11 @@
         </div>
       </div>
     </div>
-
+    <br>
+    <div v-if="true" style="cursor: pointer;" v-on:click="encuesta" class="banner">
+      <br>
+      <h5>Porfavor haga click aqui para contestar una encuesta, es por la seguridad de todos.</h5>
+    </div>
     <section class="container my-3 text-center" id="sintomas">
       <h4 class="title">¿Sabes cuáles son los síntomas?</h4>
 
@@ -86,6 +90,13 @@
       syntom,
       recomendation,
     },
+    methods: {
+      encuesta: function (event) {
+        this.$router.push({
+          name: 'FormS'
+        });
+      }
+    }
   };
 </script>
 
@@ -97,6 +108,7 @@
     border-bottom-right-radius: 50px;
     border-bottom-left-radius: 50px;
   }
+
   @media (min-width: 576px) {
     .header {
       height: 70vh;
@@ -119,5 +131,17 @@
   }
   .contagios img {
     width: 200px;
+  }
+
+  .banner {
+    height: 10vh;
+    background-color: #8f0808;
+    color: white;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+
+    text-align: center;
   }
 </style>
