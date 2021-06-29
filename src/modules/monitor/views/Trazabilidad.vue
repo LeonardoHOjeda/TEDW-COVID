@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <br />
     <div v-if="$route.params.enviado === true" class="alert">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -41,7 +41,7 @@
           size="sm"
           @click="trazar(data.item.usuario_id, data.item.fecha_de_envio, data.item.usuario)"
         >
-          Usuarios que tuvieron contacto
+          Usuarios con los que tuvo contacto
           <i class="far fa-eye"></i>
         </b-button>
       </template>
@@ -99,9 +99,13 @@
             const data = res.data;
             console.log(data);
             data.forEach((t) => {
-              if (!this.items.find((item) => item.usuario_id === t.usuario_id)) {
+              if (
+                !this.items.find(
+                  (item) => item.fecha_de_envio === moment(t.fecha).format('LL')
+                )
+              ) {
                 this.items.push({
-                  fecha_de_envio: moment(t.fecha).calendar(),
+                  fecha_de_envio: moment(t.fecha).format('LL'),
                   usuario_id: t.usuario_id,
                   usuario: t.usuario,
                   email: t.usuario_email,

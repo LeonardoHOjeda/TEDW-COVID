@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <div class="container-fluid row align-items-center ml-3">
+      <div class="container-fluid row align-items-center pl-5">
         <div class="col-sm-5">
           <h2>Sistema de Control de COVID-19 ITC</h2>
           <p>
@@ -18,7 +18,9 @@
         </div>
       </div>
     </div>
-
+    <div v-if="requireSurvey" style="cursor: pointer;" v-on:click="encuesta" class="banner mt-3">
+      <h5>Por órdenes médicas usted debe contestar la encuesta de Covid-19. Haga click aquí, es por la seguridad de todos.</h5>
+    </div>
     <section class="container my-3 text-center" id="sintomas">
       <h4 class="title">¿Sabes cuáles son los síntomas?</h4>
 
@@ -78,6 +80,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   import recomendation from '../components/recomendation.vue';
   import syntom from '../components/syntom.vue';
   export default {
@@ -85,6 +88,22 @@
     components: {
       syntom,
       recomendation,
+    },
+    methods: {
+      encuesta: function () {
+        this.$router.push({
+          name: 'FormS',
+        });
+      },
+    },
+    computed: {
+      ...mapState(['usuario', 'rol']),
+      requireSurvey() {
+        return (
+          this.rol === 'personal' ||
+          (this.rol === 'estudiante' && this.usuario.requireSurvey)
+        );
+      },
     },
   };
 </script>
@@ -97,6 +116,7 @@
     border-bottom-right-radius: 50px;
     border-bottom-left-radius: 50px;
   }
+
   @media (min-width: 576px) {
     .header {
       height: 70vh;
@@ -119,5 +139,16 @@
   }
   .contagios img {
     width: 200px;
+  }
+
+  .banner {
+    padding: 1.5rem 1rem;
+    background-color: #8f0808;
+    color: white;
+    border-radius: 1000px;
+    text-align: center;
+  }
+  .banner h5 {
+    margin: 0;
   }
 </style>

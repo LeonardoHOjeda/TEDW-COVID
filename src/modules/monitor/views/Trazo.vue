@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="mt-3">
       <router-link to="/monitor/Trazabilidad" class="btn btn-primary">
         <i class="fas fa-long-arrow-alt-left"></i> Regresar
@@ -63,12 +63,14 @@
           .get(`/trazabilidad/${this.$route.params.id}`)
           .then((res) => {
             const data = res.data;
+            console.log(data);
             data.forEach((t) => {
-              console.log(t);
-              this.items.push({
-                id_usuario: t.usuario.usuario_id,
-                correo: t.contacto.email,
-              });
+              if (moment(t.fecha).format('LL') === this.$route.params.fecha) {
+                this.items.push({
+                  id_usuario: t.usuario.usuario_id,
+                  correo: t.contacto.email,
+                });
+              }
             });
             this.cargando = false;
           })

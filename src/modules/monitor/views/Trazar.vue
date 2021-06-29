@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <br />
     <Titulos
       titulo="Trazar"
@@ -172,4 +172,20 @@
 </script>
 
 <style>
+  .search {
+    padding: 6px;
+    padding-left: 15px;
+    border: 1px solid #e1e1e1;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    border-radius: 20px;
+    outline: none;
+  }
+
+  .search:focus {
+    border: 1px solid #e1e1e1;
+    background-color: white;
+    border-radius: 20px;
+  }
 </style>

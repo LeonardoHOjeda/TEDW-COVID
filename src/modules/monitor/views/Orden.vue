@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="mt-3">
       <router-link to="/monitor/Alerta" class="btn btn-primary"><i class="fas fa-long-arrow-alt-left"></i> Regresar</router-link>
     </div>

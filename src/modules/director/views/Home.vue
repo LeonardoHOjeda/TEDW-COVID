@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5">
+  <div class="mt-5 container">
     <h3 class="mb-4">Menu de Inicio</h3>
     <div class="row">
       <!-- Dashboard -->
@@ -10,7 +10,10 @@
               <h5 class="card-title">
                 <i class="fas fa-key"></i>Dashboard
               </h5>
-              <p class="card-text">Accede a una pantalla tipo <strong>dashboard</strong> donde podras observar la informacion mas importante</p>
+              <p class="card-text">
+                Accede a una pantalla tipo
+                <strong>dashboard</strong> donde podras observar la informacion mas importante
+              </p>
             </div>
           </div>
         </router-link>
@@ -23,9 +26,7 @@
               <h5 class="card-title">
                 <i class="fas fa-virus"></i>Casos detectados
               </h5>
-              <p
-                class="card-text"
-              >Gestiona los tipos de Prueba de Covid 19 que el médico es capaz de ordenar</p>
+              <p class="card-text">Listado de todos los casos detectados dentro de la institución</p>
             </div>
           </div>
         </router-link>
@@ -39,7 +40,7 @@
               </h5>
               <p
                 class="card-text"
-              >Gestiona los tipos de Prueba de Covid 19 que el médico es capaz de ordenar</p>
+              >Gráficas con el total de casos detectados, agrupados por carrera y por departamento</p>
             </div>
           </div>
         </router-link>
@@ -53,7 +54,7 @@
               </h5>
               <p
                 class="card-text"
-              >Gestiona los tipos de Prueba de Covid 19 que el médico es capaz de ordenar</p>
+              >Gráficas con el total de encuestas aplicadas a estudiantes y personal académico, agrupados por carrera y por departamento</p>
             </div>
           </div>
         </router-link>
@@ -65,14 +66,11 @@
               <h5 class="card-title">
                 <i class="fas fa-prescription"></i>Total de Consultas
               </h5>
-              <p
-                class="card-text"
-              >Gestiona los tipos de Prueba de Covid 19 que el médico es capaz de ordenar</p>
+              <p class="card-text">Gráficas del todas las consultas atendidas, agupadas por médico</p>
             </div>
           </div>
         </router-link>
       </div>
-
     </div>
   </div>
 </template>
@@ -89,7 +87,7 @@
     transition-timing-function: ease;
   }
   .card:hover {
-    transform: scale(1.10);
+    transform: scale(1.1);
     background-color: #17a2b8;
     cursor: pointer;
     color: whitesmoke;
