@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <br />
     <div v-if="$route.params.enviado === true" class="alert">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
