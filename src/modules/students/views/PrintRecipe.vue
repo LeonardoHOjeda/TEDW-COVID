@@ -1,53 +1,55 @@
 <template>
-  <div>
-    <Titulos 
-      titulo="Historial de recetas"
-      subtitulo="En esta seccion podras imprimir las recetas medicas de las consultas que ya fueron atendidas"
-      />
-      <table class="table table-hover">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Fecha solicitud</th>
-            <th scope="col">Fecha atencion</th>
-            <th scope="col">Status</th>
-            <th scope="col">Sintomas</th>
-            <th scope="col">Medico</th>
-            <th scope="col">Modalidad</th>
-            <th scope="col">DESCARGAR RECETA</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr :class="item.status === 'atendida' ? 'table-success' : ''" v-for="(item, index) in consultas" :key="index">
-            <th scope="row">{{index+1}}</th>
-            <td scope="row">{{moment(item.fecha_solicitud).calendar()}}</td>
-            <td v-if="item.fecha_atencion" scope="row">{{moment(item.fecha_atencion).calendar()}}</td>
-            <td v-else>Aun no atendida</td>
-            <td scope="row">{{item.status}}</td>
-            <td scope="row">{{item.sintomas}}</td>
-            <td v-if="item.medico">{{item.medico.nombre}} {{item.medico.a_paterno}}</td>
-            <td v-else>Sin medico</td>
-            <td>{{item.modalidad}}</td>
-            <td v-if="item.status === 'atendida'">
-              <a :href="`http://localhost:3000/consultas/receta/${item.solicitud_id}?token=${token}`" target="_blank">Descargar Receta <i class="fas fa-file-pdf"></i></a>
-            </td>
-            <td v-else>No hay receta disponible <i class="fas fa-window-close"></i></td>
-            <td>
-              <b-button @click="showAlertDelete(item.solicitud_id)" :class="item.status === 'atendida' ? 'noDelete' : ''" variant="danger" :disabled="item.status === 'atendida'">Eliminar consulta <i class="fas fa-trash-alt"></i></b-button>
-            </td>
-            <!-- <td><a href="">Descargar </a><i class="far fa-file-pdf"></i></td> -->
-          </tr>
-        </tbody>
-      </table>
-      <div class="text-center">
-          <b-spinner
-          :variant="variant"
-          :key="variant"
-          v-if="cargando"
-          ></b-spinner>
-      </div>
-  </div>
+  <b-container class="mt-3">
+    <div>
+      <Titulos 
+        titulo="Historial de recetas"
+        subtitulo="En esta seccion podras imprimir las recetas medicas de las consultas que ya fueron atendidas"
+        />
+        <table class="table table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Fecha solicitud</th>
+              <th scope="col">Fecha atencion</th>
+              <th scope="col">Status</th>
+              <th scope="col">Sintomas</th>
+              <th scope="col">Medico</th>
+              <th scope="col">Modalidad</th>
+              <th scope="col">DESCARGAR RECETA</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr :class="item.status === 'atendida' ? 'table-success' : ''" v-for="(item, index) in consultas" :key="index">
+              <th scope="row">{{index+1}}</th>
+              <td scope="row">{{moment(item.fecha_solicitud).calendar()}}</td>
+              <td v-if="item.fecha_atencion" scope="row">{{moment(item.fecha_atencion).calendar()}}</td>
+              <td v-else>Aun no atendida</td>
+              <td scope="row">{{item.status}}</td>
+              <td scope="row">{{item.sintomas}}</td>
+              <td v-if="item.medico">{{item.medico.nombre}} {{item.medico.a_paterno}}</td>
+              <td v-else>Sin medico</td>
+              <td>{{item.modalidad}}</td>
+              <td v-if="item.status === 'atendida'">
+                <a :href="`http://localhost:3000/consultas/receta/${item.solicitud_id}?token=${token}`" target="_blank">Descargar Receta <i class="fas fa-file-pdf"></i></a>
+              </td>
+              <td v-else>No hay receta disponible <i class="fas fa-window-close"></i></td>
+              <td>
+                <b-button @click="showAlertDelete(item.solicitud_id)" :class="item.status === 'atendida' ? 'noDelete' : ''" variant="danger" :disabled="item.status === 'atendida'">Eliminar consulta <i class="fas fa-trash-alt"></i></b-button>
+              </td>
+              <!-- <td><a href="">Descargar </a><i class="far fa-file-pdf"></i></td> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center">
+            <b-spinner
+            :variant="variant"
+            :key="variant"
+            v-if="cargando"
+            ></b-spinner>
+        </div>
+    </div>
+  </b-container>
 </template>
 
 <script>

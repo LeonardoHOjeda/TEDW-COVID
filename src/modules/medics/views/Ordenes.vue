@@ -1,39 +1,42 @@
 <template>
-  <div>
-    <Titulos titulo="Ordenes" subtitulo="Aqui podras observar todas las ordenes que se han solicitado a los usuarios" />
+  <b-container class="mt-3">
+
     <div>
-      <b-table
-        :busy="cargando"
-        :items="items"
-        :fields="fields"
-        :sort-by.sync="sortBy"
-        :sort-desc.sync="sortDesc"
-        :tbody-tr-class="rowClass"
-        class="text-center"
-        responsive="md"
-        striped
-        hover
-      >
-      <template v-slot:cell(acciones)="data">
-        <div :class="data.item.resultado !== '-------' ? 'noEdit' : ''">
-          <router-link :to="`./Ordenes/${data.item.id}`" :class="data.item.resultado !== '-------' ? 'disabled' : ''" class="btn btn-outline-dark">Modificar Orden <i class="fas fa-pen"></i></router-link>
-        </div>
-        <!-- <b-button :class="data.item.resultado !== null ? 'noEdit' : ''" variant="outline-dark" size="sm" :to="`./Ordenes/${data.item.id}`">Modificar Orden <i class="fas fa-pen"></i></b-button> -->
-          <!-- <button class="btn btn-warning btn-sm">Ver respuestas <i class="far fa-eye"></i></button> -->
-      </template>
-        <template #table-busy>
-          <div class="text-center text-info my-2">
-            <b-spinner
-              :variant="variant"
-              :key="variant"
-              class="align-middle"
-            ></b-spinner>
-            <strong>Cargando...</strong>
+      <Titulos titulo="Ordenes" subtitulo="Aqui podras observar todas las ordenes que se han solicitado a los usuarios" />
+      <div>
+        <b-table
+          :busy="cargando"
+          :items="items"
+          :fields="fields"
+          :sort-by.sync="sortBy"
+          :sort-desc.sync="sortDesc"
+          :tbody-tr-class="rowClass"
+          class="text-center"
+          responsive="md"
+          striped
+          hover
+        >
+        <template v-slot:cell(acciones)="data">
+          <div :class="data.item.resultado !== '-------' ? 'noEdit' : ''">
+            <router-link :to="`./Ordenes/${data.item.id}`" :class="data.item.resultado !== '-------' ? 'disabled' : ''" class="btn btn-outline-dark">Modificar Orden <i class="fas fa-pen"></i></router-link>
           </div>
+          <!-- <b-button :class="data.item.resultado !== null ? 'noEdit' : ''" variant="outline-dark" size="sm" :to="`./Ordenes/${data.item.id}`">Modificar Orden <i class="fas fa-pen"></i></b-button> -->
+            <!-- <button class="btn btn-warning btn-sm">Ver respuestas <i class="far fa-eye"></i></button> -->
         </template>
-      </b-table>
+          <template #table-busy>
+            <div class="text-center text-info my-2">
+              <b-spinner
+                :variant="variant"
+                :key="variant"
+                class="align-middle"
+              ></b-spinner>
+              <strong>Cargando...</strong>
+            </div>
+          </template>
+        </b-table>
+      </div>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>

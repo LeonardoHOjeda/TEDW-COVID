@@ -1,6 +1,8 @@
 <template>
-  <div class="mt-3">
-    <router-link to="/medics/Ordenes" class="btn btn-primary"><i class="fas fa-hand-point-left"></i> Regresar</router-link>
+  <div class="mt-3 container">
+    <div class="mb-3">
+      <router-link to="/medics/Ordenes" class="btn btn-primary"><i class="fas fa-hand-point-left"></i> Regresar</router-link>
+    </div>
     <Titulos titulo="Editar Orden"  subtitulo="En esta seccion podras editar la orden de un usuario"/>
     <div>
       <b-form-select class="mb-3" v-model="selected" :options="options"></b-form-select>

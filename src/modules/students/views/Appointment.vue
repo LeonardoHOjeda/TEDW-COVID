@@ -1,61 +1,63 @@
 <template>
-  <div>
-    <Titulos 
-      titulo="Crear Cita"
-      subtitulo="En esta seccion podras solicitar una consulta con un medico, a continuacion deberas de llenar el siguiente formulario"
-    />
-    <div class="mt-3 text-center">
-      <b-spinner
-        :variant="variant"
-        :key="variant"
-        v-if="cargando"
-        ></b-spinner>
-      <b-alert
-        :show="dismissCountDown"
-        dismissible
-        :variant="mensaje.color"
-        @dismissed="dismissCountDown=0"
-        @dismiss-count-down="countDownChanged"
-      >
-        {{mensaje.texto}}
-      </b-alert>
-    </div>
+  <b-container class="mt-3">
     <div>
-      <form @submit.prevent="procesarFormulario">
-        <!-- Sintomas -->
-        <div class="form-group mb-3">
-          <h4>Sintomas</h4>
-          <textarea v-model.trim="cita.textoTextArea" class="form-control" :class="verificarCampo" name="" id="" cols="90" rows="5" placeholder="Ingresa aqui los sintomas..."></textarea>
-          <div v-if="compruebaLongitud" class="invalid-feedback">
-            Escribe un valor valido
+      <Titulos 
+        titulo="Crear Cita"
+        subtitulo="En esta seccion podras solicitar una consulta con un medico, a continuacion deberas de llenar el siguiente formulario"
+      />
+      <div class="mt-3 text-center">
+        <b-spinner
+          :variant="variant"
+          :key="variant"
+          v-if="cargando"
+          ></b-spinner>
+        <b-alert
+          :show="dismissCountDown"
+          dismissible
+          :variant="mensaje.color"
+          @dismissed="dismissCountDown=0"
+          @dismiss-count-down="countDownChanged"
+        >
+          {{mensaje.texto}}
+        </b-alert>
+      </div>
+      <div>
+        <form @submit.prevent="procesarFormulario">
+          <!-- Sintomas -->
+          <div class="form-group mb-3">
+            <h4>Sintomas</h4>
+            <textarea v-model.trim="cita.textoTextArea" class="form-control" :class="verificarCampo" name="" id="" cols="90" rows="5" placeholder="Ingresa aqui los sintomas..."></textarea>
+            <div v-if="compruebaLongitud" class="invalid-feedback">
+              Escribe un valor valido
+            </div>
           </div>
-        </div>
-        <!-- File uploader -->
-        <div class="form-group" mb-3>
-          <h4 for="exampleFormControlFile1">Subir fotografias/video <span class="badge badge-pill badge-warning">max 3 elementos</span></h4>
-          <input accept="image/*, video/*" type="file" ref="file" class="form-control-file" id="evidencias" multiple>
-        </div>
+          <!-- File uploader -->
+          <div class="form-group" mb-3>
+            <h4 for="exampleFormControlFile1">Subir fotografias/video <span class="badge badge-pill badge-warning">max 3 elementos</span></h4>
+            <input accept="image/*, video/*" type="file" ref="file" class="form-control-file" id="evidencias" multiple>
+          </div>
 
-        <div class="my-3">
-          <div class="">
-            <h4>La cita sobre que modalidad la deseas?</h4>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="modalidad" id="virtual" value="virtual" v-model="cita.modalidad">
-              <label class="form-check-label" for="virtual">Virtual</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="modalidad" id="presencial" value="presencial" v-model="cita.modalidad">
-              <label class="form-check-label" for="presencial">Presencial</label>
+          <div class="my-3">
+            <div class="">
+              <h4>La cita sobre que modalidad la deseas?</h4>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="modalidad" id="virtual" value="virtual" v-model="cita.modalidad">
+                <label class="form-check-label" for="virtual">Virtual</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="modalidad" id="presencial" value="presencial" v-model="cita.modalidad">
+                <label class="form-check-label" for="presencial">Presencial</label>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- Modalidad de la cita -->
-        <div class="form-group mb-3">
-          <button @click="cargando = true" class="btn btn-success btn-block" type="submit" :disabled="bloquear">Solicitar Cita</button>
-        </div>
-      </form>
+          <!-- Modalidad de la cita -->
+          <div class="form-group mb-3">
+            <button @click="cargando = true" class="btn btn-success btn-block" type="submit" :disabled="bloquear">Solicitar Cita</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>

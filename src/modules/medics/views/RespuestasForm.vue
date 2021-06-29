@@ -1,34 +1,36 @@
 <template>
-  <div>
-    <div class="mt-3">
-      <router-link to="/medics/Form" class="btn btn-primary"><i class="fas fa-long-arrow-alt-left"></i> Regresar</router-link>
-    </div>
-    <Titulos titulo="Respuestas del formulario " subtitulo=""/>
-    <h3 class="font-weight-light text-center">Aqui podras observar las respuestas del formulario con el id: {{$route.params.id}}</h3>
-    <h5 class=""> <span class="badge badge-info">Fecha de aplicacion: </span> {{fecha_aplicacion}}</h5>
+  <b-container class="mt-3">
     <div>
-      <h3 class="text-center">Respuestas</h3>
-      <div class="" v-for="(item, index) in respuestas" :key="index">
-        <h5>{{item.pregunta.pregunta.pregunta}}</h5>
-        <h5><span class="text-capitalize badge" :class="item.pregunta.respuesta === 'no' ? 'badge-success' : 'badge-danger'">{{item.pregunta.respuesta}}</span></h5>
-        <hr>
+      <div class="my-3">
+        <router-link to="/medics/Form" class="btn btn-primary"><i class="fas fa-long-arrow-alt-left"></i> Regresar</router-link>
       </div>
-      <div class="mb-3">
-        <h3>Otros sintomas</h3>
-        <b-form-textarea
-          id="textarea"
-          v-model="text"
-          placeholder="No hay sintomas agregados :c"
-          rows="3"
-          max-rows="6"
-          readonly
-        ></b-form-textarea>
+      <Titulos titulo="Respuestas del formulario " subtitulo=""/>
+      <h3 class="font-weight-light text-center">Aqui podras observar las respuestas del formulario con el id: {{$route.params.id}}</h3>
+      <h5 class=""> <span class="badge badge-info">Fecha de aplicacion: </span> {{fecha_aplicacion}}</h5>
+      <div>
+        <h3 class="text-center">Respuestas</h3>
+        <div class="" v-for="(item, index) in respuestas" :key="index">
+          <h5>{{item.pregunta.pregunta.pregunta}}</h5>
+          <h5><span class="text-capitalize badge" :class="item.pregunta.respuesta === 'no' ? 'badge-success' : 'badge-danger'">{{item.pregunta.respuesta}}</span></h5>
+          <hr>
+        </div>
+        <div class="mb-3">
+          <h3>Otros sintomas</h3>
+          <b-form-textarea
+            id="textarea"
+            v-model="text"
+            placeholder="No hay sintomas agregados :c"
+            rows="3"
+            max-rows="6"
+            readonly
+          ></b-form-textarea>
+        </div>
       </div>
+      <h4>Solicitar prueba</h4>
+      <b-form-select v-model="selected" :options="options" class="mb-3"></b-form-select>
+      <b-button @click="crearOrden" :disabled="block" block variant="danger">Levantar orden <i class="fas fa-viruses"></i></b-button>
     </div>
-    <h4>Solicitar prueba</h4>
-    <b-form-select v-model="selected" :options="options" class="mb-3"></b-form-select>
-    <b-button @click="crearOrden" :disabled="block" block variant="danger">Levantar orden <i class="fas fa-viruses"></i></b-button>
-  </div>
+  </b-container>
 </template>
 
 <script>

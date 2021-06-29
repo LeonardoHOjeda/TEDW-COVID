@@ -1,45 +1,48 @@
 <template>
-  <div>
-    <Titulos titulo="Alertas!" subtitulo="En esta seccion podras encontrar las alertas que se encuentran disponibles para ti"/>
+  <b-container class="mt-3">
 
-    <b-alert
-        class="text-center"
-        :show="dismissCountDown"
-        dismissible
-        :variant="mensaje.color"
-        @dismissed="dismissCountDown=0"
-        @dismiss-count-down="countDownChanged"
-      >
-        {{mensaje.texto}}
-      </b-alert>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Alerta</th>
-          <th scope="col">Fecha de alerta</th>
-          <th scope="col">Accion</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr :class="item.status === 'pendiente' ? 'bg-danger text-white' : 'table-success'" v-for="(item, index) in alertas" :key="index">
-          <th scope="row">{{index+1}}</th>
-          <td>{{item.alerta}}</td>
-          <td>{{moment(item.create_at).calendar()}}</td>
-          <td>
-            <b-button :class="item.status !== 'pendiente' ? 'noCheck' : '' " :disabled="item.status !== 'pendiente'" @click="showAlertRead(item.alerta_id)" variant="success">Marcar como leida <b-icon icon="check-all"></b-icon></b-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="text-center">
-        <b-spinner
-        :variant="variant"
-        :key="variant"
-        v-if="cargando"
-        ></b-spinner>
+    <div>
+      <Titulos titulo="Alertas!" subtitulo="En esta seccion podras encontrar las alertas que se encuentran disponibles para ti"/>
+
+      <b-alert
+          class="text-center"
+          :show="dismissCountDown"
+          dismissible
+          :variant="mensaje.color"
+          @dismissed="dismissCountDown=0"
+          @dismiss-count-down="countDownChanged"
+        >
+          {{mensaje.texto}}
+        </b-alert>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Alerta</th>
+            <th scope="col">Fecha de alerta</th>
+            <th scope="col">Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr :class="item.status === 'pendiente' ? 'bg-danger text-white' : 'table-success'" v-for="(item, index) in alertas" :key="index">
+            <th scope="row">{{index+1}}</th>
+            <td>{{item.alerta}}</td>
+            <td>{{moment(item.create_at).calendar()}}</td>
+            <td>
+              <b-button :class="item.status !== 'pendiente' ? 'noCheck' : '' " :disabled="item.status !== 'pendiente'" @click="showAlertRead(item.alerta_id)" variant="success">Marcar como leida <b-icon icon="check-all"></b-icon></b-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center">
+          <b-spinner
+          :variant="variant"
+          :key="variant"
+          v-if="cargando"
+          ></b-spinner>
+      </div>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>

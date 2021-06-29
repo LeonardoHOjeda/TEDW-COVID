@@ -1,47 +1,49 @@
 <template>
-  <div>
-    <Titulos
-      titulo="Respuestas Formulario"
-      subtitulo="Aqui podras observar las respuestas de cada formulario que se ha respondido"
-    />
+  <b-container class="mt-3">
     <div>
-      <b-form-checkbox size="lg" v-model="checked" name="check-button" switch>
-        <b class="badge badge-dark">Filtrar por sintomas:</b>
-        <span v-if="checked" :class="checked ? 'badge badge-success' : ''">Si</span>
-        <span v-else :class="!checked ? 'badge badge-danger' : ''">No</span>
-      </b-form-checkbox>
+      <Titulos
+        titulo="Respuestas Formulario"
+        subtitulo="Aqui podras observar las respuestas de cada formulario que se ha respondido"
+      />
+      <div>
+        <b-form-checkbox size="lg" v-model="checked" name="check-button" switch>
+          <b class="badge badge-dark">Filtrar por sintomas:</b>
+          <span v-if="checked" :class="checked ? 'badge badge-success' : ''">Si</span>
+          <span v-else :class="!checked ? 'badge badge-danger' : ''">No</span>
+        </b-form-checkbox>
+      </div>
+      <div>
+        <p>
+          Filtrado por:
+          <b>{{sortBy}}</b>
+        </p>
+      </div>
+      <b-table
+        :busy="cargando"
+        :sort-by.sync="sortBy"
+        striped
+        hover
+        :items="items"
+        :fields="fields"
+        class="text-center"
+        responsive="sm"
+      >
+        <template v-slot:cell(acciones)="data">
+          <b-button variant="outline-info" size="sm" :to="`./Form/${data.item.id_encuesta}`">
+            Ver respuestas
+            <i class="far fa-eye"></i>
+          </b-button>
+          <!-- <button class="btn btn-warning btn-sm">Ver respuestas <i class="far fa-eye"></i></button> -->
+        </template>
+        <template #table-busy>
+          <div class="text-center text-info my-2">
+            <b-spinner :variant="variant" :key="variant" class="align-middle"></b-spinner>
+            <strong>Cargando...</strong>
+          </div>
+        </template>
+      </b-table>
     </div>
-    <div>
-      <p>
-        Filtrado por:
-        <b>{{sortBy}}</b>
-      </p>
-    </div>
-    <b-table
-      :busy="cargando"
-      :sort-by.sync="sortBy"
-      striped
-      hover
-      :items="items"
-      :fields="fields"
-      class="text-center"
-      responsive="sm"
-    >
-      <template v-slot:cell(acciones)="data">
-        <b-button variant="outline-info" size="sm" :to="`./Form/${data.item.id_encuesta}`">
-          Ver respuestas
-          <i class="far fa-eye"></i>
-        </b-button>
-        <!-- <button class="btn btn-warning btn-sm">Ver respuestas <i class="far fa-eye"></i></button> -->
-      </template>
-      <template #table-busy>
-        <div class="text-center text-info my-2">
-          <b-spinner :variant="variant" :key="variant" class="align-middle"></b-spinner>
-          <strong>Cargando...</strong>
-        </div>
-      </template>
-    </b-table>
-  </div>
+  </b-container>
 </template>
 
 <script>
