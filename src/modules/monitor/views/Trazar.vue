@@ -154,10 +154,6 @@
             id: data.item.id,
           });
         }
-
-        for (let i = 0; i < this.por_enviar.length; i++) {
-          console.log(this.por_enviar[i].id);
-        }
       },
       enviar() {
         this.$router.push({
