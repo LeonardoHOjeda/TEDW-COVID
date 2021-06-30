@@ -7,11 +7,12 @@
       <div class="col-4 form-check form-check-inline text-center d-flex justify-content-around ">
         <div class="">
           <label class="form-check-label mr-3" :for="idInputYes">{{opcionUno}}</label>
-          <input @change="mandaInformacion" v-model="respuesta" type="radio" class="form-check-input" :name="nameInput" :id="idInputYes">
+          <!-- <input @click="mandaInformacion" v-model="respuesta" type="radio" class="form-check-input" :name="nameInput" id="si"> -->
+          <input @click="mandaInformacion" v-model="respuesta" type="radio" class="form-check-input" :name="nameInput" :id="idInputYes" value="si">
         </div>
         <div>
           <label class="form-check-label mr-3" :for="idInputNo">{{opcionDos}}</label>
-          <input @change="mandaInformacion" v-model="respuesta" type="radio" class="form-check-input" :name="nameInput" :id="idInputNo">
+          <input @click="mandaInformacion" v-model="respuesta" type="radio" class="form-check-input" :name="nameInput" :id="idInputNo" value="no">
         </div>
       </div><!-- Fin pregunta dos -->
     </div>
@@ -57,7 +58,7 @@ export default {
 
   },methods: {
     mandaInformacion(valorSeleccionado){
-      this.$emit("obtenerValor", valorSeleccionado)
+      this.$emit("obtenerValor", valorSeleccionado.target.value)
     }
   }
 }
