@@ -4,7 +4,7 @@
       <router-link to="/Monitor/Alerta" class="btn btn-primary"><i class="fas fa-long-arrow-alt-left"></i> Regresar</router-link>
     </div>
     <Titulos titulo="Envio de la alerta" subtitulo=""/>
-    <h3 class="font-weight-light text-center">Aqui podra especificar que quiere que se mande junto con el correo para alertar al usuario: <br> {{usuario}}</h3>
+    <h3 class="font-weight-light text-center">Aqui podra especificar que quiere que se mande junto con la alerta para el usuario: <br> {{usuario}}</h3>
     <div>
       <br>
       <div class="mb-3">
@@ -49,6 +49,7 @@ export default {
       this.axios.get(`/ordenes/${this.$route.params.orden}`, config)
         .then((res) => {
           this.usuario = res.data.usuario.email;
+          this.id = res.data.usuario.usuario_id;
         }).catch((err) => {
           console.log(err.response);
         });
@@ -58,14 +59,25 @@ export default {
         alerta_enviada: true
       }
 
-      console.log(enviarDatos);
       let config = {headers:{'Authorization': `Bearer ${this.token}`}}
       this.axios.put(`/ordenes/${this.$route.params.orden}`, enviarDatos, config)
-        .then((res) => {
-          console.log(res);
-        }).catch((err) => {
-          console.log(err.response);
-        });
+      .then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        console.log(err.response);
+      });
+
+      let alerta = {
+        usuario_id: this.id,
+        alerta: this.text
+      }
+
+      this.axios.post(`/alertas`, alerta, config)
+      .then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        console.log(err.response);
+      });
 
       this.$router.push({
         name: 'Alerta', 
