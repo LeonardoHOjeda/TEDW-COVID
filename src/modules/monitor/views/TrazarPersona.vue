@@ -147,15 +147,16 @@
             fecha: moment().format(),
           };
 
-          let config = { headers: { Authorization: `Bearer ${this.token}` } };
-          await this.axios
-            .post(`/trazabilidad`, enviarDatos, config)
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((err) => {
-              console.log(err.response);
+          try {
+            await this.axios.post(`/trazabilidad`, enviarDatos);
+            await this.axios.post(`/alertas`, {
+              usuario_id: enviarDatos.contacto_id,
+              alerta:
+                'Usted ha tenido contacto con una persona contagiada en los últimos días. Mantenga sus precauciones.',
             });
+          } catch (error) {
+            console.log(error.response.data);
+          }
         }
 
         this.$router.push({

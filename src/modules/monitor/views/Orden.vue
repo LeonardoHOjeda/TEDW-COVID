@@ -44,9 +44,8 @@ export default {
     this.listar()
   },
   methods: {
-    listar(){
-      let config = {headers:{'Authorization': `Bearer ${this.token}`}}
-      this.axios.get(`/ordenes/${this.$route.params.id}`, config)
+    listar(){     
+      this.axios.get(`/ordenes/${this.$route.params.id}`)
         .then((res) => {
           this.fecha_deteccion = moment(res.data.fecha_deteccion).calendar()
           this.usuario = res.data.usuario.email
