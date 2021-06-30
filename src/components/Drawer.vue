@@ -61,7 +61,7 @@
     name: 'Drawer',
     data: () => ({
       student_menu: [
-        { icon: 'fas fa-poll-h', to: '/students/Form', label: 'Form' },
+        { icon: 'fas fa-poll-h', to: '/students/Form', label: 'Contestar Formulario' },
         {
           icon: 'fas fa-user-md',
           to: '/students/Appointment',

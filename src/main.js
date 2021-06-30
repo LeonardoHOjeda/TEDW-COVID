@@ -46,7 +46,7 @@ Vue.use(VueAxios, axios)
 
 // Agregamos la URL base de la API
 axios.defaults.baseURL = 'https://covid19-itc.herokuapp.com'
-// axios.defaults.baseURL = 'http://localhost:3000'
+    // axios.defaults.baseURL = 'http://localhost:3000'
 
 Vue.config.productionTip = false
 

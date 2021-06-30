@@ -20,7 +20,7 @@
         <h4>Fotos y/o videos</h4>
         <div class="d-flex flex-wrap">
           <div v-for="(item, index) in evidencias" :key="index">
-            <div v-if="item.url.substr(item.url.length - 3) === 'mp4'" class="mr-4 mb-4">
+            <div v-if="item.url.substr(item.url.length - 3) === 'MP4'" class="mr-4 mb-4">
               <iframe :src="`https://${item.url}`" frameborder="0" allowfullscreen></iframe>
               <br>
                 <a class="badge badge-primary" :href="`http://${item.url}`" target="_blank">Link al video <i class="fas fa-video"></i></a>
