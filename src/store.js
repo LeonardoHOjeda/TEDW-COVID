@@ -8,6 +8,7 @@ import createPersistedState from 'vuex-persistedstate'
 // Modulos
 import adminModule from './modules/administrator/store'
 import reportsModule from './modules/reportes/store'
+import directorModule from './modules/director/store'
 
 Vue.use(Vuex)
 
@@ -79,5 +80,6 @@ export default new Vuex.Store({
     modules: {
         admin: adminModule,
         reportes: reportsModule,
+        director: directorModule
     },
 })

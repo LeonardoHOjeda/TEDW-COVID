@@ -11,7 +11,7 @@
     >Este es un listado de todos los usuarios que han tenido contacto con: {{$route.params.usuario}}</h3>
     <br />
     <h5 class>
-      <span class="badge badge-info">Fecha de envio:</span>
+      <span class="badge badge-info">Fecha del contacto:</span>
       {{$route.params.fecha}}
     </h5>
     <br />
@@ -46,7 +46,15 @@
         cargando: false,
         medico: '',
         tipo_prueba: '',
-        fields: [{ key: 'correo', sortable: false }],
+        fields: [
+          { key: 'correo', sortable: true },
+          { key: 'nombre', sortable: true },
+          {
+            key: 'carrera_dept',
+            label: 'Carrera o Departamento',
+            sortable: true,
+          },
+        ],
         items: [],
       };
     },
@@ -68,7 +76,9 @@
               if (moment(t.fecha).format('LL') === this.$route.params.fecha) {
                 this.items.push({
                   id_usuario: t.usuario.usuario_id,
-                  correo: t.contacto.email,
+                  correo: t.contacto_email,
+                  nombre: t.contacto,
+                  carrera_dept: t.carrera || t.departamento,
                 });
               }
             });

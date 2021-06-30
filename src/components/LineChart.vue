@@ -1,8 +1,8 @@
 <script>
-  import { Pie } from 'vue-chartjs';
+  import { Line } from 'vue-chartjs';
 
   export default {
-    extends: Pie,
+    extends: Line,
     data: () => ({
       options: {
         responsive: true,
@@ -13,6 +13,7 @@
               ticks: {
                 stepSize: 1,
                 beginAtZero: true,
+                suggestedMax: 3,
               },
             },
           ],
