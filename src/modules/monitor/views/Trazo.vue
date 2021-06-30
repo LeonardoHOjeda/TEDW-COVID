@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="mt-3">
-      <router-link to="/monitor/Trazabilidad" class="btn btn-primary">
+      <router-link to="/monitor/Trazabilidad" class="btn btn-primary mb-3">
         <i class="fas fa-long-arrow-alt-left"></i> Regresar
       </router-link>
     </div>
